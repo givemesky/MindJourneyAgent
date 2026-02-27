@@ -1,0 +1,13 @@
+# 忽略所有模型权重文件夹
+model/
+models/
+SynPT_LoRA/
+*.safetensors
+*.bin
+*.pth
+
+# 忽略临时数据和日志
+__pycache__/
+logs/
+lora/optimizer.pt
+#data/*.jsonl
