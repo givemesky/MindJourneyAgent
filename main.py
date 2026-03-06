@@ -9,6 +9,8 @@ import yaml
 from tqdm import tqdm
 from openai import OpenAI
 
+# 这段代码是一个基于 Python 和异步 IO (asyncio) 实现的 LLM 多轮对话模拟系统。
+# 它模拟了一个“用户”智能体（User Agent）与一个“文旅助手”智能体（Assistant Agent）之间的交互过程，用于生成、测试或评估大模型在特定场景（如文化旅游）下的对话表现。
 from prompts import first_inquiry_system_prompt, user_prompt, user_prompt_anxiety
 from utils import (
     get_info_from_config,
