@@ -129,6 +129,13 @@ Besides `Start City`, `Target City`, `People Count`, `Day Count`. There are some
 `Cost` on specific activity, `Position` of specific activity, `Type` of specific activity, `Num`of something. You can create some constraints that are not listed here as long as they are reasonable and mentioned in user's request. The are also some Implicit constraints that are not mentioned in user's request but can be inferred from the request. For example, if there are many people in the request, it is reasonable to infer that the user may want to book multiple rooms.
 Combine constraints is also allowed. For example, "The cost of xxx activity  should be less than 1000 and the position of xxx activity should be in the city center" as long as they are mentioned in user's request.
 
+### MANDATORY RULES FOR ATTRACTIONS (景点强制规则) ###
+1. Whenever you identify an ATTRACTION, you MUST output both its 'Position' (Name) AND its 'Type'.
+2. The 'Type' MUST be selected from this specific list: 
+   ['游乐园/体育娱乐', '历史古迹', '博物馆/纪念馆', '文化旅游区', '公园', '人文景观', '商业街区', '红色景点', '美术馆/艺术馆', '图书馆', '大学校园', '自然风光'].
+3. Format: "Exist Attraction which Position == 'NAME' and Type == 'CATEGORY'"
+####################################################
+
 we offer some functions below, which can help you extract the nature language logic constraints in the user's request.
 variables:
 (1) plan: a dict of the generated plan with information of the specific plan.
@@ -159,10 +166,10 @@ Nature Language Logic Constraints:
 7. Tickets == People Count = 3
 8. Metro Tickets == People Count = 3
 9. Cars == (People Count + 3) // 4 = 1
-10. Exist "都江堰" in Attraction Position
-11. All Innercity Transport set <= {"taxi", "metro", "walk"}
+10. Exist "都江堰" in Attraction Position and Type == "自然风光"
+11. Exist Attraction which Type == "自然风光"
 12. All InterCity Transport Type == "airplane"
-13. Exist Attraction which Type == "自然风光"
+13. All Innercity Transport set <= {"taxi", "metro", "walk"}
 14. Exist Accommodation which Type == "泳池"
 <end>
 DO NOT MAKE ANY ASSUMPTIONS. Follow the user's request strictly!!!
@@ -228,13 +235,46 @@ answer:
 )
 
 # get_json_str: 一个稳健的解析函数，用于从 LLM 的返回中截取标准的 JSON 字符串。
+# def get_json_str(json_str):
+#     l_ptr = json_str.find("{")
+#     r_ptr = json_str.rfind("}")
+#     if l_ptr != -1 and r_ptr != -1:
+#         return json_str[l_ptr : r_ptr + 1]
+#     else:
+#         return {"error": "Translation failed, please try again."}
+
 def get_json_str(json_str):
-    l_ptr = json_str.find("{")
-    r_ptr = json_str.rfind("}")
-    if l_ptr != -1 and r_ptr != -1:
-        return json_str[l_ptr : r_ptr + 1]
-    else:
-        return {"error": "Translation failed, please try again."}
+    if not isinstance(json_str, str):
+        return "{}"
+    
+    # 移除 Markdown 代码块标记
+    json_str = json_str.replace("```json", "").replace("```", "").strip()
+    
+    # 找到第一个 { 的位置
+    start_idx = json_str.find("{")
+    if start_idx == -1:
+        return "{}"
+    
+    # 截取从第一个 { 开始的内容
+    potential_json = json_str[start_idx:]
+    
+    try:
+        # 使用 JSONDecoder 的 raw_decode 寻找第一个合法的 JSON 对象
+        # 它会自动处理嵌套括号并停止在对象结束处
+        import json
+        decoder = json.JSONDecoder()
+        obj, end_idx = decoder.raw_decode(potential_json)
+        # 将对象转回字符串返回（为了保持你原有流程的兼容性）
+        return json.dumps(obj)
+    except Exception as e:
+        # 如果 raw_decode 失败，使用最基础的正则尝试提取
+        print(f"⚠️ [JSON Decoder 失败] 尝试正则提取: {e}")
+        import re
+        match = re.search(r"(\{.*\})", potential_json, re.DOTALL)
+        if match:
+            # 这里的正则仍然可能是贪婪的，但在 decoder 失败时是最后的补救
+            return match.group(1).strip().replace("\n", " ")
+        return "{}"
 
 # get_step_1_prompt / get_step_2_prompt: 组装 LLM 输入。
 def get_step_1_prompt(query):
@@ -280,30 +320,96 @@ def nl2sl_dsl_prompt_deepmind(query, backbone_llm):
 
 # nl2sl_v2 / _nl2sl_v2: 核心工作流。
 # 调用 LLM 获取自然语言约束。再次调用 LLM 将约束转为 Python 代码。解析返回的 JSON 并持久化到缓存。
+# def nl2sl_v2(query, backbone_llm):
+#     addtion_text = backbone_llm(
+#         messages=[
+#             {
+#                 "role": "user",
+#                 "content": get_step_1_prompt(query),
+#             }
+#         ],
+#         one_line=False,
+#         json_mode=False,
+#     )
+#     addtion_text = addtion_text.split("<end>")[0].split("<constraint>")[1].strip()
+#     prompt = get_step_2_prompt(query, addtion_text)
+#     res = backbone_llm(
+#         messages=[{"role": "user", "content": prompt}],
+#         one_line=False,
+#         json_mode=True,
+#     )
+#     res = get_json_str(res)
+#     res = json.loads(res)
+#     for key in res:
+#         query[key] = res[key]
+#     query["nature_language_constraints"] = addtion_text.split("\n")
+#     return query
+
 def nl2sl_v2(query, backbone_llm):
+    # 第一步：提取自然语言约束
     addtion_text = backbone_llm(
-        messages=[
-            {
-                "role": "user",
-                "content": get_step_1_prompt(query),
-            }
-        ],
+        messages=[{"role": "user", "content": get_step_1_prompt(query)}],
         one_line=False,
         json_mode=False,
     )
-    addtion_text = addtion_text.split("<end>")[0].split("<constraint>")[1].strip()
+    
+    try:
+        # 增加切分安全性检查
+        if "<constraint>" in addtion_text:
+            addtion_text = addtion_text.split("<end>")[0].split("<constraint>")[1].strip()
+        else:
+            # 兜底逻辑：如果没按格式出，尝试按行匹配
+            addtion_text = addtion_text.strip()
+    except Exception:
+        addtion_text = ""
+
+    # 第二步：将约束转为 Python/JSON
     prompt = get_step_2_prompt(query, addtion_text)
-    res = backbone_llm(
+    res_raw = backbone_llm(
         messages=[{"role": "user", "content": prompt}],
         one_line=False,
         json_mode=True,
     )
-    res = get_json_str(res)
-    res = json.loads(res)
+    
+    # 鲁棒性解析
+    res_str = get_json_str(res_raw)
+
+    try:
+        # 看报错的字符串
+        # print(f"DEBUG: 待解析的JSON字符串为: |{res_str}|")
+        res = json.loads(res_str)
+    except json.JSONDecodeError:
+        print(f"⚠️ [JSON解析失败] 原始输出: {res_raw[:100]}...")
+        res = {} # 兜底返回空字典
+
+    # try:
+    #     # --- 修改部分：解析并以中文格式打印 ---
+    #     res = json.loads(res_str)
+        
+    #     # 使用 ensure_ascii=False 来显示中文，indent=2 让格式更整齐
+    #     readable_res = json.dumps(res, ensure_ascii=False, indent=2)
+    #     print(f"DEBUG: 成功解析 JSON 对象:\n{readable_res}")
+        
+    # except json.JSONDecodeError:
+    #     # --- 修改部分：解析失败时，尝试强制解码查看中文内容 ---
+    #     try:
+    #         # 这种方法可以将字符串中的 \u4e0a 这种编码强制转为中文
+    #         decoded_error_str = res_str.encode('utf-8').decode('unicode_escape')
+    #         print(f"DEBUG: [解析失败] 待解析的字符串内容为: |{decoded_error_str}|")
+    #     except Exception:
+    #         print(f"DEBUG: [解析失败] 待解析的原始字符串为: |{res_str}|")
+            
+    #     print(f"⚠️ [JSON解析失败] 原始输出前100字: {res_raw[:100]}...")
+    #     res = {} # 兜底返回空字典
+
+    # 更新 query
     for key in res:
         query[key] = res[key]
-    query["nature_language_constraints"] = addtion_text.split("\n")
+    
+    # 保存约束列表供 EvidenceMapper 使用
+    query["nature_language_constraints"] = [line.strip() for line in addtion_text.split("\n") if line.strip()]
     return query
+
 
 
 def _nl2sl_v2(query, backbone_llm):
