@@ -26,21 +26,44 @@ except ImportError as e:
     raise
 
 class DPIAlgorithmInterface:
-    def __init__(self, log_dir="/public/home/azsy/SynPT-main/dpi_me/logs/UserProfile"):
+    # def __init__(self, log_dir="/public/home/azsy/SynPT-main/dpi_me/logs/UserProfile"):
+    #     """
+    #     初始化 DPI 算法插件
+    #     :param log_dir: 实验日志保存路径
+    #     """
+    #     print("🛠️  [DPI Interface] 正在初始化 DPI-ME 算法引擎...")
+        
+    #     # 1. 初始化系统中枢 (内部已配置为引用全局共享模型)
+    #     # 注意：这里传入 model_name="shared" 是为了告诉管理器不要自己加载模型
+    #     self.manager = DPISystemManager(model_name="shared")
+        
+    #     # 2. 初始化评估器
+    #     self.evaluator = PreferenceEvaluator(log_dir=log_dir)
+    #     self.log_dir = log_dir 
+    #     print("✅ [DPI Interface] 算法引擎初始化完成。")
+
+    def __init__(self, 
+                 user_profile_dir="/public/home/azsy/SynPT-main/dpi_me/logs/UserProfile",
+                 convergence_dir="/public/home/azsy/SynPT-main/dpi_me/logs/Convergence"): # 新增路径参数
         """
         初始化 DPI 算法插件
-        :param log_dir: 实验日志保存路径
         """
-        print("🛠️  [DPI Interface] 正在初始化 DPI-ME 算法引擎...")
+        print("🛠️  [DPI Interface] 正在初始化引擎...")
         
-        # 1. 初始化系统中枢 (内部已配置为引用全局共享模型)
-        # 注意：这里传入 model_name="shared" 是为了告诉管理器不要自己加载模型
         self.manager = DPISystemManager(model_name="shared")
         
-        # 2. 初始化评估器
-        self.evaluator = PreferenceEvaluator(log_dir=log_dir)
-        self.log_dir = log_dir 
+        # --- 修改这里：分别为两个组件指定不同的目录 ---
+        # 1. 评估器存到 Convergence
+        self.evaluator = PreferenceEvaluator(log_dir=convergence_dir)
         print("✅ [DPI Interface] 算法引擎初始化完成。")
+
+        # 2. 接口层保存 UserProfile 的引用
+        self.user_profile_dir = user_profile_dir
+        self.convergence_dir = convergence_dir
+        
+        print(f"✅ 日志配置：\n   - 画像轨迹: {user_profile_dir}\n   - 收敛报表: {convergence_dir}")
+
+
 
     def analyze_turn(self, user_input, turn_id):
         """
@@ -72,21 +95,37 @@ class DPIAlgorithmInterface:
         
         return persona_summary, metrics
 
+    # def get_final_report(self):
+    #     """保存并获取最终实验数据报表"""
+    #     # 1. 保存 CSV
+    #     self.evaluator.save_to_csv("persona_convergence.csv")
+        
+    #     # 2. 保存画像 JSON (纯数学分布)
+    #     json_path = os.path.join(self.log_dir, "persona_evolution.json")
+    #     self.manager.persona.save_logs(path=json_path)
+        
+    #     # 3. 保存独立约束 JSON (纯语义约束)
+    #     constraints_path = os.path.join(self.log_dir, "constraints_log.json")
+    #     self.manager.save_constraints(path=constraints_path)
+        
+    #     # 这里建议直接 return 而不是调用 manager 的 generate_final_report
+    #     # 因为 manager 里的路径是硬编码的，可能会产生重复或路径不一的文件
+    #     return self.manager.persona.get_top_persona()
+
     def get_final_report(self):
         """保存并获取最终实验数据报表"""
-        # 1. 保存 CSV
-        self.evaluator.save_to_csv("persona_convergence_test.csv")
+        # 1. 保存 CSV (它会存入初始化时指定的 Convergence 目录)
+        self.evaluator.save_to_csv("persona_convergence.csv")
         
-        # 2. 保存画像 JSON (纯数学分布)
-        json_path = os.path.join(self.log_dir, "persona_evolution.json")
+        # 2. 保存画像 JSON (明确指向 user_profile_dir)
+        json_path = os.path.join(self.user_profile_dir, "persona_evolution.json")
         self.manager.persona.save_logs(path=json_path)
         
-        # 3. 保存独立约束 JSON (纯语义约束)
-        constraints_path = os.path.join(self.log_dir, "constraints_log.json")
+        # 3. 保存独立约束 JSON (明确指向 user_profile_dir)
+        constraints_path = os.path.join(self.user_profile_dir, "constraints_log.json")
         self.manager.save_constraints(path=constraints_path)
         
-        # 这里建议直接 return 而不是调用 manager 的 generate_final_report
-        # 因为 manager 里的路径是硬编码的，可能会产生重复或路径不一的文件
+        # 返回最终画像总结
         return self.manager.persona.get_top_persona()
 
     def reset(self):

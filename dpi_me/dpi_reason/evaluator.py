@@ -8,7 +8,7 @@ import csv
 import os
 
 class PreferenceEvaluator:
-    def __init__(self, log_dir="/public/home/azsy/SynPT-main/dpi_me/logs/UserProfile"):
+    def __init__(self, log_dir="/public/home/azsy/SynPT-main/dpi_me/logs/Convergence"):
         """
         初始化评估器
         log_dir: 结果保存路径
