@@ -55,6 +55,8 @@ class DPIAlgorithmInterface:
         # --- 1. 执行推理链路 (Perception -> Reasoning -> State Update) ---
         # manager.process_turn 内部会调用 nl2sl, EvidenceMapper 和 BayesianUpdater
         self.manager.process_turn(user_input, turn_id)
+        # 【关键修改】从 manager 中获取刚刚识别到的约束
+        current_constraints = getattr(self.manager, 'last_constraints', [])
         
         # --- 2. 计算并记录评估指标 ---
         # 记录本轮各维度的熵值、确定度，并保存到 evaluator.history
@@ -67,14 +69,25 @@ class DPIAlgorithmInterface:
         # 记录本次演化到本地存储 (json)
         self.manager.persona.record_step(turn_id)
         
+        
         return persona_summary, metrics
 
     def get_final_report(self):
         """保存并获取最终实验数据报表"""
+        # 1. 保存 CSV
         self.evaluator.save_to_csv("persona_convergence_test.csv")
+        
+        # 2. 保存画像 JSON (纯数学分布)
         json_path = os.path.join(self.log_dir, "persona_evolution.json")
         self.manager.persona.save_logs(path=json_path)
-        return self.manager.generate_final_report()
+        
+        # 3. 保存独立约束 JSON (纯语义约束)
+        constraints_path = os.path.join(self.log_dir, "constraints_log.json")
+        self.manager.save_constraints(path=constraints_path)
+        
+        # 这里建议直接 return 而不是调用 manager 的 generate_final_report
+        # 因为 manager 里的路径是硬编码的，可能会产生重复或路径不一的文件
+        return self.manager.persona.get_top_persona()
 
     def reset(self):
         """重置画像状态 (用于开始新对话)"""

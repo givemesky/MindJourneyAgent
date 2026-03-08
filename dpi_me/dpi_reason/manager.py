@@ -43,6 +43,9 @@ class DPISystemManager:
         
         # 初始化状态层 (画像)
         self.persona = UserPersona(PREFERENCE_SCHEMA)
+
+        # 专门存储约束的历史记录
+        self.constraints_history = [] 
         
         print("✅ [系统中枢] 系统初始化完成，随时可以开始对话。")
 
@@ -54,7 +57,15 @@ class DPISystemManager:
         
         # 1. 感知阶段：获取本轮似然观测 D
         obs_D, constraints = self.extractor.get_likelihood_D(user_text, uid=f"t_{turn_id}")
+        self.last_constraints = constraints
         print(f"[感知层] 识别到约束: {constraints}")
+
+        # 【新增】将本轮文本和识别到的约束存入历史记录
+        self.constraints_history.append({
+            "turn": turn_id,
+            "user_text": user_text,
+            "constraints": constraints
+        })
 
         # ✨ 新增：打印似然向量 D，看看算法到底“看”到了什么
         print(f"[推理层] 产生的似然向量 D (Likelihood):")
@@ -68,6 +79,17 @@ class DPISystemManager:
         
         # 4. 获取当前结论
         return self.persona.get_top_persona()
+
+    # 【新增】专门保存约束日志的方法
+    def save_constraints(self, path):
+        import json
+        dir_name = os.path.dirname(path)
+        if dir_name and not os.path.exists(dir_name):
+            os.makedirs(dir_name, exist_ok=True)
+            
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump(self.constraints_history, f, indent=2, ensure_ascii=False)
+        print(f"✅ [Manager] 独立约束日志已保存至: {path}")
 
     def generate_final_report(self):
         """保存实验日志并生成最终报告"""

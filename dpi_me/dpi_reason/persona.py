@@ -43,10 +43,31 @@ class UserPersona:
         if dim not in self.beliefs: return 0.0
         return np.max(self.beliefs[dim])
 
-    def record_step(self, turn_id):
-        """记录当前状态到历史"""
+    # def record_step(self, turn_id):
+    #     """记录当前状态到历史"""
+    #     step_data = {dim: prob.tolist() for dim, prob in self.beliefs.items()}
+    #     self.history.append({"turn": turn_id, "beliefs": step_data})
+        
+    #     metrics = {
+    #         dim: {
+    #             "entropy": self.get_entropy(dim),
+    #             "confidence": self.get_confidence(dim)
+    #         } for dim in self.beliefs
+    #     }
+    #     self.metrics_history.append({"turn": turn_id, "metrics": metrics})
+
+    # dpi_me/dpi_reason/persona.py
+
+    def record_step(self, turn_id, constraints=None):
+        """记录当前状态到历史，新增 constraints 参数"""
         step_data = {dim: prob.tolist() for dim, prob in self.beliefs.items()}
-        self.history.append({"turn": turn_id, "beliefs": step_data})
+        
+        # 将约束也存入 history 列表中
+        self.history.append({
+            "turn": turn_id, 
+            "beliefs": step_data,
+            "constraints": constraints if constraints else [] # 保存约束
+        })
         
         metrics = {
             dim: {
