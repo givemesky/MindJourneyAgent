@@ -4,6 +4,7 @@
 # 方法：get_top_labels() (返回当前概率最高的偏好)。
 
 # dpi_me/persona.py
+# dpi_me/persona.py
 import numpy as np
 import json
 import os
@@ -20,13 +21,26 @@ class UserPersona:
         self.history = []  # 存储每一轮的概率分布
         self.metrics_history = [] # 存储每一轮的熵和置信度
 
+    # ================= 新增：解决报错的方法 =================
+    def get_top_label(self, dim):
+        """获取特定维度当前概率最大的标签名称"""
+        if dim not in self.beliefs:
+            return "Unknown"
+        # 找到概率最大的索引
+        idx = np.argmax(self.beliefs[dim])
+        # 从 schema 中返回对应的字符串标签
+        return self.schema[dim][idx]
+    # ======================================================
+
     def get_entropy(self, dim):
         """计算特定维度的信息熵 (熵越低，画像越确定)"""
         p = self.beliefs[dim]
-        return -np.sum(p * np.log2(p + 1e-9))
+        # 使用 1e-12 提高数值稳定性
+        return -np.sum(p * np.log2(p + 1e-12))
 
     def get_confidence(self, dim):
         """计算置信度 (当前最高概率项的概率值)"""
+        if dim not in self.beliefs: return 0.0
         return np.max(self.beliefs[dim])
 
     def record_step(self, turn_id):
@@ -43,7 +57,7 @@ class UserPersona:
         self.metrics_history.append({"turn": turn_id, "metrics": metrics})
 
     def get_top_persona(self):
-        """获取当前最可能的画像标签总结"""
+        """获取当前最可能的画像标签总结 (用于控制台打印)"""
         summary = {}
         for dim, prob in self.beliefs.items():
             idx = np.argmax(prob)
@@ -56,6 +70,10 @@ class UserPersona:
 
     def save_logs(self, path="logs/persona_evolution.json"):
         """保存演化日志"""
-        os.makedirs(os.path.dirname(path), exist_ok=True)
+        # 确保目录存在
+        dir_name = os.path.dirname(path)
+        if dir_name and not os.path.exists(dir_name):
+            os.makedirs(dir_name, exist_ok=True)
+            
         with open(path, 'w') as f:
             json.dump({"history": self.history, "metrics": self.metrics_history}, f, indent=2)
