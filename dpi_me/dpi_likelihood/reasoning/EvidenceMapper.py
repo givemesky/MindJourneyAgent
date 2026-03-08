@@ -20,8 +20,8 @@ class EvidenceMapper:
             },
             "Interest": {
                 "Culture": ["人文", "文化", "历史", "古", "艺术", "建筑", "博物馆", "遗址", "人文景观", "古迹"],
-                "Nature": ["自然", "公园", "森林", "山", "湖", "岛", "湿地", "风景", "草", "郊外", "自然风光"],
-                "Entertainment": ["乐园", "迪士尼", "娱乐", "游乐", "欢乐谷", "演出", "主题", "体育"],
+                "Nature": ["自然", "公园", "森林", "山", "湖", "岛", "湿地", "风景", "草", "郊外", "自然风光", "动物"],
+                "Entertainment": ["乐园", "迪士尼", "娱乐", "游乐", "欢乐谷", "演出", "主题", "体育", "网红"],
                 "Shopping": ["商业", "商圈", "购物", "步行街", "广场", "中心", "免税", "买买买"]
             },
             "Pace": {
@@ -30,12 +30,25 @@ class EvidenceMapper:
             }
         }
 
+    # def _handle_interest(self, match):
+    #     captured_val = match.group(1)
+    #     # 只要引号内的内容命中任何维度的关键词，就返回结果
+    #     for label, keywords in self.keyword_map["Interest"].items():
+    #         if any(kw in captured_val for kw in keywords):
+    #             return "Interest", label, 0.95
+    #     return None
+
+    # 不仅要提高命中的标签，还要主动压低其他标签的似然值。
     def _handle_interest(self, match):
         captured_val = match.group(1)
-        # 只要引号内的内容命中任何维度的关键词，就返回结果
         for label, keywords in self.keyword_map["Interest"].items():
             if any(kw in captured_val for kw in keywords):
-                return "Interest", label, 0.95
+                # 增强信号：命中的给 0.99，未命中的给 0.1 而不是 0.5
+                # 这样一轮更新就能拉开巨大差距
+                likelihoods = [0.1] * len(self.schema["Interest"])
+                idx = self.schema["Interest"].index(label)
+                likelihoods[idx] = 0.99
+                return "Interest", likelihoods
         return None
 
     def _handle_consumption(self, match):
@@ -151,12 +164,12 @@ class EvidenceMapper:
         t_low = text.lower()
         
         # 1. 检测否定词
-        neg_words = ["不", "没", "非", "不要", "没那么"]
+        neg_words = ["不", "没", "非", "不要", "没那么", "不用"]
         has_negation = any(nw in t_low for nw in neg_words)
 
         # 2. 关键词匹配逻辑
         # 如果包含 "不/没" + "赶/快/紧凑"，则判定为 Relaxed
-        fast_keywords = ["赶", "快", "紧凑", "密集", "赶时间"]
+        fast_keywords = ["赶", "快", "紧凑", "密集", "赶时间", "打卡"]
         if has_negation and any(kw in t_low for kw in fast_keywords):
             return "Relaxed", 0.98  # 极高置信度，否定了“快”
 
@@ -167,7 +180,7 @@ class EvidenceMapper:
 
         # 直接匹配 Fast 关键词 (前提是没有否定词)
         if not has_negation and any(kw in t_low for kw in self.keyword_map["Pace"]["Fast"]):
-            return "Fast", 0.92
+            return "Fast", 0.98
 
         # 3. 数值约束逻辑 (针对 activity_time)
         pace_num_m = re.search(r"(time|duration).*?([<>!=]=?)\s*(\d+)", t_low)
@@ -181,6 +194,8 @@ class EvidenceMapper:
             # 注意：90分钟是一个模糊地带，不轻易做判定，除非是极短时间
             
         return None
+
+
 
     def _handle_consumption_flexible(self, key, op, val_str):
         key = key.lower()

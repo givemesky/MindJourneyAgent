@@ -68,12 +68,25 @@ class UserPersona:
             }
         return summary
 
-    def save_logs(self, path="logs/persona_evolution.json"):
+    # def save_logs(self, path="logs/persona_evolution.json"):
+    #     """保存演化日志"""
+    #     # 确保目录存在
+    #     dir_name = os.path.dirname(path)
+    #     if dir_name and not os.path.exists(dir_name):
+    #         os.makedirs(dir_name, exist_ok=True)
+            
+    #     with open(path, 'w') as f:
+    #         json.dump({"history": self.history, "metrics": self.metrics_history}, f, indent=2)
+
+    def save_logs(self, path="/public/home/azsy/SynPT-main/dpi_me/logs/UserProfile/persona_evolution.json"):
         """保存演化日志"""
-        # 确保目录存在
+        # 获取目录路径
         dir_name = os.path.dirname(path)
+        # 递归创建目录 (如果 UserProfile 不存在也会自动创建)
         if dir_name and not os.path.exists(dir_name):
             os.makedirs(dir_name, exist_ok=True)
             
-        with open(path, 'w') as f:
-            json.dump({"history": self.history, "metrics": self.metrics_history}, f, indent=2)
+        with open(path, 'w', encoding='utf-8') as f:
+            # 建议加上 ensure_ascii=False 确保中文不乱码
+            json.dump({"history": self.history, "metrics": self.metrics_history}, f, indent=2, ensure_ascii=False)
+        print(f"✅ [Persona] 画像轨迹已保存至: {path}")

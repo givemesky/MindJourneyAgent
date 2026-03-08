@@ -7,21 +7,30 @@ from transformers import AutoConfig
 # from modelscope import AutoModelForCausalLM, AutoTokenizer
 import tiktoken
 
-from vllm import LLM, SamplingParams
+# from vllm import LLM, SamplingParams
 import re
 import sys
 import os
 
-# project_root_path = os.path.dirname(
-#     os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# )
 
+# 1. 先计算路径
+# dpi_me/dpi_likelihood/perception/llms.py -> 向上四级到根目录
 project_root_path = os.path.dirname(
     os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 )
 
+# 2. 注入路径
 if project_root_path not in sys.path:
     sys.path.insert(0, project_root_path)
+
+#3. 再导入共享模型 
+try:
+    from model_provider import SharedModelProvider
+except ImportError:
+    # 兼容路径问题
+    sys.path.append(os.path.join(project_root_path))
+    from model_provider import SharedModelProvider
+
 
 def chat_template(messages):
     """
@@ -103,25 +112,25 @@ class Deepseek(AbstractLLM):
         res_str = res_str.strip()
         return res_str
 
-    def _get_response(self, messages, one_line, json_mode):
-        kwargs = {
-            "model": "deepseek-chat",
-            "max_tokens": 4096,
-            "temperature": 0,
-            "top_p": 0.00000001,
-        }
-        if one_line:
-            kwargs["stop"] = ["\n"]
-        elif json_mode:
-            kwargs["response_format"] = {"type": "json_object"}
-        try:
-            res_str = self._send_request(messages, kwargs)
-            if json_mode:
-                res_str = repair_json(res_str, ensure_ascii=False)
-        except Exception as e:
-            print(e)
-            res_str = '{"error": "Request failed, please try again."}'
-        return res_str
+#     def _get_response(self, messages, one_line, json_mode):
+#         kwargs = {
+#             "model": "deepseek-chat",
+#             "max_tokens": 4096,
+#             "temperature": 0,
+#             "top_p": 0.00000001,
+#         }
+#         if one_line:
+#             kwargs["stop"] = ["\n"]
+#         elif json_mode:
+#             kwargs["response_format"] = {"type": "json_object"}
+#         try:
+#             res_str = self._send_request(messages, kwargs)
+#             if json_mode:
+#                 res_str = repair_json(res_str, ensure_ascii=False)
+#         except Exception as e:
+#             print(e)
+#             res_str = '{"error": "Request failed, please try again."}'
+#         return res_str
 
 
 class GLM4Plus(AbstractLLM):
@@ -159,190 +168,231 @@ class GLM4Plus(AbstractLLM):
         return res_str
 
 
-class GPT4o(AbstractLLM):
-    def __init__(self):
-        super().__init__()
-        self.llm = OpenAI()
-        self.name = "GPT4o"
-        self.tokenizer = tiktoken.encoding_for_model("gpt-4o")
+# class GPT4o(AbstractLLM):
+#     def __init__(self):
+#         super().__init__()
+#         self.llm = OpenAI()
+#         self.name = "GPT4o"
+#         self.tokenizer = tiktoken.encoding_for_model("gpt-4o")
 
 
-    def _send_request(self, messages, kwargs):
+#     def _send_request(self, messages, kwargs):
 
-        # print(messages)
-        tokens = self.tokenizer.encode(chat_template(messages))
-        self.input_token_count += len(tokens)
-        self.input_token_maxx = max(self.input_token_maxx, len(tokens))
+#         # print(messages)
+#         tokens = self.tokenizer.encode(chat_template(messages))
+#         self.input_token_count += len(tokens)
+#         self.input_token_maxx = max(self.input_token_maxx, len(tokens))
 
-        # print(tokens)
-        # print(self.input_token_count)
-        # exit(0)
+#         # print(tokens)
+#         # print(self.input_token_count)
+#         # exit(0)
 
-        res_str = (
-            self.llm.chat.completions.create(messages=messages, **kwargs)
-            .choices[0]
-            .message.content
-        )
+#         res_str = (
+#             self.llm.chat.completions.create(messages=messages, **kwargs)
+#             .choices[0]
+#             .message.content
+#         )
         
-        tokens = self.tokenizer.encode(res_str)
-        self.output_token_count += len(tokens)
+#         tokens = self.tokenizer.encode(res_str)
+#         self.output_token_count += len(tokens)
 
-        res_str = res_str.strip()
-        return res_str
+#         res_str = res_str.strip()
+#         return res_str
 
-    def _get_response(self, messages, one_line, json_mode):
-        kwargs = {
-            "model": "chatgpt-4o-latest",
-            "max_tokens": 4095,
-            "temperature": 0,
-            "top_p": 0.01,
-        }
-        if one_line:
-            kwargs["stop"] = ["\n"]
-        elif json_mode:
-            kwargs["response_format"] = {"type": "json_object"}
-        try:
-            res_str = self._send_request(messages, kwargs)
-            if json_mode:
-                res_str = repair_json(res_str, ensure_ascii=False)
-        except Exception as e:
-            print(e)
-            res_str = '{"error": "Request failed, please try again."}'
-        return res_str
+#     def _get_response(self, messages, one_line, json_mode):
+#         kwargs = {
+#             "model": "chatgpt-4o-latest",
+#             "max_tokens": 4095,
+#             "temperature": 0,
+#             "top_p": 0.01,
+#         }
+#         if one_line:
+#             kwargs["stop"] = ["\n"]
+#         elif json_mode:
+#             kwargs["response_format"] = {"type": "json_object"}
+#         try:
+#             res_str = self._send_request(messages, kwargs)
+#             if json_mode:
+#                 res_str = repair_json(res_str, ensure_ascii=False)
+#         except Exception as e:
+#             print(e)
+#             res_str = '{"error": "Request failed, please try again."}'
+#         return res_str
 
+
+# class Qwen(AbstractLLM):
+#     def __init__(self, model_name, max_model_len=None):
+#         super().__init__()
+#         self.path = os.path.join(
+#             # project_root_path, "chinatravel", "local_llm", model_name
+#             project_root_path, "model", model_name
+#         )
+#         os.environ["VLLM_ALLOW_LONG_MAX_MODEL_LEN"] = "1" 
+#         if "Qwen3" in model_name:    
+#             self.sampling_params = SamplingParams(temperature=0.6, top_p=0.95, top_k=20, max_tokens=4096)
+            
+#         else:
+#             self.sampling_params = SamplingParams(temperature=0, top_p=0.001, max_tokens=4096)
+
+#         if max_model_len is not None and max_model_len > 32768:
+#             config = AutoConfig.from_pretrained(self.path)
+#             config.rope_scaling = {
+#                     "type": "yarn", 
+#                     "factor": max_model_len//32768, # 2.0,  # 原长 32,768 → 扩展到 32,768 * 2 = 65536
+#                     "original_max_position_embeddings": 32768
+#                 }
+#             config.save_pretrained(self.path)
+#             os.environ["VLLM_ALLOW_LONG_MAX_MODEL_LEN"] = "1"
+#         else:
+#             config = AutoConfig.from_pretrained(self.path)
+#             if "rope_scaling" in config.to_dict():
+#                 del config.rope_scaling
+#             config.save_pretrained(self.path)
+
+#         self.tokenizer = AutoTokenizer.from_pretrained(self.path)
+
+#         if max_model_len is None:
+#             max_model_len = 32768
+            
+#         # self.llm = LLM(
+#         #     model=self.path,
+#         #     gpu_memory_utilization=0.95,
+#         #     max_model_len=max_model_len,  # 强制上下文长度为 65536
+#         #     # max_num_seqs = 1,           # Limit batch size
+#         #     # tensor_parallel_size=2,     # GPUs=2
+#         #     enable_prefix_caching=(max_model_len>=32768),  # 可选：启用前缀缓存优化长文本
+#         # )
+
+#         # 找到 self.llm = LLM( 这部分，进行如下修改：
+#         self.llm = LLM(
+#             model=self.path,
+#             tokenizer=self.path,
+#             max_model_len=max_model_len,
+#             trust_remote_code=True,
+#             gpu_memory_utilization=0.7,
+#             tensor_parallel_size=1,
+#             enforce_eager=True,
+#             # --- 尝试改变加载格式 ---
+#             swap_space=0,
+#             load_format="safetensors", # 明确指定格式
+#             # ----------------------
+#         )
+
+#         self.name = model_name
+#         self.max_model_len = max_model_len
+
+        
+
+#     def _get_response(self, messages, one_line, json_mode):
+#         # print(messages)
+        
+        
+
+#         if "Qwen3" in self.name:
+#             text = self.tokenizer.apply_chat_template(
+#                 messages,
+#                 tokenize=False,
+#                 add_generation_prompt=True,
+#                 enable_thinking=True # Switch between thinking and non-thinking modes. Default is True.
+#             )
+
+#             input_tokens = self.tokenizer(text)["input_ids"]
+#             self.input_token_count += len(input_tokens)       
+#             self.input_token_maxx = max(self.input_token_maxx, len(input_tokens))
+            
+#             if len(input_tokens) >= self.max_model_len:
+#                 return str({"error": f"Input prompt is longer than {self.max_model_len} tokens."})
+#             # conduct text completion
+#             outputs = self.llm.generate([text], self.sampling_params)
+
+
+#             generated_text = outputs[0].outputs[0].text
+#             # print(f"Prompt: {prompt!r}, Generated text: {generated_text!r}")
+#             # print(generated_text)
+
+#             output_token_ids = outputs[0].outputs[0].token_ids
+#             self.output_token_count += len(output_token_ids)
+
+#             try:
+#                 m = re.match(r"<think>\n(.+)</think>\n\n", generated_text, flags=re.DOTALL)
+#                 content = generated_text[len(m.group(0)):]
+#                 thinking_content = m.group(1).strip()
+
+#             except Exception as e:
+#                 thinking_content = ""
+#                 content = generated_text.strip()
+            
+#             # print("think content: ", thinking_content)
+#             # print("content: ", content)
+#             res_str = content
+#         else:
+#             text = self.tokenizer.apply_chat_template(
+#                 messages, tokenize=False, add_generation_prompt=True
+#             )
+            
+#             input_tokens = self.tokenizer(text)["input_ids"]
+#             self.input_token_count += len(input_tokens)        
+#             self.input_token_maxx = max(self.input_token_maxx, len(input_tokens))
+            
+#             if len(input_tokens) >= self.max_model_len:
+#                 return str({"error": f"Input prompt is longer than {self.max_model_len} tokens."})
+
+#             outputs = self.llm.generate([text], self.sampling_params)
+#             res_str = outputs[0].outputs[0].text
+
+#             output_token_ids = outputs[0].outputs[0].token_ids
+#             self.output_token_count += len(output_token_ids)
+#         try:
+#             if json_mode:
+#                 res_str = repair_json(res_str, ensure_ascii=False)
+#             elif one_line:
+#                 res_str = res_str.split("\n")[0]
+#         except Exception as e:
+#             res_str = '{"error": "Request with specific format failed, please try again."}'
+#         # print("---qwen_output---")
+#         # print(res_str)
+#         # print("---qwen_output_end---")
+#         return res_str
 
 class Qwen(AbstractLLM):
     def __init__(self, model_name, max_model_len=None):
         super().__init__()
-        self.path = os.path.join(
-            # project_root_path, "chinatravel", "local_llm", model_name
-            project_root_path, "model", model_name
-        )
-        os.environ["VLLM_ALLOW_LONG_MAX_MODEL_LEN"] = "1" 
-        if "Qwen3" in model_name:    
-            self.sampling_params = SamplingParams(temperature=0.6, top_p=0.95, top_k=20, max_tokens=4096)
-            
-        else:
-            self.sampling_params = SamplingParams(temperature=0, top_p=0.001, max_tokens=4096)
-
-        if max_model_len is not None and max_model_len > 32768:
-            config = AutoConfig.from_pretrained(self.path)
-            config.rope_scaling = {
-                    "type": "yarn", 
-                    "factor": max_model_len//32768, # 2.0,  # 原长 32,768 → 扩展到 32,768 * 2 = 65536
-                    "original_max_position_embeddings": 32768
-                }
-            config.save_pretrained(self.path)
-            os.environ["VLLM_ALLOW_LONG_MAX_MODEL_LEN"] = "1"
-        else:
-            config = AutoConfig.from_pretrained(self.path)
-            if "rope_scaling" in config.to_dict():
-                del config.rope_scaling
-            config.save_pretrained(self.path)
-
-        self.tokenizer = AutoTokenizer.from_pretrained(self.path)
-
-        if max_model_len is None:
-            max_model_len = 32768
-            
-        # self.llm = LLM(
-        #     model=self.path,
-        #     gpu_memory_utilization=0.95,
-        #     max_model_len=max_model_len,  # 强制上下文长度为 65536
-        #     # max_num_seqs = 1,           # Limit batch size
-        #     # tensor_parallel_size=2,     # GPUs=2
-        #     enable_prefix_caching=(max_model_len>=32768),  # 可选：启用前缀缓存优化长文本
-        # )
-
-        # 找到 self.llm = LLM( 这部分，进行如下修改：
-        self.llm = LLM(
-            model=self.path,
-            tokenizer=self.path,
-            max_model_len=max_model_len,
-            trust_remote_code=True,
-            gpu_memory_utilization=0.7,
-            tensor_parallel_size=1,
-            enforce_eager=True,
-            # --- 尝试改变加载格式 ---
-            swap_space=0,
-            load_format="safetensors", # 明确指定格式
-            # ----------------------
-        )
-
         self.name = model_name
-        self.max_model_len = max_model_len
-
+        # 1. 不再在这里加载模型，直接获取根目录下的共享模型实例
+        self.provider = SharedModelProvider.get_instance()
+        # 2. 使用共享模型提供的 tokenizer 
+        self.tokenizer = SharedModelProvider.tokenizer
         
+        # 可选：保留原有的 max_model_len 记录
+        self.max_model_len = max_model_len if max_model_len else 32768
+        print(f"✅ [DPI-Qwen-Client] 已连接到全局共享模型: {model_name}")
 
     def _get_response(self, messages, one_line, json_mode):
-        # print(messages)
-        
-        
+        """
+        利用 SharedModelProvider 进行推理，不再独立占用显存
+        """
+        # --- 如果你需要保留 Token 统计逻辑 (可选) ---
+        # text = self.tokenizer.apply_chat_template(messages, tokenize=False)
+        # self.input_token_count += len(self.tokenizer(text)["input_ids"])
 
-        if "Qwen3" in self.name:
-            text = self.tokenizer.apply_chat_template(
-                messages,
-                tokenize=False,
-                add_generation_prompt=True,
-                enable_thinking=True # Switch between thinking and non-thinking modes. Default is True.
-            )
-
-            input_tokens = self.tokenizer(text)["input_ids"]
-            self.input_token_count += len(input_tokens)       
-            self.input_token_maxx = max(self.input_token_maxx, len(input_tokens))
-            
-            if len(input_tokens) >= self.max_model_len:
-                return str({"error": f"Input prompt is longer than {self.max_model_len} tokens."})
-            # conduct text completion
-            outputs = self.llm.generate([text], self.sampling_params)
-
-
-            generated_text = outputs[0].outputs[0].text
-            # print(f"Prompt: {prompt!r}, Generated text: {generated_text!r}")
-            # print(generated_text)
-
-            output_token_ids = outputs[0].outputs[0].token_ids
-            self.output_token_count += len(output_token_ids)
-
-            try:
-                m = re.match(r"<think>\n(.+)</think>\n\n", generated_text, flags=re.DOTALL)
-                content = generated_text[len(m.group(0)):]
-                thinking_content = m.group(1).strip()
-
-            except Exception as e:
-                thinking_content = ""
-                content = generated_text.strip()
-            
-            # print("think content: ", thinking_content)
-            # print("content: ", content)
-            res_str = content
-        else:
-            text = self.tokenizer.apply_chat_template(
-                messages, tokenize=False, add_generation_prompt=True
-            )
-            
-            input_tokens = self.tokenizer(text)["input_ids"]
-            self.input_token_count += len(input_tokens)        
-            self.input_token_maxx = max(self.input_token_maxx, len(input_tokens))
-            
-            if len(input_tokens) >= self.max_model_len:
-                return str({"error": f"Input prompt is longer than {self.max_model_len} tokens."})
-
-            outputs = self.llm.generate([text], self.sampling_params)
-            res_str = outputs[0].outputs[0].text
-
-            output_token_ids = outputs[0].outputs[0].token_ids
-            self.output_token_count += len(output_token_ids)
         try:
+            # 1. 直接调用共享接口生成回答
+            # 注意：SharedModelProvider.chat_generate 内部已经处理了 apply_chat_template
+            res_str = self.provider.chat_generate(messages, max_new_tokens=512)
+
+            # 2. 保持原有的后处理逻辑 (JSON 修复和单行切分)
             if json_mode:
                 res_str = repair_json(res_str, ensure_ascii=False)
             elif one_line:
                 res_str = res_str.split("\n")[0]
+            
+            # --- 如果需要统计输出 Token (可选) ---
+            # self.output_token_count += len(self.tokenizer(res_str)["input_ids"])
+
         except Exception as e:
-            res_str = '{"error": "Request with specific format failed, please try again."}'
-        # print("---qwen_output---")
-        # print(res_str)
-        # print("---qwen_output_end---")
+            print(f"❌ [Qwen Client Error]: {e}")
+            res_str = '{"error": "Shared model request failed."}'
+
         return res_str
 
 

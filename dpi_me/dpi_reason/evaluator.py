@@ -8,7 +8,7 @@ import csv
 import os
 
 class PreferenceEvaluator:
-    def __init__(self, log_dir="dpi_me/logs"):
+    def __init__(self, log_dir="/public/home/azsy/SynPT-main/dpi_me/logs/UserProfile"):
         """
         初始化评估器
         log_dir: 结果保存路径
@@ -56,11 +56,15 @@ class PreferenceEvaluator:
         for dim, probs in persona.beliefs.items():
             entropy = self.calculate_entropy(probs)
             certainty = self.calculate_certainty(probs)
+
+            max_prob = float(np.max(probs))
             top_label = persona.get_top_label(dim) # 假设 persona 有此方法
 
             entry[f"{dim}_entropy"] = round(entropy, 4)
-            entry[f"{dim}_confidence"] = round(certainty, 4)
-            entry[f"{dim}_top"] = top_label
+            entry[f"{dim}_certainty"] = round(certainty, 4)
+            entry[f"{dim}_confidence"] = round(max_prob, 4) 
+            # entry[f"{dim}_top"] = top_label
+            entry[f"{dim}_top"] = persona.get_top_label(dim)
             
         self.history.append(entry)
         return entry
@@ -79,4 +83,5 @@ class PreferenceEvaluator:
             dict_writer.writeheader()
             dict_writer.writerows(self.history)
         
-        print(f"Convergence analysis saved to {filepath}")
+        # print(f"Convergence analysis saved to {filepath}")
+        print(f"✅ [Evaluator] 收敛性分析报表已保存至: {filepath}")
