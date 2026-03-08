@@ -130,10 +130,15 @@ Besides `Start City`, `Target City`, `People Count`, `Day Count`. There are some
 Combine constraints is also allowed. For example, "The cost of xxx activity  should be less than 1000 and the position of xxx activity should be in the city center" as long as they are mentioned in user's request.
 
 ### MANDATORY RULES FOR ATTRACTIONS (景点强制规则) ###
-1. Whenever you identify an ATTRACTION, you MUST output both its 'Position' (Name) AND its 'Type'.
-2. The 'Type' MUST be selected from this specific list: 
-   ['游乐园/体育娱乐', '历史古迹', '博物馆/纪念馆', '文化旅游区', '公园', '人文景观', '商业街区', '红色景点', '美术馆/艺术馆', '图书馆', '大学校园', '自然风光'].
-3. Format: "Exist Attraction which Position == 'NAME' and Type == 'CATEGORY'"
+1. If the user specifies a particular attraction or a clear type of interest:
+   - Output: "Exist Attraction which Position == 'NAME' and Type == 'CATEGORY'"
+2. If the user mentions "attractions" or "spots" generally WITHOUT specifying names or types:
+   - Output: "Exist Attraction which Type == '其它'" 
+3. The 'Type' MUST be selected from this specific list: 
+   ['游乐园/体育娱乐', '历史古迹', '博物馆/纪念馆', '文化旅游区', '公园', '人文景观', '商业街区', '红色景点', '美术馆/艺术馆', '图书馆', '大学校园', '自然风光','其它'].
+4. If the user mentions "attractions" but doesn't specify a type, you MUST use '其它' as the Type instead of listing all categories.
+5. DO NOT output multiple categories in a list like ["Type A", "Type B"] unless the user explicitly requested multiple types. 
+6. DO NOT dump the entire candidate list. If you are uncertain, use '其它'.
 ####################################################
 
 we offer some functions below, which can help you extract the nature language logic constraints in the user's request.
@@ -154,7 +159,7 @@ Output it in the following format:
 !!!You must obey all the rules we offer above, return type, the list of choices, the relationship between variables, etc.!!!
 
 for example:
-Query: 当前位置广州。我们三个人想坐飞机去成都玩3天，只打车或地铁或步行，住成都明悦大酒店，都开双人间，请给我们一个旅行规划，想去都江堰，还想看看自然风景，希望酒店带泳池。
+Query 1: 当前位置广州。我们三个人想坐飞机去成都玩3天，只打车或地铁或步行，住成都明悦大酒店，都开双人间，请给我们一个旅行规划，想去都江堰，还想看看自然风景，希望酒店带泳池。
 Nature Language Logic Constraints:
 <constraint>
 1. Start City == "广州"
@@ -172,6 +177,15 @@ Nature Language Logic Constraints:
 13. All Innercity Transport set <= {"taxi", "metro", "walk"}
 14. Exist Accommodation which Type == "泳池"
 <end>
+
+Query 2: 我想多去几个景点看看，行程排满一点，行程不要太赶。
+Nature Language Logic Constraints:
+<constraint>
+1. Exist Attraction which Type == "其它"
+2. All Activities count >= 5
+3. All Activities' activity_time() <= 90
+<end>
+
 DO NOT MAKE ANY ASSUMPTIONS. Follow the user's request strictly!!!
 DO NOT FORGET Tickets and Metro Tickets
 Please extract the nature language logic constraints in the user's request:

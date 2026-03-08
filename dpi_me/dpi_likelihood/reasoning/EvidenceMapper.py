@@ -14,9 +14,9 @@ class EvidenceMapper:
         # 扩展语义词典：直接映射关键词到标签
         self.keyword_map = {
             "Consumption": {
-                "Budget": ["吃紧", "便宜", "省钱", "低价", "性价比", "不贵", "穷游", "200元", "三百元"],
-                "Economy": ["中等", "经济", "普通", "适中", "标准"],
-                "Luxury": ["高端", "豪华", "五星", "不差钱", "奢侈", "高档", "档次"]
+                "Budget": ["吃紧", "便宜", "省", "低价", "性价比", "不贵", "穷游", "200元", "三百元", "平替", "实惠", "打折", "廉价", "特价", "羊毛", "性价比", "凑合", "没钱", "budget", "low cost", "cheap"],
+                "Economy": ["中等", "经济", "普通", "适中", "标准", "舒适", "平衡", "大众", "正常", "合理", "一般", "稳妥", "普通", "主流", "常规", "平价", "均价", "白领", "economy", "standard", "moderate"],
+                "Luxury": ["高端", "豪华", "五星", "不差钱", "奢侈", "高档", "档次","品质", "定制", "贵妇", "精品", "排场", "阔气", "名牌", "高级", "昂贵", "luxury", "high-end", "expensive"]
             },
             "Interest": {
                 "Culture": ["人文", "文化", "历史", "古", "艺术", "建筑", "博物馆", "遗址", "人文景观", "古迹"],
@@ -25,8 +25,8 @@ class EvidenceMapper:
                 "Shopping": ["商业", "商圈", "购物", "步行街", "广场", "中心", "免税", "买买买"]
             },
             "Pace": {
-                "Relaxed": ["不赶", "慢慢", "悠闲", "放松", "慢节奏", "一两个", "不要太累", "随性", "休闲", "慢一点"],
-                "Fast": ["赶时间", "多去", "多", "效率", "紧凑", "打卡", "尽量多", "快节奏", "多逛", "多看几个"]
+                "Relaxed": ["不赶", "慢", "悠闲", "放松", "慢节奏", "一两个", "不要太累", "随性", "休闲", "慢一点", "佛系", "散步", "随缘", "舒缓", "清闲", "度假", "懒散", "不累", "睡饱", "发呆"],
+                "Fast": ["赶时间", "多去", "多", "效率", "紧凑", "打卡", "尽量多", "快节奏", "多逛", "多看几个", "特种兵", "拉满", "抓紧", "暴走", "高强度", "填满", "多跑", "连轴转", "高效", "赶场"]
             }
         }
 
@@ -54,144 +54,227 @@ class EvidenceMapper:
 
     # def get_likelihood_D(self, constraints, raw_text=""):
     #     """
-    #     constraints: NL2SL提取的约束列表
-    #     raw_text: 原始用户输入（可选，用于增加兜底命中率）
+    #     获取似然向量 D
+    #     constraints: NL2SL 提取的符号约束列表
+    #     raw_text: 原始用户输入文本（强烈建议传入，用于兜底识别软偏好）
     #     """
+    #     # 1. 初始化 D 向量，默认 0.5 (贝叶斯中性)
     #     D = {dim: [0.5] * len(labels) for dim, labels in self.schema.items()}
         
-    #     # 将所有约束文本合并，并加入原始文本
-    #     all_text_to_scan = [str(c) for c in constraints]
+    #     # 2. 构造扫描池：逻辑约束 + 原始自然语言
+    #     scan_pool = []
+    #     for c in constraints:
+    #         scan_pool.append({"text": str(c).lower(), "is_raw": False})
     #     if raw_text:
-    #         all_text_to_scan.append(raw_text)
+    #         scan_pool.append({"text": raw_text.lower(), "is_raw": True})
 
-    #     for text in all_text_to_scan:
-    #         t_low = text.lower()
+    #     for item in scan_pool:
+    #         text = item["text"]
+    #         is_raw = item["is_raw"]
             
-    #         # --- 1. 策略 A：关键词全扫描（解决软意图命中率低的问题） ---
-    #         for dim, label_dict in self.keyword_map.items():
-    #             for label, keywords in label_dict.items():
-    #                 for kw in keywords:
-    #                     if kw in t_low:
-    #                         # 简单的否定词处理：比如“不”+“赶”
-    #                         if kw == "赶" and "不" in t_low:
-    #                             continue # 交给 Relaxed 逻辑处理
-                            
-    #                         idx = self.schema[dim].index(label)
-    #                         D[dim][idx] = max(D[dim][idx], 0.92)
-    #                         print(f"DEBUG: [语义命中] {dim}->{label} | 匹配词: {kw} | 来源: {text}")
+    #         # --- 策略 A: 噪音过滤 ---
+    #         # 如果一条逻辑约束里包含过多的引号或中括号，通常是模型在“背诵”Schema 候选列表，而非真实意图
+    #         # 例如: Type in ["自然风光", "历史古迹", "人文景观", ...]
+    #         if not is_raw:
+    #             quote_count = len(re.findall(r'["\']', text))
+    #             if quote_count > 6 or len(text) > 150:
+    #                 print(f"DEBUG: [噪音过滤] 忽略疑似列表倾倒的约束: {text[:50]}...")
+    #                 continue
 
-    #         # --- 2. 策略 B：结构化正则捕获（保留对数值和符号的精准处理） ---
-    #         # 消费正则
-    #         price_m = re.search(r"(price|budget|cost|accommodation).*?([<>!=]=?)\s*(\d+)", t_low)
+    #         # --- 策略 B: 语义关键词扫描 ---
+    #         for dim, label_dict in self.keyword_map.items():
+    #             if dim not in self.schema:
+    #                 continue
+                
+    #             # 记录本条文本在该维度下命中的标签，用于冲突检测
+    #             hits_in_this_line = set()
+                
+    #             for label, keywords in label_dict.items():
+    #                 if label not in self.schema[dim]:
+    #                     continue
+                    
+    #                 for kw in keywords:
+    #                     if kw in text:
+    #                         # 特殊否定逻辑处理：如“不”+“赶”
+    #                         if kw == "赶" and "不" in text:
+    #                             if "Relaxed" in self.schema["Pace"]:
+    #                                 idx = self.schema["Pace"].index("Relaxed")
+    #                                 D["Pace"][idx] = max(D["Pace"][idx], 0.95)
+    #                                 print(f"DEBUG: [语义命中] Pace->Relaxed | 匹配词: 不赶")
+    #                             continue
+                            
+    #                         hits_in_this_line.add(label)
+    #                         break # 一个标签命中一个词即可
+                
+    #             # 冲突过滤：如果同一行文本触发了一个维度下的 3 个以上标签，通常是无效证据（如背诵列表）
+    #             if len(hits_in_this_line) >= 3 and not is_raw:
+    #                 print(f"DEBUG: [冲突过滤] 维度 {dim} 命中过多标签 {hits_in_this_line}，已忽略。")
+    #                 continue
+                
+    #             # 正式更新 D 向量
+    #             for label in hits_in_this_line:
+    #                 idx = self.schema[dim].index(label)
+    #                 # 设定似然概率：设定为 0.95 以上可让贝叶斯置信度跳变更明显
+    #                 D[dim][idx] = max(D[dim][idx], 0.95)
+    #                 source_type = "原始文本" if is_raw else "逻辑约束"
+    #                 print(f"DEBUG: [语义命中] {dim}->{label} | 匹配词来源: {source_type}")
+
+    #         # --- 策略 C: 结构化正则捕获 (保持对数值的精准处理) ---
+    #         # 1. 消费数字正则
+    #         price_m = re.search(r"(price|budget|cost|accommodation).*?([<>!=]=?)\s*(\d+)", text)
     #         if price_m:
     #             res = self._handle_consumption(price_m)
     #             if res:
     #                 dim, label, score = res
-    #                 D[dim][self.schema[dim].index(label)] = max(D[dim][self.schema[dim].index(label)], score)
-    #                 print(f"DEBUG: [数值命中] {dim}->{label} | 内容: {price_m.group(0)}")
+    #                 if dim in self.schema and label in self.schema[dim]:
+    #                     idx = self.schema[dim].index(label)
+    #                     D[dim][idx] = max(D[dim][idx], score)
+    #                     print(f"DEBUG: [数值命中] {dim}->{label} | 内容: {price_m.group(0)}")
 
-    #         # 兴趣正则 (Position/Type)
-    #         interest_matches = re.finditer(r"(?:position|type).*?\"(.+?)\"", t_low)
+    #         # 2. 兴趣符号正则 (Position/Type)
+    #         interest_matches = re.finditer(r"(?:position|type).*?\"(.+?)\"", text)
     #         for m in interest_matches:
     #             res = self._handle_interest(m)
     #             if res:
     #                 dim, label, score = res
-    #                 D[dim][self.schema[dim].index(label)] = max(D[dim][self.schema[dim].index(label)], score)
-    #                 print(f"DEBUG: [符号命中] {dim}->{label} | 内容: {m.group(0)}")
+    #                 if dim in self.schema and label in self.schema[dim]:
+    #                     idx = self.schema[dim].index(label)
+    #                     D[dim][idx] = max(D[dim][idx], score)
+    #                     print(f"DEBUG: [符号命中] {dim}->{label} | 内容: {m.group(0)}")
 
     #     return D
 
+    def _handle_pace(self, text, is_raw=False):
+        """
+        专门处理节奏（Pace）的方法，解决否定语义和数值矛盾。
+        """
+        t_low = text.lower()
+        
+        # 1. 检测否定词
+        neg_words = ["不", "没", "非", "不要", "没那么"]
+        has_negation = any(nw in t_low for nw in neg_words)
+
+        # 2. 关键词匹配逻辑
+        # 如果包含 "不/没" + "赶/快/紧凑"，则判定为 Relaxed
+        fast_keywords = ["赶", "快", "紧凑", "密集", "赶时间"]
+        if has_negation and any(kw in t_low for kw in fast_keywords):
+            return "Relaxed", 0.98  # 极高置信度，否定了“快”
+
+        # 直接匹配 Relaxed 关键词
+        relaxed_keywords = self.keyword_map["Pace"]["Relaxed"]
+        if any(kw in t_low for kw in relaxed_keywords):
+            return "Relaxed", 0.95
+
+        # 直接匹配 Fast 关键词 (前提是没有否定词)
+        if not has_negation and any(kw in t_low for kw in self.keyword_map["Pace"]["Fast"]):
+            return "Fast", 0.92
+
+        # 3. 数值约束逻辑 (针对 activity_time)
+        pace_num_m = re.search(r"(time|duration).*?([<>!=]=?)\s*(\d+)", t_low)
+        if pace_num_m:
+            op, val = pace_num_m.group(2), float(pace_num_m.group(3))
+            # 如果是原始文本路径已经判定了意向，数值逻辑不再覆盖它
+            if val >= 120 and op in [">", ">=", "=="]:
+                return "Relaxed", 0.90
+            if val <= 70 and op in ["<", "<=", "=="]:
+                return "Fast", 0.85
+            # 注意：90分钟是一个模糊地带，不轻易做判定，除非是极短时间
+            
+        return None
+
+    def _handle_consumption_flexible(self, key, op, val_str):
+        key = key.lower()
+        val_str = val_str.strip().lower()
+        # 1. 直接标签匹配（解决 LLM 吐出英文符号的问题）
+        for label in self.schema["Consumption"]:
+            if val_str == label.lower():
+                return "Consumption", label, 0.95
+
+        if not re.search(r'\d+', val_str):
+            for label, kws in self.keyword_map["Consumption"].items():
+                if any(kw in val_str for kw in kws): return "Consumption", label, 0.95
+            return None
+        try:
+            val = float(re.findall(r'\d+\.?\d*', val_str)[0])
+        except: return None
+        is_total = any(x in key for x in ["budget", "total", "总"]) or val > 1000
+        if is_total:
+            if val <= 1500: return "Consumption", "Budget", 0.95
+            if val <= 4500: return "Consumption", "Economy", 0.90
+            return "Consumption", "Luxury", 0.95
+        else:
+            if val <= 200: return "Consumption", "Budget", 0.95
+            if val <= 600: return "Consumption", "Economy", 0.90
+            return "Consumption", "Luxury", 0.95
+
     def get_likelihood_D(self, constraints, raw_text=""):
-        """
-        获取似然向量 D
-        constraints: NL2SL 提取的符号约束列表
-        raw_text: 原始用户输入文本（强烈建议传入，用于兜底识别软偏好）
-        """
-        # 1. 初始化 D 向量，默认 0.5 (贝叶斯中性)
         D = {dim: [0.5] * len(labels) for dim, labels in self.schema.items()}
         
-        # 2. 构造扫描池：逻辑约束 + 原始自然语言
+        # 建立扫描池
         scan_pool = []
-        for c in constraints:
-            scan_pool.append({"text": str(c).lower(), "is_raw": False})
+        # 原始文本优先级最高，放在最前面处理
         if raw_text:
             scan_pool.append({"text": raw_text.lower(), "is_raw": True})
+        for c in constraints:
+            scan_pool.append({"text": str(c).lower(), "is_raw": False})
 
         for item in scan_pool:
             text = item["text"]
             is_raw = item["is_raw"]
+
+            # 1. 噪音过滤 (仅约束)
+            if not is_raw and (len(re.findall(r'["\']', text)) > 6 or len(text) > 150):
+                continue
+
+            # 2. 调用专门的 Pace 处理方法
+            # 如果本轮已经通过原始文本确定了 Pace，后续的约束匹配不再覆盖它（防止感知层错误数值的干扰）
+            pace_res = self._handle_pace(text, is_raw)
+            if pace_res:
+                label, score = pace_res
+                idx = self.schema["Pace"].index(label)
+                # 策略：原始文本的判定具有“否决权”
+                if is_raw:
+                    D["Pace"] = [0.5] * len(self.schema["Pace"]) # 清空本轮 Pace 观测
+                    D["Pace"][idx] = score
+                else:
+                    # 如果约束中也有 Pace 信号，且之前没有通过 raw 确定，或者方向一致，则取大值
+                    D["Pace"][idx] = max(D["Pace"][idx], score)
+                print(f"DEBUG: [Pace命中] -> {label} | 来源: {'原始文本' if is_raw else '约束'}")
+
+            # 3. 消费水平处理 (排除 time 干扰)
+            if "time" not in text and "duration" not in text:
+                price_m = re.search(r"(price|budget|cost|accommodation|activity).*?([<>!=]=?)\s*[\"']?([^\"'\]\s,]+)[\"']?", text)
+                if price_m:
+                    res = self._handle_consumption_flexible(price_m.group(1), price_m.group(2), price_m.group(3))
+                    if res and res[1] in self.schema["Consumption"]:
+                        D["Consumption"][self.schema["Consumption"].index(res[1])] = max(D["Consumption"][self.schema["Consumption"].index(res[1])], res[2])
+                        print(f"DEBUG: [数值命中] Consumption->{res[1]}")
             
-            # --- 策略 A: 噪音过滤 ---
-            # 如果一条逻辑约束里包含过多的引号或中括号，通常是模型在“背诵”Schema 候选列表，而非真实意图
-            # 例如: Type in ["自然风光", "历史古迹", "人文景观", ...]
-            if not is_raw:
-                quote_count = len(re.findall(r'["\']', text))
-                if quote_count > 6 or len(text) > 150:
-                    print(f"DEBUG: [噪音过滤] 忽略疑似列表倾倒的约束: {text[:50]}...")
-                    continue
+            # 如果约束里包含 "low as possible"
+            if "low" in text and "possible" in text and "cost" in text:
+                idx = self.schema["Consumption"].index("Budget")
+                D["Consumption"][idx] = max(D["Consumption"][idx], 0.95)
+                print(f"DEBUG: [语义命中] Consumption->Budget (基于: low as possible)")
 
-            # --- 策略 B: 语义关键词扫描 ---
-            for dim, label_dict in self.keyword_map.items():
-                if dim not in self.schema:
-                    continue
-                
-                # 记录本条文本在该维度下命中的标签，用于冲突检测
-                hits_in_this_line = set()
-                
-                for label, keywords in label_dict.items():
-                    if label not in self.schema[dim]:
-                        continue
-                    
-                    for kw in keywords:
-                        if kw in text:
-                            # 特殊否定逻辑处理：如“不”+“赶”
-                            if kw == "赶" and "不" in text:
-                                if "Relaxed" in self.schema["Pace"]:
-                                    idx = self.schema["Pace"].index("Relaxed")
-                                    D["Pace"][idx] = max(D["Pace"][idx], 0.95)
-                                    print(f"DEBUG: [语义命中] Pace->Relaxed | 匹配词: 不赶")
-                                continue
-                            
-                            hits_in_this_line.add(label)
-                            break # 一个标签命中一个词即可
-                
-                # 冲突过滤：如果同一行文本触发了一个维度下的 3 个以上标签，通常是无效证据（如背诵列表）
-                if len(hits_in_this_line) >= 3 and not is_raw:
-                    print(f"DEBUG: [冲突过滤] 维度 {dim} 命中过多标签 {hits_in_this_line}，已忽略。")
-                    continue
-                
-                # 正式更新 D 向量
-                for label in hits_in_this_line:
-                    idx = self.schema[dim].index(label)
-                    # 设定似然概率：设定为 0.95 以上可让贝叶斯置信度跳变更明显
-                    D[dim][idx] = max(D[dim][idx], 0.95)
-                    source_type = "原始文本" if is_raw else "逻辑约束"
-                    print(f"DEBUG: [语义命中] {dim}->{label} | 匹配词来源: {source_type}")
-
-            # --- 策略 C: 结构化正则捕获 (保持对数值的精准处理) ---
-            # 1. 消费数字正则
-            price_m = re.search(r"(price|budget|cost|accommodation).*?([<>!=]=?)\s*(\d+)", text)
-            if price_m:
-                res = self._handle_consumption(price_m)
-                if res:
-                    dim, label, score = res
-                    if dim in self.schema and label in self.schema[dim]:
-                        idx = self.schema[dim].index(label)
-                        D[dim][idx] = max(D[dim][idx], score)
-                        print(f"DEBUG: [数值命中] {dim}->{label} | 内容: {price_m.group(0)}")
-
-            # 2. 兴趣符号正则 (Position/Type)
-            interest_matches = re.finditer(r"(?:position|type).*?\"(.+?)\"", text)
+            # 4. 兴趣处理 (关键词扫描 + 正则)
+            # 关键词扫描
+            for label, kws in self.keyword_map["Interest"].items():
+                if label in self.schema["Interest"] and any(kw in text for kw in kws):
+                    D["Interest"][self.schema["Interest"].index(label)] = max(D["Interest"][self.schema["Interest"].index(label)], 0.95)
+                    print(f"DEBUG: [语义命中] Interest->{label}")
+            
+            # 符号正则
+            interest_matches = re.finditer(r"[\"']([^\"']{2,})[\"']", text)
             for m in interest_matches:
-                res = self._handle_interest(m)
-                if res:
-                    dim, label, score = res
-                    if dim in self.schema and label in self.schema[dim]:
-                        idx = self.schema[dim].index(label)
-                        D[dim][idx] = max(D[dim][idx], score)
-                        print(f"DEBUG: [符号命中] {dim}->{label} | 内容: {m.group(0)}")
+                captured = m.group(1)
+                if captured in ["上海", "北京", "重庆", "武汉", "杭州", "当前城市", "未指定"]: continue
+                for label, kws in self.keyword_map["Interest"].items():
+                    if label in self.schema["Interest"] and any(kw in captured for kw in kws):
+                        D["Interest"][self.schema["Interest"].index(label)] = max(D["Interest"][self.schema["Interest"].index(label)], 0.95)
+                        print(f"DEBUG: [符号命中] Interest->{label} | 内容: {captured}")
 
         return D
+    
 
 #################v2#####################################
 # # EvidenceMapper.py 基本判定可以实现，节奏和价格识别的不是很好

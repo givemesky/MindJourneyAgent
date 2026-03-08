@@ -35,12 +35,12 @@ def run_persona_evolution_test():
 
     # 2. 定义一个测试场景：一个“省钱、想看风景、节奏慢”的用户
     test_scenario = [
-        {"input": "我想从杭州去上海玩3天，预算比较吃紧，想找200元左右的住处。", "goal": "Consumption -> Budget"},
-        {"input": "我想去看看外滩和自然公园，不打算打车，全程走路或者地铁。", "goal": "Interest -> Nature/Culture, Pace -> Relaxed"},
-        {"input": "我希望行程不要太赶，一天逛一两个地方就行了。", "goal": "Pace -> Relaxed (强化)"}
-        # {"input": "我想从武汉到北京玩4天，总预算不超过5000元。", "goal": "Consumption -> Budget"},
-        # {"input": "我想去看看颐和园和天坛，全程走路或者地铁。", "goal": "Interest -> Nature/Culture, Pace -> Relaxed"},
-        # {"input": "我希望行程密集一点，多去几个景点。", "goal": "Pace -> Fast (强化)"}
+        # {"input": "我想从杭州去上海玩3天，预算比较吃紧，想找200元左右的住处。", "goal": "Consumption -> Budget"},
+        # {"input": "我想去看看外滩和自然公园，不打算打车，全程走路或者地铁。", "goal": "Interest -> Nature/Culture, Pace -> Relaxed"},
+        # {"input": "我希望行程不要太赶，一天逛一两个地方就行了。", "goal": "Pace -> Relaxed (强化)"}
+        {"input": "我想从深圳到成都玩5天，希望总预算不超过5000。"},
+        {"input": "我想去太古里和杜甫草堂，全程公共交通为主。"},
+        {"input": "休闲一点。"}
     ]
 
     print(f"\n初始信念状态 (Prior):")
