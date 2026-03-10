@@ -94,8 +94,22 @@ def main():
             print(f"助手: {result['response']}")
 
             # 6. 如果检测到对话应结束，给出提示
+            # if result['decision']['action'] == 'TERMINATE':
+            #     print("\n📢 [系统提示] 用户偏好已收敛。接下来系统将锁定此偏好，为您生成详细方案。")
+
+            # turn += 1
+
             if result['decision']['action'] == 'TERMINATE':
-                print("\n📢 [系统提示] 用户偏好已收敛。接下来系统将锁定此偏好，为您生成详细方案。")
+                print("\n" + "!"*30)
+                print("📢 [系统提示] 用户偏好已收敛。接下来系统将锁定此偏好，为您生成详细方案。")
+                print("🚀 正在自动保存实验数据并退出系统...")
+                print("!"*30)
+                
+                # 执行保存逻辑
+                bridge.finalize()
+                
+                print(f"\n✅ 任务完成！耗时: {result['duration']}s")
+                return # 或者使用 sys.exit(0) 彻底退出程序
 
             turn += 1
 

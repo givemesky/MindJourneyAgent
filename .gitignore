@@ -11,3 +11,7 @@ __pycache__/
 logs/
 lora/optimizer.pt
 #data/*.jsonl
+kg_travel/attractions
+kg_travel/restaurants
+kg_travel/attracions_restaurants_kg/output_attracions_restaurants_kg
+kg_travel/attractions_kg/output_attractions_kgs

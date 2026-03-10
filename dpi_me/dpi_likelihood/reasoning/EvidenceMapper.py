@@ -21,11 +21,11 @@ class EvidenceMapper:
             "Interest": {
                 "Culture": ["人文", "文化", "历史", "古", "艺术", "建筑", "博物馆", "遗址", "人文景观", "古迹"],
                 "Nature": ["自然", "公园", "森林", "山", "湖", "岛", "湿地", "风景", "草", "郊外", "自然风光", "动物"],
-                "Entertainment": ["乐园", "迪士尼", "娱乐", "游乐", "欢乐谷", "演出", "主题", "体育", "网红"],
+                "Entertainment": ["乐园", "迪士尼", "娱乐", "游乐", "欢乐谷", "演出", "主题", "体育", "网红", "美食"],
                 "Shopping": ["商业", "商圈", "购物", "步行街", "广场", "中心", "免税", "买买买"]
             },
             "Pace": {
-                "Relaxed": ["不赶", "慢", "悠闲", "放松", "慢节奏", "一两个", "不要太累", "随性", "休闲", "慢一点", "佛系", "散步", "随缘", "舒缓", "清闲", "度假", "懒散", "不累", "睡饱", "发呆"],
+                "Relaxed": ["不赶", "慢", "悠闲", "悠", "放松", "松", "慢节奏", "一两个", "不要太累", "随性", "休闲", "慢一点", "佛系", "宽松", "散步", "随缘", "舒缓", "清闲", "度假", "懒散", "不累", "睡饱", "发呆"],
                 "Fast": ["赶时间", "多去", "多", "效率", "紧凑", "打卡", "尽量多", "快节奏", "多逛", "多看几个", "特种兵", "拉满", "抓紧", "暴走", "高强度", "填满", "多跑", "连轴转", "高效", "赶场"]
             }
         }
@@ -222,72 +222,155 @@ class EvidenceMapper:
             if val <= 600: return "Consumption", "Economy", 0.90
             return "Consumption", "Luxury", 0.95
 
+    # def get_likelihood_D(self, constraints, raw_text=""):
+    #     D = {dim: [0.5] * len(labels) for dim, labels in self.schema.items()}
+        
+    #     # 建立扫描池
+    #     scan_pool = []
+    #     # 原始文本优先级最高，放在最前面处理
+    #     if raw_text:
+    #         scan_pool.append({"text": raw_text.lower(), "is_raw": True})
+    #     for c in constraints:
+    #         scan_pool.append({"text": str(c).lower(), "is_raw": False})
+
+    #     for item in scan_pool:
+    #         text = item["text"]
+    #         is_raw = item["is_raw"]
+
+    #         # 1. 噪音过滤 (仅约束)
+    #         if not is_raw and (len(re.findall(r'["\']', text)) > 6 or len(text) > 150):
+    #             continue
+
+    #         # 2. 调用专门的 Pace 处理方法
+    #         # 如果本轮已经通过原始文本确定了 Pace，后续的约束匹配不再覆盖它（防止感知层错误数值的干扰）
+    #         pace_res = self._handle_pace(text, is_raw)
+    #         if pace_res:
+    #             label, score = pace_res
+                
+    #             idx = self.schema["Pace"].index(label)
+    #             # 策略：原始文本的判定具有“否决权”
+    #             if is_raw:
+    #                 D["Pace"] = [0.5] * len(self.schema["Pace"]) # 清空本轮 Pace 观测
+    #                 D["Pace"][idx] = score
+    #             else:
+    #                 # 如果约束中也有 Pace 信号，且之前没有通过 raw 确定，或者方向一致，则取大值
+    #                 D["Pace"][idx] = max(D["Pace"][idx], score)
+    #             print(f"DEBUG: [Pace命中] -> {label} | 来源: {'原始文本' if is_raw else '约束'}")
+
+    #         # 3. 消费水平处理 (排除 time 干扰)
+    #         if "time" not in text and "duration" not in text:
+    #             price_m = re.search(r"(price|budget|cost|accommodation|activity).*?([<>!=]=?)\s*[\"']?([^\"'\]\s,]+)[\"']?", text)
+    #             if price_m:
+    #                 res = self._handle_consumption_flexible(price_m.group(1), price_m.group(2), price_m.group(3))
+    #                 if res and res[1] in self.schema["Consumption"]:
+    #                     D["Consumption"][self.schema["Consumption"].index(res[1])] = max(D["Consumption"][self.schema["Consumption"].index(res[1])], res[2])
+    #                     print(f"DEBUG: [数值命中] Consumption->{res[1]}")
+            
+    #         # 如果约束里包含 "low as possible"
+    #         if "low" in text and "possible" in text and "cost" in text:
+    #             idx = self.schema["Consumption"].index("Budget")
+    #             D["Consumption"][idx] = max(D["Consumption"][idx], 0.95)
+    #             print(f"DEBUG: [语义命中] Consumption->Budget (基于: low as possible)")
+
+    #         # 4. 兴趣处理 (关键词扫描 + 正则)
+    #         # 关键词扫描
+    #         for label, kws in self.keyword_map["Interest"].items():
+    #             if label in self.schema["Interest"] and any(kw in text for kw in kws):
+    #                 D["Interest"][self.schema["Interest"].index(label)] = max(D["Interest"][self.schema["Interest"].index(label)], 0.95)
+    #                 print(f"DEBUG: [语义命中] Interest->{label}")
+            
+    #         # 符号正则
+    #         interest_matches = re.finditer(r"[\"']([^\"']{2,})[\"']", text)
+    #         for m in interest_matches:
+    #             captured = m.group(1)
+    #             if captured in ["上海", "北京", "重庆", "武汉", "杭州", "当前城市", "未指定"]: continue
+    #             for label, kws in self.keyword_map["Interest"].items():
+    #                 if label in self.schema["Interest"] and any(kw in captured for kw in kws):
+    #                     D["Interest"][self.schema["Interest"].index(label)] = max(D["Interest"][self.schema["Interest"].index(label)], 0.95)
+    #                     print(f"DEBUG: [符号命中] Interest->{label} | 内容: {captured}")
+
+    #     return D
+
     def get_likelihood_D(self, constraints, raw_text=""):
+        # 1. 初始化似然向量 D 和 命中计数器
         D = {dim: [0.5] * len(labels) for dim, labels in self.schema.items()}
+        # hit_counts 格式: {"Interest": {"Culture": 2, "Nature": 0, ...}, "Consumption": {...}}
+        hit_counts = {dim: {label: 0 for label in labels} for dim, labels in self.schema.items()}
         
         # 建立扫描池
         scan_pool = []
-        # 原始文本优先级最高，放在最前面处理
         if raw_text:
             scan_pool.append({"text": raw_text.lower(), "is_raw": True})
         for c in constraints:
             scan_pool.append({"text": str(c).lower(), "is_raw": False})
 
+        # ================= 第一阶段：命中统计 =================
         for item in scan_pool:
             text = item["text"]
             is_raw = item["is_raw"]
 
-            # 1. 噪音过滤 (仅约束)
+            # 1. 噪音过滤
             if not is_raw and (len(re.findall(r'["\']', text)) > 6 or len(text) > 150):
                 continue
 
-            # 2. 调用专门的 Pace 处理方法
-            # 如果本轮已经通过原始文本确定了 Pace，后续的约束匹配不再覆盖它（防止感知层错误数值的干扰）
+            # 2. 节奏统计 (Pace)
             pace_res = self._handle_pace(text, is_raw)
             if pace_res:
-                label, score = pace_res
-                idx = self.schema["Pace"].index(label)
-                # 策略：原始文本的判定具有“否决权”
-                if is_raw:
-                    D["Pace"] = [0.5] * len(self.schema["Pace"]) # 清空本轮 Pace 观测
-                    D["Pace"][idx] = score
-                else:
-                    # 如果约束中也有 Pace 信号，且之前没有通过 raw 确定，或者方向一致，则取大值
-                    D["Pace"][idx] = max(D["Pace"][idx], score)
-                print(f"DEBUG: [Pace命中] -> {label} | 来源: {'原始文本' if is_raw else '约束'}")
+                label, _ = pace_res # 我们只取标签，分数由后面的计数逻辑统一给
+                # 原始文本权重更高，计为 2 次命中，确保其统治地位
+                hit_counts["Pace"][label] += 2 if is_raw else 1
 
-            # 3. 消费水平处理 (排除 time 干扰)
+            # 3. 消费水平统计 (Consumption)
             if "time" not in text and "duration" not in text:
                 price_m = re.search(r"(price|budget|cost|accommodation|activity).*?([<>!=]=?)\s*[\"']?([^\"'\]\s,]+)[\"']?", text)
                 if price_m:
                     res = self._handle_consumption_flexible(price_m.group(1), price_m.group(2), price_m.group(3))
                     if res and res[1] in self.schema["Consumption"]:
-                        D["Consumption"][self.schema["Consumption"].index(res[1])] = max(D["Consumption"][self.schema["Consumption"].index(res[1])], res[2])
-                        print(f"DEBUG: [数值命中] Consumption->{res[1]}")
+                        hit_counts["Consumption"][res[1]] += 1
             
-            # 如果约束里包含 "low as possible"
             if "low" in text and "possible" in text and "cost" in text:
-                idx = self.schema["Consumption"].index("Budget")
-                D["Consumption"][idx] = max(D["Consumption"][idx], 0.95)
-                print(f"DEBUG: [语义命中] Consumption->Budget (基于: low as possible)")
+                hit_counts["Consumption"]["Budget"] += 1
 
-            # 4. 兴趣处理 (关键词扫描 + 正则)
+            # 4. 兴趣统计 (Interest)
             # 关键词扫描
             for label, kws in self.keyword_map["Interest"].items():
                 if label in self.schema["Interest"] and any(kw in text for kw in kws):
-                    D["Interest"][self.schema["Interest"].index(label)] = max(D["Interest"][self.schema["Interest"].index(label)], 0.95)
-                    print(f"DEBUG: [语义命中] Interest->{label}")
+                    hit_counts["Interest"][label] += 1
             
-            # 符号正则
+            # 符号正则扫描
             interest_matches = re.finditer(r"[\"']([^\"']{2,})[\"']", text)
             for m in interest_matches:
                 captured = m.group(1)
                 if captured in ["上海", "北京", "重庆", "武汉", "杭州", "当前城市", "未指定"]: continue
                 for label, kws in self.keyword_map["Interest"].items():
                     if label in self.schema["Interest"] and any(kw in captured for kw in kws):
-                        D["Interest"][self.schema["Interest"].index(label)] = max(D["Interest"][self.schema["Interest"].index(label)], 0.95)
-                        print(f"DEBUG: [符号命中] Interest->{label} | 内容: {captured}")
+                        hit_counts["Interest"][label] += 1
 
+        # ================= 第二阶段：似然增强与竞争抑制 =================
+        for dim, labels in self.schema.items():
+            counts = hit_counts[dim]
+            max_hits = max(counts.values())
+            
+            # 如果本维度有任何命中，则进入计算逻辑，否则保持全 0.5
+            if max_hits > 0:
+                for idx, label in enumerate(labels):
+                    count = counts[label]
+                    if count > 0:
+                        # 【非线性增强】: 次数越多，越接近 1.0
+                        if count == 1:
+                            score = 0.95
+                        elif count == 2:
+                            score = 0.97
+                        else:
+                            score = 0.99
+                        D[dim][idx] = score
+                        print(f"DEBUG: [{dim}] 增强命中 -> {label} (次数: {count}, 似然: {score})")
+                    else:
+                        # 【竞争抑制】: 如果本维度有其他标签被强势命中，压低未命中标签
+                        # 如果最高命中次数 >= 2, 强制压到 0.1；只有 1 次命中时压到 0.4
+                        inhibition_score = 0.1 if max_hits >= 2 else 0.4
+                        D[dim][idx] = inhibition_score
+        
         return D
     
 
