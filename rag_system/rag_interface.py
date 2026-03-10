@@ -30,7 +30,8 @@ def run_rag_recommendation():
         
         output = []
         output.append("\n" + "="*50)
-        output.append("🚀 [RAG 增强生成] 为您定制的南京方案：")
+        city_name = engine.hard_filters['city'] or "目的地"
+        output.append(f"🚀 [RAG 增强生成] 为您定制的 {city_name} 方案：")
         output.append("="*50)
 
         output.append(f"\n📍 【核心打卡】(根据您的要求优先匹配)")
@@ -44,7 +45,7 @@ def run_rag_recommendation():
             d = engine.kg.nodes[a]
             output.append(f" - {a} [{d.get('type')}] | 门票:{d.get('price')}元")
 
-        output.append(f"\n🍽️ 【美食地图】(已为您优先寻找鸭血粉丝汤)")
+        output.append(f"\n🍽️ 【美食地图】")
         for r in rests[:8]:
             d = engine.kg.nodes[r]
             # 标识出命中菜品的餐厅
