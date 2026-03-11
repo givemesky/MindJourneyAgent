@@ -1,0 +1,23 @@
+{
+    "basic_info": {
+    "target_city": "深圳",
+    "people_count": 1,
+    "day_count": 2
+    },
+    "hard_constraints": {
+    "must_visit_attractions": [
+    "深圳湾公园",
+    "世界之窗"
+    ],
+    "must_eat_restaurants": [
+    "粤海荟 (粤菜)",
+    "宽米砂锅粥"
+    ],
+    "min_activities_count": 5
+    },
+    "soft_constraints_persona": {
+    "consumption_level": "Budget (经济实惠)",
+    "interest_preference": "Nature (自然风光)",
+    "travel_pace": "Fast (紧凑打卡)"
+    }
+    }

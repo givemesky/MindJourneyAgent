@@ -1,4 +1,4 @@
-# 入口文件：运行推荐逻辑并输出最终结果
+# 测试景点和餐厅RAG推荐文件：运行推荐逻辑并输出最终结果
 
 from retriever import TravelRetriever
 import os

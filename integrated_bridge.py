@@ -72,7 +72,8 @@ class DPI_SynPT_Bridge:
 
         # 3. 调用共享模型生成对话回复 (参照 chat_proactive.py 逻辑)
         start_time = time.time()
-        assistant_response = SharedModelProvider.chat_generate(temp_messages)
+        # assistant_response = SharedModelProvider.chat_generate(temp_messages)
+        assistant_response = SharedModelProvider.get_instance().chat_generate(temp_messages)
         duration = time.time() - start_time
 
         # 4. 将助手的真实回复存入正式历史
