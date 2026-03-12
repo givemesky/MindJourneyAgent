@@ -25,7 +25,7 @@ from dpi_me.dpi_reason.strategy import DialogueStrategy
 class DPI_SynPT_Bridge:
     def __init__(self):
         print("\n" + "="*50)
-        print("🤖 [System] 正在启动 DPI-ME + SynPT 集成系统...")
+        print("🤖 [System] 正在启动 MindJourney 系统...")
         print("="*50)
 
         # 1. 初始化模型提供者 (加载 Qwen + LoRA)

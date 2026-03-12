@@ -11,7 +11,7 @@ import random
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # ================= 配置路径 =================
-MODEL_PATH = "/public/home/azsy/SynPT-main/model/Qwen2.5-7B-Instruct"
+MODEL_PATH = "/public/home/azsy/MindJourney/MindJourneyAgent/model/Qwen2.5-7B-Instruct"
 
 class TravelPlanner:
     def __init__(self, json_path):
@@ -37,7 +37,7 @@ class TravelPlanner:
         self.model.eval()
 
     def _load_kg(self):
-        kg_path = f"/public/home/azsy/SynPT-main/kg_travel/city_kg/output_city_kg/{self.city_key}_unified_kg.gml"
+        kg_path = f"/public/home/azsy/MindJourney/MindJourneyAgent/kg_travel/city_kg/output_city_kg/{self.city_key}_unified_kg.gml"
         return nx.read_gml(kg_path)
 
     def _clean_name(self, name):
@@ -364,5 +364,5 @@ class TravelPlanner:
         return f"\n✅ 成功！已强制要求全量天数输出。详见: travel_itinerary_report.txt"
 
 if __name__ == "__main__":
-    planner = TravelPlanner("/public/home/azsy/SynPT-main/test_json.json")
+    planner = TravelPlanner("/public/home/azsy/MindJourney/MindJourneyAgent/test_json.json")
     print(planner.run())

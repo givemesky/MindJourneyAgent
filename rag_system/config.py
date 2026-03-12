@@ -3,12 +3,12 @@
 import os
 
 # 日志路径
-LOG_DIR = "/public/home/azsy/SynPT-main/dpi_me/logs"
+LOG_DIR = "/public/home/azsy/MindJourney/MindJourneyAgent/dpi_me/logs"
 CONSTRAINTS_PATH = os.path.join(LOG_DIR, "UserProfile/constraints_log.json")
 CONVERGENCE_PATH = os.path.join(LOG_DIR, "Convergence/persona_convergence.csv")
 
 # 图谱数据路径
-KG_DIR = "/public/home/azsy/SynPT-main/kg_travel/attracions_restaurants_kg/output_attracions_restaurants_kg"
+KG_DIR = "/public/home/azsy/MindJourney/MindJourneyAgent/kg_travel/attracions_restaurants_kg/output_attracions_restaurants_kg"
 
 # 输出设置
 OUTPUT_FIELDS_ATTR = ["name", "type", "price", "max_time"]

@@ -9,7 +9,7 @@ class SharedModelProvider:
     model = None
     tokenizer = None
 
-    BASE_MODEL_PATH = "/public/home/azsy/SynPT-main/model/Qwen2.5-7B-Instruct"
+    BASE_MODEL_PATH = "/public/home/azsy/MindJourney/MindJourneyAgent/model/Qwen2.5-7B-Instruct"
     LORA_PATH = "/public/home/azsy/SynPT-main/lora"
 
     @classmethod

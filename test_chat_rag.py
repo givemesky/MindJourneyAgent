@@ -91,7 +91,7 @@ def main():
         print(f"❌ 系统初始化失败: {e}")
         return
 
-    print("\n🌟 [Qwen-PT + DPI-ME] 旅游定制助手已就绪！")
+    print("\n🌟 [MindJourney] 旅游定制助手已就绪！")
     print("您好！我是您的智能旅游助手，请问您最近有去哪里旅行的计划吗？")
 
     turn = 1
