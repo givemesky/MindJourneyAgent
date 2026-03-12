@@ -6,6 +6,8 @@ from scipy.cluster.vq import kmeans2
 import re
 import sys
 import torch
+import math
+import random
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
 # ================= 配置路径 =================
@@ -25,13 +27,7 @@ class TravelPlanner:
         self.city_key = city_mapping.get(target_city_name, "beijing")
         
         self.kg = self._load_kg()
-        
-        # 预算阈值设定
-        self.budget_thresholds = {
-            "restaurant": 100,    
-            "accommodation": 400, 
-            "attraction": 50      
-        }
+        self.budget_thresholds = {"restaurant": 100, "accommodation": 400}
         
         print(f"正在加载基座模型: {os.path.basename(MODEL_PATH)}...")
         self.tokenizer = AutoTokenizer.from_pretrained(MODEL_PATH, trust_remote_code=True)
@@ -45,90 +41,120 @@ class TravelPlanner:
         return nx.read_gml(kg_path)
 
     def _clean_name(self, name):
-        """清洗输入，处理如 '粤海荟 (粤菜)' -> '粤海荟'"""
         return re.sub(r'\s*\(.*?\)', '', name).strip()
 
+    # def _get_node_full_info(self, name):
+    #     clean_n = self._clean_name(name)
+    #     if clean_n in self.kg:
+    #         data = dict(self.kg.nodes[clean_n])
+    #         data['name'] = clean_n
+    #         data['node_type'] = 'attraction' if 'max_t' in data else ('restaurant' if 'cuisine' in data else 'accommodation')
+    #         try: data['price'] = float(data.get('price', 0))
+    #         except: data['price'] = 0.0
+    #         return data
+    #     # 模糊匹配
+    #     for node, d in self.kg.nodes(data=True):
+    #         if clean_n in node or node in clean_n:
+    #             res = dict(d)
+    #             res['name'] = node
+    #             res['node_type'] = 'attraction' if 'max_t' in res else ('restaurant' if 'cuisine' in res else 'accommodation')
+    #             res['price'] = float(res.get('price', 0))
+    #             return res
+    #     return None
+
     def _get_node_full_info(self, name):
-        """增强版匹配逻辑"""
         clean_n = self._clean_name(name)
         if clean_n in self.kg:
             data = dict(self.kg.nodes[clean_n])
             data['name'] = clean_n
-            # 识别类型
-            if 'max_t' in data: data['node_type'] = 'attraction'
-            elif 'cuisine' in data: data['node_type'] = 'restaurant'
-            else: data['node_type'] = 'accommodation'
-            # 价格转换
+            # --- 优化特色菜字段映射 ---
+            # 确保将数据库中的 recommendedfood 映射到 Prompt 需要的 recommend 键上
+            raw_recommend = data.get('recommendedfood') or data.get('recommend') or "店长推荐特色菜"
+            # 处理数据中的 'nan' 或空值
+            data['recommend'] = str(raw_recommend) if str(raw_recommend).lower() != 'nan' else "特色苏帮菜"
+            
+            data['node_type'] = 'attraction' if 'max_t' in data else ('restaurant' if 'cuisine' in data else 'accommodation')
             try: data['price'] = float(data.get('price', 0))
             except: data['price'] = 0.0
             return data
-        
-        # 模糊搜索
+            
+        # 模糊匹配
         for node, d in self.kg.nodes(data=True):
             if clean_n in node or node in clean_n:
                 res = dict(d)
                 res['name'] = node
-                if 'max_t' in res: res['node_type'] = 'attraction'
-                elif 'cuisine' in res: res['node_type'] = 'restaurant'
-                else: res['node_type'] = 'accommodation'
+                # --- 同样的优化处理 ---
+                raw_recommend = res.get('recommendedfood') or res.get('recommend') or "店长推荐特色菜"
+                res['recommend'] = str(raw_recommend) if str(raw_recommend).lower() != 'nan' else "特色苏帮菜"
+                
+                res['node_type'] = 'attraction' if 'max_t' in res else ('restaurant' if 'cuisine' in res else 'accommodation')
                 try: res['price'] = float(res.get('price', 0))
                 except: res['price'] = 0.0
                 return res
         return None
 
-    def _find_smart_node(self, ref_node_name, target_type, exclude_names=[], strategy="loyalty"):
-        """价格-距离平衡搜索"""
+    def _find_smart_node(self, ref_node_name, target_type, exclude_names=[], focus="constraint", keyword=None):
         ref_data = self.kg.nodes[ref_node_name]
         ref_coords = (ref_data['lat'], ref_data['lon'])
-        max_p = self.budget_thresholds.get(target_type) if strategy == "budget" else None
-
+        pref = self.user_data['soft_constraints_persona']
+        
         candidates = []
         for node, data in self.kg.nodes(data=True):
             if node in exclude_names: continue
             
-            # 判断节点类型
             n_type = 'attraction' if 'max_t' in data else ('restaurant' if 'cuisine' in data else 'accommodation')
             if n_type == target_type:
-                price = float(data.get('price', 0))
-                if strategy == "budget" and max_p and price > max_p: continue
+                kw_bonus = 0
+                if keyword and (keyword in node or node in keyword):
+                    kw_bonus = 5000 
                 
+                price = float(data.get('price', 1.0))
                 dist = np.sqrt((data['lat'] - ref_coords[0])**2 + (data['lon'] - ref_coords[1])**2)
-                score = price * 0.1 + dist * 500  # 综合分：越小越好
+                score = dist * 3000 - kw_bonus 
+
+                if focus == "consumption":
+                    if "Luxury" in pref['consumption_level']: score += (20000 / (price + 1))
+                    else: score += (price * 0.5)
+                elif focus == "interest":
+                    interest_pref = pref['interest_preference'].split('(')[0].strip()
+                    type_str = str(data.get('type', '')) + str(data.get('cuisine', ''))
+                    if interest_pref.lower() in type_str.lower(): score -= 800 
+                
+                score += price * 0.1
                 candidates.append((node, score))
         
         if candidates:
             candidates.sort(key=lambda x: x[1])
-            return self._get_node_full_info(candidates[0][0])
-        
-        # 全城最便宜兜底
-        all_of_type = [n for n, d in self.kg.nodes(data=True) if ('max_t' in d if target_type=='attraction' else ('cuisine' in d if target_type=='restaurant' else 'lat' in d))]
-        all_of_type.sort(key=lambda x: float(self.kg.nodes[x].get('price', 9999)))
-        return self._get_node_full_info(all_of_type[0])
+            return self._get_node_full_info(random.choice(candidates[:min(10, len(candidates))])[0])
+        return None
 
-    def solve_plan(self, strategy="loyalty"):
+    def solve_plan(self, strategy_name, focus_mode, forbidden_names=set()):
         hards = self.user_data['hard_constraints']
-        day_count = self.user_data['basic_info']['day_count']
+        basic = self.user_data['basic_info']
+        day_count, people_count = basic['day_count'], basic['people_count']
         pace = self.user_data['soft_constraints_persona'].get('travel_pace', 'Relaxed')
+        is_fast = "Fast" in pace
         
-        # 1. 强制提取硬约束
-        must_attrs = [self._get_node_full_info(n) for n in hards['must_visit_attractions'] if self._get_node_full_info(n)]
-        must_rests = [self._get_node_full_info(n) for n in hards['must_eat_restaurants'] if self._get_node_full_info(n)]
+        must_attr_names = hards['must_visit_attractions']
+        must_rest_names = hards['must_eat_restaurants']
+        used_here = set() | forbidden_names
+        
+        all_attr_pool = []
+        for n in must_attr_names:
+            info = self._get_node_full_info(n)
+            if info: 
+                all_attr_pool.append(info)
+                used_here.add(info['name'])
 
-        # 2. 补全景点 (Fast: 3个/天, Relaxed: 2个/天)
-        per_day = 3 if "Fast" in pace else 2
-        total_needed = day_count * per_day
-        all_attr_pool = list(must_attrs)
-        used_names = {a['name'] for a in all_attr_pool}
-
-        while len(all_attr_pool) < total_needed:
-            ref = all_attr_pool[-1]['name']
-            extra = self._find_smart_node(ref, 'attraction', exclude_names=used_names, strategy=strategy)
+        attr_per_day = 3 if is_fast else 2
+        while len(all_attr_pool) < day_count * attr_per_day:
+            ref = all_attr_pool[-1]['name'] if all_attr_pool else random.choice(list(self.kg.nodes))
+            extra = self._find_smart_node(ref, 'attraction', exclude_names=used_here, focus=focus_mode)
             if extra:
                 all_attr_pool.append(extra)
-                used_names.add(extra['name'])
+                used_here.add(extra['name'])
             else: break
 
-        # 3. 地理聚类
         coords = np.array([[a['lat'], a['lon']] for a in all_attr_pool])
         k_val = min(day_count, len(all_attr_pool))
         centroids, labels = kmeans2(coords, k=k_val, minit='points')
@@ -139,97 +165,203 @@ class TravelPlanner:
             if not day_nodes: continue
             ref_node = day_nodes[0]['name']
 
-            # 午餐：忠实版必须用原选
-            res_idx = d % len(must_rests) if must_rests else 0
-            base_lunch = must_rests[res_idx] if must_rests else None
+            lunch = None
+            for mr_name in must_rest_names:
+                clean_mr = self._clean_name(mr_name)
+                if clean_mr in self.kg and clean_mr not in used_here:
+                    lunch = self._get_node_full_info(clean_mr)
+                    break
+                elif clean_mr not in self.kg or clean_mr in used_here:
+                    alt_res = self._find_smart_node(ref_node, 'restaurant', exclude_names=used_here, focus=focus_mode, keyword=clean_mr)
+                    if alt_res:
+                        lunch = alt_res
+                        break
             
-            if strategy == "budget" and base_lunch and base_lunch['price'] > self.budget_thresholds['restaurant']:
-                lunch = self._find_smart_node(ref_node, 'restaurant', strategy="budget", exclude_names=used_names)
-                change_reason = f"原选{base_lunch['name']}超出预算，已替换"
-            else:
-                lunch = base_lunch or self._find_smart_node(ref_node, 'restaurant', exclude_names=used_names)
-                change_reason = ""
-
-            # 晚餐/住宿/补位景点
-            dinner = self._find_smart_node(day_nodes[-1]['name'], 'restaurant', exclude_names=used_names | {lunch['name'] if lunch else ""}, strategy=strategy)
-            hotel = self._find_smart_node(ref_node, 'accommodation', strategy=strategy)
+            if not lunch:
+                lunch = self._find_smart_node(ref_node, 'restaurant', exclude_names=used_here, focus=focus_mode)
+            if lunch: used_here.add(lunch['name'])
             
-            # 分段
-            morning = day_nodes[0]
-            afternoon = day_nodes[1] if len(day_nodes) > 1 else self._find_smart_node(ref_node, 'attraction', exclude_names=used_names, strategy=strategy)
-            evening = day_nodes[2] if len(day_nodes) > 2 else self._find_smart_node(afternoon['name'], 'attraction', exclude_names=used_names | {afternoon['name']}, strategy=strategy)
+            dinner = self._find_smart_node(day_nodes[-1]['name'], 'restaurant', exclude_names=used_here, focus=focus_mode)
+            if dinner: used_here.add(dinner['name'])
+            
+            hotel = self._find_smart_node(ref_node, 'accommodation', exclude_names=used_here, focus=focus_mode)
+            if hotel: used_here.add(hotel['name'])
 
-            itinerary.append({
+            day_data = {
                 "day": d + 1,
-                "morning": morning, "lunch": lunch,
-                "afternoon": afternoon, "evening": evening,
-                "dinner": dinner, "accommodation": hotel,
-                "note": change_reason
-            })
-            # 更新已用
-            for item in [lunch, dinner, hotel, morning, afternoon, evening]:
-                if item: used_names.add(item['name'])
+                "morning_attr": day_nodes[0],
+                "lunch_res": lunch,
+                "afternoon_attr": day_nodes[1] if len(day_nodes) > 1 else self._find_smart_node(ref_node, 'attraction', exclude_names=used_here, focus=focus_mode),
+                "dinner_res": dinner,
+                "accommodation": hotel
+            }
+            if is_fast:
+                ev = day_nodes[2] if len(day_nodes) > 2 else self._find_smart_node(day_data["afternoon_attr"]['name'], 'attraction', exclude_names=used_here, focus=focus_mode)
+                day_data["evening_attr"] = ev
+                if ev: used_here.add(ev['name'])
+            else:
+                day_data["evening_attr"] = None
 
-        # 计算总价
+            itinerary.append(day_data)
+
         total = 0
-        for day in itinerary:
-            for k in ["morning", "afternoon", "evening", "lunch", "dinner", "accommodation"]:
-                if day[k]: total += day[k]['price']
+        rooms = math.ceil(people_count / 2)
+        for dy in itinerary:
+            for k in ["morning_attr", "afternoon_attr", "evening_attr", "lunch_res", "dinner_res"]:
+                if dy[k]: total += dy[k]['price'] * people_count
+            if dy["accommodation"]: total += dy["accommodation"]['price'] * rooms
 
-        return itinerary, round(total, 2)
+        return {"strategy": strategy_name, "itinerary": itinerary, "total": round(total, 2)}
+
+    # def run(self):
+    #     b, h, p = self.user_data['basic_info'], self.user_data['hard_constraints'], self.user_data['soft_constraints_persona']
+        
+    #     plan_1 = self.solve_plan("硬约束忠实版", "constraint")
+    #     used_p1 = {n['name'] for d in plan_1['itinerary'] for n in [d['morning_attr'], d['afternoon_attr'], d['evening_attr'], d['lunch_res'], d['dinner_res'], d['accommodation']] if n}
+        
+    #     plan_2 = self.solve_plan("兴趣偏好深度版", "interest", forbidden_names=used_p1)
+    #     used_p2 = {n['name'] for d in plan_2['itinerary'] for n in [d['morning_attr'], d['afternoon_attr'], d['evening_attr'], d['lunch_res'], d['dinner_res'], d['accommodation']] if n}
+        
+    #     plan_3 = self.solve_plan("消费水平定制版", "consumption", forbidden_names=used_p1 | used_p2)
+
+    #     prompt = f"""你是一名专业的旅游定制师。请为用户写三套{b['target_city']}旅游方案。
+    #     总人数：{b['people_count']}人。用户画像：{json.dumps(p, ensure_ascii=False)}。
+        
+    #     ### 严格禁止行为：
+    #     1. 严禁在同一个方案内多次出现同一家餐厅。
+    #     2. 严禁使用“同上”、“见前文”等缩写。必须完整列出餐厅的【招牌推荐】。
+        
+    #     要求格式：
+    #     #### [方案名称]
+    #     第N天：
+    #     - 上午浏览：[景点名] (票价: [price]元/人)。特色：[介绍]。
+    #     - 午餐：[餐厅名] (人均: [price]元)。招牌：[recommend]。
+    #     - 下午浏览：[景点名] (票价: [price]元/人)。特色：[介绍]。
+    #     - 晚上浏览：(仅当数据中有 evening_attr 且节奏为 Fast 时列出)。
+    #     - 晚餐：[餐厅名] (人均: [price]元)。招牌：[recommend]。
+    #     - 住宿：[酒店名] (房价: [price]元/间)。服务：[特色]。
+
+    #     [数据源-方案1]: {json.dumps(plan_1, ensure_ascii=False)}
+    #     [数据源-方案2]: {json.dumps(plan_2, ensure_ascii=False)}
+    #     [数据源-方案3]: {json.dumps(plan_3, ensure_ascii=False)}
+    #     """
+
+    #     messages = [{"role": "user", "content": prompt}]
+    #     text = self.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+    #     model_inputs = self.tokenizer([text], return_tensors="pt").to(self.model.device)
+        
+    #     print("\n>>> Qwen 模型渲染中...")
+    #     with torch.no_grad():
+    #         generated_ids = self.model.generate(**model_inputs, max_new_tokens=5000, temperature=0.1)
+    #         response = self.tokenizer.decode(generated_ids[0][len(model_inputs.input_ids[0]):], skip_special_tokens=True)
+        
+    #     with open("travel_itinerary_report.txt", "w", encoding="utf-8") as f:
+    #         # 写入完整的 Context 背景信息
+    #         f.write("==================================================\n")
+    #         f.write("           🌟 旅游规划输入背景 (Context) 🌟\n")
+    #         f.write("==================================================\n")
+    #         f.write(f"【基本信息】\n")
+    #         f.write(f"  - 目标城市: {b['target_city']}\n")
+    #         f.write(f"  - 游玩天数: {b['day_count']} 天\n")
+    #         f.write(f"  - 出行人数: {b['people_count']} 人\n\n")
+
+    #         f.write(f"【硬约束条件 (Hard Constraints)】\n")
+    #         f.write(f"  - 必去景点: {', '.join(h['must_visit_attractions'])}\n")
+    #         f.write(f"  - 必吃餐厅: {', '.join(h['must_eat_restaurants'])}\n")
+    #         f.write(f"  - 最小活动数: {h['min_activities_count']} 个\n\n")
+
+    #         f.write(f"【用户偏好画像 (Soft Persona)】\n")
+    #         f.write(f"  - 消费水平: {p['consumption_level']}\n")
+    #         f.write(f"  - 兴趣偏好: {p['interest_preference']}\n")
+    #         f.write(f"  - 旅行节奏: {p['travel_pace']}\n\n")
+
+    #         f.write(f"【方案预估总价摘要 ({b['people_count']}人总计)】\n")
+    #         f.write(f"  - 方案一 ({plan_1['strategy']}): {plan_1['total']} 元\n")
+    #         f.write(f"  - 方案二 ({plan_2['strategy']}): {plan_2['total']} 元\n")
+    #         f.write(f"  - 方案三 ({plan_3['strategy']}): {plan_3['total']} 元\n")
+    #         f.write("==================================================\n\n")
+            
+    #         f.write(response)
+        
+    #     return f"\n✅ 成功！方案见: travel_itinerary_report.txt"
 
     def run(self):
         b, h, p = self.user_data['basic_info'], self.user_data['hard_constraints'], self.user_data['soft_constraints_persona']
-        print(f"\n>>> [1. 任务解析]")
-        print(f"  目标: {b['target_city']} {b['day_count']}天 | 预算偏好: {p['consumption_level']}")
-        print(f"  必去景点: {h['must_visit_attractions']}")
-        print(f"  必吃餐厅: {h['must_eat_restaurants']}")
-
-        loy_iti, loy_total = self.solve_plan(strategy="loyalty")
-        bud_iti, bud_total = self.solve_plan(strategy="budget")
-
-        print("\n>>> [2. 结构化数据预览 (用于调试)]")
-        debug_output = {"loyalty_total": loy_total, "budget_total": bud_total, "sample_day": loy_iti[0]}
-        print(json.dumps(debug_output, ensure_ascii=False, indent=2))
-
-        prompt = f"""你是一名资深导游。请根据以下 JSON 旅游数据，撰写两套深圳旅游方案。
-        要求格式：
-        #### 方案X：[名称]
-        第N天：
-        - 上午：[name] (费用: [price]元)。[type]特色。
-        - 午餐：[name] (人均: [price]元)。招牌：[recommend]。
-        - 下午：[name] (费用: [price]元)。
-        - 晚上：[name] (费用: [price]元)。
-        - 晚餐：[name] (人均: [price]元)。招牌：[recommend]。
-        - 住宿：[name] (费用: [price]元)。
         
-        注意：
-        1. 每一个时间段必须有具体地点和价格，禁止出现“暂无”或“无”。
-        2. 方案一忠实执行必吃必去。方案二若必吃太贵则进行平价替换并说明。
-        3. 总价必须出现在方案末尾。
+        # 链式去重：方案1的所有选点，方案2和3尽量避开
+        plan_1 = self.solve_plan("硬约束忠实版", "constraint")
+        used_p1 = {n['name'] for d in plan_1['itinerary'] for n in [d['morning_attr'], d['afternoon_attr'], d.get('evening_attr'), d['lunch_res'], d['dinner_res'], d['accommodation']] if n}
+        
+        plan_2 = self.solve_plan("兴趣偏好深度版", "interest", forbidden_names=used_p1)
+        used_p2 = {n['name'] for d in plan_2['itinerary'] for n in [d['morning_attr'], d['afternoon_attr'], d.get('evening_attr'), d['lunch_res'], d['dinner_res'], d['accommodation']] if n}
+        
+        plan_3 = self.solve_plan("消费水平定制版", "consumption", forbidden_names=used_p1 | used_p2)
 
-        [数据源-忠实版]: {json.dumps(loy_iti, ensure_ascii=False)} | 总价: {loy_total}
-        [数据源-预算版]: {json.dumps(bud_iti, ensure_ascii=False)} | 总价: {bud_total}
+        # 【优化重点】：在 Prompt 中强化“全天数输出”的指令
+        prompt = f"""你是一名专业的旅游定制师。请为用户写三套{b['target_city']}旅游方案。
+        总人数：{b['people_count']}人。总天数：{b['day_count']}天。用户画像：{json.dumps(p, ensure_ascii=False)}。
+        
+        ### ⚠️ 核心任务要求（非常重要）：
+        1. **必须完整列出每一套方案中包含的所有天数（第1天、第2天...直到第{b['day_count']}天）**。
+        2. **严禁只写第一天。** 如果数据源中有两天的行程，你必须全部写出来。
+        3. 严禁在同一个方案内多次出现同一家餐厅。
+        4. 严禁使用“同上”、“见前文”等缩写。必须完整列出餐厅的【招牌推荐】。
+        
+        要求格式：
+        #### [方案名称]
+        第1天：
+        - 上午浏览：[景点名] (票价: [price]元/人)。特色：[介绍]。
+        - 午餐：[餐厅名] (人均: [price]元)。招牌：[recommend]。
+        - 下午浏览：[景点名] (票价: [price]元/人)。特色：[介绍]。
+        - 晚上浏览：(仅当数据中有 evening_attr 且节奏为 Fast 时列出)。
+        - 晚餐：[餐厅名] (人均: [price]元)。招牌：[recommend]。
+        - 住宿：[酒店名] (房价: [price]元/间)。服务：[特色]。
+
+        第2天：
+        - (必须按照第1天的格式完整列出第2天的行程内容，不得省略)
+
+        [数据源-方案1]: {json.dumps(plan_1, ensure_ascii=False)}
+        [数据源-方案2]: {json.dumps(plan_2, ensure_ascii=False)}
+        [数据源-方案3]: {json.dumps(plan_3, ensure_ascii=False)}
         """
 
-        print("\n>>> [3. Qwen 模型渲染中...]")
         messages = [{"role": "user", "content": prompt}]
         text = self.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
         model_inputs = self.tokenizer([text], return_tensors="pt").to(self.model.device)
         
+        print(f"\n>>> Qwen 模型渲染中（当前任务：{b['day_count']}天行程全量输出）...")
         with torch.no_grad():
-            generated_ids = self.model.generate(**model_inputs, max_new_tokens=3000, temperature=0.1)
+            generated_ids = self.model.generate(**model_inputs, max_new_tokens=5000, temperature=0.1)
             response = self.tokenizer.decode(generated_ids[0][len(model_inputs.input_ids[0]):], skip_special_tokens=True)
         
-        # 存入文件
-        report_path = "travel_itinerary_report.txt"
-        with open(report_path, "w", encoding="utf-8") as f:
-            f.write(f"用户画像: {json.dumps(p, ensure_ascii=False)}\n")
-            f.write(f"硬约束条件: {json.dumps(h, ensure_ascii=False)}\n")
-            f.write("\n" + "="*50 + "\n")
+        with open("travel_itinerary_report.txt", "w", encoding="utf-8") as f:
+            f.write("==================================================\n")
+            f.write("           🌟 旅游规划输入背景 (Context) 🌟\n")
+            f.write("==================================================\n")
+            f.write(f"【基本信息】\n")
+            f.write(f"  - 目标城市: {b['target_city']}\n")
+            f.write(f"  - 游玩天数: {b['day_count']} 天\n")
+            f.write(f"  - 出行人数: {b['people_count']} 人\n\n")
+
+            f.write(f"【硬约束条件 (Hard Constraints)】\n")
+            f.write(f"  - 必去景点: {', '.join(h['must_visit_attractions'])}\n")
+            f.write(f"  - 必吃餐厅: {', '.join(h['must_eat_restaurants'])}\n")
+            f.write(f"  - 最小活动数: {h['min_activities_count']} 个\n\n")
+
+            f.write(f"【用户偏好画像 (Soft Persona)】\n")
+            f.write(f"  - 消费水平: {p['consumption_level']}\n")
+            f.write(f"  - 兴趣偏好: {p['interest_preference']}\n")
+            f.write(f"  - 旅行节奏: {p['travel_pace']}\n\n")
+
+            f.write(f"【方案预估总价摘要 ({b['people_count']}人总计)】\n")
+            f.write(f"  - 方案一 ({plan_1['strategy']}): {plan_1['total']} 元\n")
+            f.write(f"  - 方案二 ({plan_2['strategy']}): {plan_2['total']} 元\n")
+            f.write(f"  - 方案三 ({plan_3['strategy']}): {plan_3['total']} 元\n")
+            f.write("==================================================\n\n")
+            
             f.write(response)
         
-        return f"\n✅ 规划完成！详细方案已保存至: {os.path.abspath(report_path)}"
+        return f"\n✅ 成功！已强制要求全量天数输出。详见: travel_itinerary_report.txt"
 
 if __name__ == "__main__":
     planner = TravelPlanner("/public/home/azsy/SynPT-main/test_json.json")
