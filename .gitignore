@@ -1,20 +1,18 @@
 # 忽略所有模型权重文件夹
 model/
-models/
-SynPT_LoRA/
 *.safetensors
 *.bin
 *.pth
 
 # 忽略临时数据和日志
 __pycache__/
-logs/
 lora/optimizer.pt
+lora/**/checkpoint-*/
 #data/*.jsonl
-kg_travel/attractions
-kg_travel/restaurants
-kg_travel/accommodations
-kg_travel/attracions_restaurants_kg/output_attracions_restaurants_kg
-kg_travel/attractions_kg/output_attractions_kgs
-kg_travel/city_kg/output_city_kg
+RAG/kg_travel/attractions
+RAG/kg_travel/accommodations
+RAG/kg_travel/restaurants
+RAG/kg_travel/attracions_restaurants_kg/output_attracions_restaurants_kg
+RAG/kg_travel/attractions_kg/output_attractions_kgs
+RAG/kg_travel/city_kg/output_city_kg
 

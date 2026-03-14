@@ -1,0 +1,490 @@
+{"id": 1, "category": "旅行计划", "destination": "北京", "day": "4天", "time": "10月", "cost": "2500元", "who": "和朋友", "play": "不限", "pref_consumption": "Economy", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 2, "category": "旅行计划", "destination": "北京", "day": "2天", "time": "不限", "cost": "不限", "who": "一个人", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 3, "category": "旅行计划", "destination": "北京", "day": "2天", "time": "3月", "cost": "1530元", "who": "不限", "play": "自由行，火车，徒步", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 4, "category": "旅行计划", "destination": "北京", "day": "8天", "time": "8月", "cost": "10000元", "who": "亲子", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 5, "category": "旅行计划", "destination": "桂林", "day": "3天", "time": "不限", "cost": "1000元", "who": "亲子", "play": "美食，自由行，周末游", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 6, "category": "旅行计划", "destination": "北京", "day": "9天", "time": "10月", "cost": "5000元", "who": "和朋友", "play": "不限", "pref_consumption": "Economy", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 7, "category": "旅行计划", "destination": "北京", "day": "2天", "time": "9月", "cost": "不限", "who": "亲子", "play": "周末游", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 8, "category": "旅行计划", "destination": "北京", "day": "4天", "time": "8月", "cost": "4000元", "who": "一个人", "play": "购物，人文", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 9, "category": "旅行计划", "destination": "北京", "day": "2天", "time": "6月", "cost": "不限", "who": "亲子", "play": "摄影，周末游", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 10, "category": "旅行计划", "destination": "桂林", "day": "不限", "time": "不限", "cost": "不限", "who": "不限", "play": "美食，摄影，人文，半自由行，跟团，小资", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 11, "category": "旅行计划", "destination": "北京", "day": "6天", "time": "12月", "cost": "3000元", "who": "一个人", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 12, "category": "旅行计划", "destination": "北京", "day": "3天", "time": "2月", "cost": "4000元", "who": "和朋友", "play": "美食，购物，摄影，奢侈，美食林", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 13, "category": "旅行计划", "destination": "桂林", "day": "5天", "time": "9月", "cost": "5000元", "who": "夫妻", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 14, "category": "旅行计划", "destination": "北京", "day": "3天", "time": "8月", "cost": "2000元", "who": "亲子", "play": "不限", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 15, "category": "旅行计划", "destination": "桂林", "day": "2天", "time": "6月", "cost": "400元", "who": "夫妻", "play": "摄影，自驾，人文，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 16, "category": "旅行计划", "destination": "北京", "day": "2天", "time": "10月", "cost": "1000元", "who": "不限", "play": "美食，购物，摄影，自由行，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 17, "category": "旅行计划", "destination": "北京", "day": "4天", "time": "12月", "cost": "500元", "who": "和朋友", "play": "美食，摄影，自驾，自由行，周末游，美食林", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 18, "category": "旅行计划", "destination": "北京", "day": "3天", "time": "1月", "cost": "2000元", "who": "亲子", "play": "美食，自驾，小资，周末游", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 19, "category": "旅行计划", "destination": "北京", "day": "2天", "time": "10月", "cost": "500元", "who": "和朋友", "play": "摄影，自驾，自由行，省钱，周末游", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 20, "category": "旅行计划", "destination": "北京", "day": "3天", "time": "12月", "cost": "3000元", "who": "和朋友", "play": "美食，摄影，自驾，人文，自由行，小资，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 21, "category": "旅行计划", "destination": "北京", "day": "7天", "time": "10月", "cost": "5000元", "who": "不限", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 22, "category": "旅行计划", "destination": "北京", "day": "3天", "time": "7月", "cost": "1500元", "who": "亲子", "play": "不限", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 23, "category": "旅行计划", "destination": "北京", "day": "5天", "time": "11月", "cost": "3000元", "who": "和朋友", "play": "自由行，奢侈", "pref_consumption": "Economy", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 24, "category": "旅行计划", "destination": "桂林", "day": "6天", "time": "9月", "cost": "5000元", "who": "和朋友", "play": "摄影，小资，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 25, "category": "旅行计划", "destination": "北京", "day": "2天", "time": "不限", "cost": "不限", "who": "情侣", "play": "自驾，自由行，小资，周末游", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 26, "category": "旅行计划", "destination": "桂林", "day": "4天", "time": "8月", "cost": "3000元", "who": "夫妻", "play": "人文，自由行，奢侈，周末游", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 27, "category": "旅行计划", "destination": "北京", "day": "5天", "time": "6月", "cost": "1360元", "who": "和朋友", "play": "美食，人文，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 28, "category": "旅行计划", "destination": "北京", "day": "7天", "time": "9月", "cost": "5000元", "who": "情侣", "play": "摄影，人文，自由行，徒步", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 29, "category": "旅行计划", "destination": "桂林", "day": "6天", "time": "11月", "cost": "3000元", "who": "亲子", "play": "不限", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 30, "category": "旅行计划", "destination": "北京", "day": "3天", "time": "7月", "cost": "1000元", "who": "和朋友", "play": "美食，摄影，自驾，自由行，周末游", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 31, "category": "旅行计划", "destination": "桂林", "day": "3天", "time": "5月", "cost": "600元", "who": "夫妻", "play": "摄影，自驾，人文，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 32, "category": "旅行计划", "destination": "北京", "day": "4天", "time": "8月", "cost": "5000元", "who": "一个人", "play": "美食，摄影，自驾，自由行，小资，省钱，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 33, "category": "旅行计划", "destination": "桂林", "day": "4天", "time": "3月", "cost": "500元", "who": "亲子", "play": "美食，摄影，自驾，人文，小资", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 34, "category": "旅行计划", "destination": "北京", "day": "4天", "time": "不限", "cost": "不限", "who": "不限", "play": "美食，购物，摄影，自驾，人文，自由行，徒步，穷游，省钱，周末游", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 35, "category": "旅行计划", "destination": "桂林", "day": "3天", "time": "12月", "cost": "2000元", "who": "和朋友", "play": "摄影，自驾，人文，自由行，半自由行，跟团，周末游，美食林", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 36, "category": "旅行计划", "destination": "北京", "day": "6天", "time": "不限", "cost": "不限", "who": "和朋友", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 37, "category": "旅行计划", "destination": "承德", "day": "3天", "time": "9月", "cost": "1000元", "who": "和朋友", "play": "摄影，自驾，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 38, "category": "旅行计划", "destination": "桂林", "day": "5天", "time": "3月", "cost": "2000元", "who": "和朋友", "play": "美食，自驾，周末游，美食林", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 39, "category": "旅行计划", "destination": "北京", "day": "1天", "time": "10月", "cost": "100元", "who": "夫妻", "play": "美食，摄影，人文，小资", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 40, "category": "旅行计划", "destination": "桂林", "day": "4天", "time": "6月", "cost": "500元", "who": "亲子", "play": "美食，摄影，骑行，周末游", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 41, "category": "旅行计划", "destination": "桂林", "day": "2天", "time": "12月", "cost": "800元", "who": "夫妻", "play": "不限", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 42, "category": "旅行计划", "destination": "桂林", "day": "3天", "time": "1月", "cost": "3000元", "who": "和朋友", "play": "摄影，自驾，人文，自由行，徒步，小资，奢侈，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 43, "category": "旅行计划", "destination": "桂林", "day": "7天", "time": "11月", "cost": "3400元", "who": "不限", "play": "自由行，徒步", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 44, "category": "旅行计划", "destination": "北京", "day": "1天", "time": "9月", "cost": "20元", "who": "夫妻", "play": "美食，摄影，自驾，人文，自由行，小资", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 45, "category": "旅行计划", "destination": "桂林", "day": "1天", "time": "10月", "cost": "不限", "who": "一个人", "play": "美食，人文，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 46, "category": "旅行计划", "destination": "桂林", "day": "7天", "time": "7月", "cost": "3000元", "who": "亲子", "play": "不限", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 47, "category": "旅行计划", "destination": "北京", "day": "7天", "time": "10月", "cost": "1280元", "who": "和朋友", "play": "美食，摄影，自驾，自由行，小资", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 48, "category": "旅行计划", "destination": "桂林", "day": "2天", "time": "7月", "cost": "2000元", "who": "亲子", "play": "人文，自由行，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 49, "category": "旅行计划", "destination": "桂林", "day": "5天", "time": "7月", "cost": "2500元", "who": "和朋友", "play": "不限", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 50, "category": "旅行计划", "destination": "桂林", "day": "8天", "time": "10月", "cost": "5000元", "who": "和朋友", "play": "美食，自驾，自由行", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 51, "category": "旅行计划", "destination": "桂林", "day": "3天", "time": "3月", "cost": "1500元", "who": "和朋友", "play": "不限", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 52, "category": "旅行计划", "destination": "桂林", "day": "6天", "time": "9月", "cost": "2000元", "who": "和朋友", "play": "美食，摄影，自驾，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 53, "category": "旅行计划", "destination": "北京", "day": "3天", "time": "6月", "cost": "2000元", "who": "亲子", "play": "美食，自由行，周末游", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 54, "category": "旅行计划", "destination": "桂林", "day": "3天", "time": "11月", "cost": "700元", "who": "和父母", "play": "人文，自由行，火车，骑行，穷游，省钱，周末游", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 55, "category": "旅行计划", "destination": "南宁", "day": "6天", "time": "6月", "cost": "4000元", "who": "和朋友", "play": "自驾", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 56, "category": "旅行计划", "destination": "桂林", "day": "7天", "time": "7月", "cost": "3500元", "who": "和父母", "play": "自由行", "pref_consumption": "Luxury", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 57, "category": "旅行计划", "destination": "桂林", "day": "3天", "time": "12月", "cost": "2000元", "who": "和朋友", "play": "摄影，自驾，人文，自由行", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 58, "category": "旅行计划", "destination": "桂林", "day": "3天", "time": "11月", "cost": "800元", "who": "一个人", "play": "美食，人文，自由行", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 59, "category": "旅行计划", "destination": "桂林", "day": "8天", "time": "10月", "cost": "5000元", "who": "情侣", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 60, "category": "旅行计划", "destination": "桂林", "day": "3天", "time": "12月", "cost": "3000元", "who": "和朋友", "play": "美食，摄影，自驾，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 61, "category": "旅行计划", "destination": "桂林", "day": "3天", "time": "7月", "cost": "800元", "who": "亲子", "play": "美食，自由行，周末游", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 62, "category": "旅行计划", "destination": "南宁市,百色市,崇左市,北海市,桂林市", "day": "10天", "time": "11月", "cost": "不限", "who": "夫妻", "play": "美食，摄影，自驾，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 63, "category": "旅行计划", "destination": "南宁市,巴马瑶族自治县,北海市", "day": "6天", "time": "4月", "cost": "3000元", "who": "和朋友", "play": "不限", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 64, "category": "旅行计划", "destination": "桂林市,贺州市", "day": "不限", "time": "不限", "cost": "不限", "who": "不限", "play": "美食，购物，摄影，自驾，人文，自由行，小资", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 65, "category": "旅行计划", "destination": "桂林市,贺州市", "day": "6天", "time": "9月", "cost": "3000元", "who": "夫妻", "play": "摄影，自驾，人文，自由行，火车，周末游", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 66, "category": "旅行计划", "destination": "桂林", "day": "3天", "time": "1月", "cost": "2000元", "who": "一个人", "play": "美食，摄影，人文，自由行，小资，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 67, "category": "旅行计划", "destination": "南宁", "day": "3天", "time": "5月", "cost": "600元", "who": "夫妻", "play": "摄影，自驾，人文，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 68, "category": "旅行计划", "destination": "桂林", "day": "1天", "time": "6月", "cost": "300元", "who": "夫妻", "play": "摄影，自驾，人文，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 69, "category": "旅行计划", "destination": "桂林", "day": "3天", "time": "6月", "cost": "3000元", "who": "和朋友", "play": "美食，摄影，自驾，自由行，火车，小资，奢侈，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 70, "category": "旅行计划", "destination": "桂林", "day": "4天", "time": "6月", "cost": "2500元", "who": "情侣", "play": "美食，摄影，自驾，自由行，小资", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 71, "category": "旅行计划", "destination": "南宁市,北海市", "day": "4天", "time": "不限", "cost": "不限", "who": "一个人", "play": "不限", "pref_consumption": "Economy", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 72, "category": "旅行计划", "destination": "南宁、北海", "day": "10天", "time": "3月", "cost": "3066元", "who": "夫妻", "play": "摄影，人文，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 73, "category": "旅行计划", "destination": "南宁", "day": "4天", "time": "1月", "cost": "2400元", "who": "和朋友", "play": "不限", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 74, "category": "旅行计划", "destination": "桂林", "day": "3天", "time": "1月", "cost": "2000元", "who": "不限", "play": "美食，摄影，自驾", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 75, "category": "旅行计划", "destination": "南宁市,崇左市,桂林市", "day": "8天", "time": "10月", "cost": "5000元", "who": "情侣", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 76, "category": "旅行计划", "destination": "南宁市,北海市", "day": "5天", "time": "5月", "cost": "5000元", "who": "和朋友", "play": "摄影，自驾，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 77, "category": "旅行计划", "destination": "桂林", "day": "3天", "time": "不限", "cost": "不限", "who": "和朋友", "play": "美食，摄影，自由行", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 78, "category": "旅行计划", "destination": "南宁市,河池市,荔波县,百色市", "day": "13天", "time": "9月", "cost": "15000元", "who": "亲子", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 79, "category": "旅行计划", "destination": "南宁市,崇左市,北海市", "day": "4天", "time": "12月", "cost": "1000元", "who": "和朋友", "play": "不限", "pref_consumption": "Budget", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 80, "category": "旅行计划", "destination": "柳州市,南宁市,广州市", "day": "9天", "time": "12月", "cost": "1800元", "who": "和父母", "play": "不限", "pref_consumption": "Budget", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 81, "category": "旅行计划", "destination": "南宁市,崇左市,北海市", "day": "6天", "time": "5月", "cost": "5000元", "who": "和朋友", "play": "美食，摄影，自驾，人文，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 82, "category": "旅行计划", "destination": "南宁", "day": "3天", "time": "3月", "cost": "862元", "who": "夫妻", "play": "摄影，人文，自由行，邮轮，火车，穷游，省钱，周末游", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 83, "category": "旅行计划", "destination": "桂林", "day": "4天", "time": "6月", "cost": "2000元", "who": "和朋友", "play": "美食，摄影，自由行，半自由行", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 84, "category": "旅行计划", "destination": "南宁", "day": "4天", "time": "6月", "cost": "1200元", "who": "一个人", "play": "不限", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 85, "category": "旅行计划", "destination": "桂林", "day": "2天", "time": "11月", "cost": "500元", "who": "和父母", "play": "美食，摄影，人文，自由行，火车，穷游，周末游，美食林", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 86, "category": "旅行计划", "destination": "南宁市,百色市,北海市,桂林市", "day": "10天", "time": "11月", "cost": "不限", "who": "夫妻", "play": "美食，摄影，自驾，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 87, "category": "旅行计划", "destination": "南宁市,防港城市,北海市", "day": "6天", "time": "5月", "cost": "4000元", "who": "和朋友", "play": "摄影，自驾，自由行", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 88, "category": "旅行计划", "destination": "桂林市,南宁市,防港城市,北海市", "day": "9天", "time": "9月", "cost": "7000元", "who": "和父母", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 89, "category": "旅行计划", "destination": "南宁", "day": "1天", "time": "不限", "cost": "不限", "who": "和朋友", "play": "摄影，人文，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 90, "category": "旅行计划", "destination": "南宁市,崇左市,百色市,河池市", "day": "14天", "time": "不限", "cost": "3200元", "who": "和朋友", "play": "摄影，自驾，人文，自由行，小资", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 91, "category": "旅行计划", "destination": "南宁市,崇左市,防城港市", "day": "6天", "time": "5月", "cost": "5000元", "who": "和朋友", "play": "美食，摄影，自驾，人文，自由行，穷游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 92, "category": "旅行计划", "destination": "上海", "day": "4天", "time": "7月", "cost": "2000元", "who": "和朋友", "play": "摄影，自由行，穷游，省钱，周末游", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 93, "category": "旅行计划", "destination": "南宁", "day": "2天", "time": "7月", "cost": "1500元", "who": "和朋友", "play": "摄影，自驾，自由行", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 94, "category": "旅行计划", "destination": "上海", "day": "3天", "time": "12月", "cost": "1000元", "who": "和朋友", "play": "美食，购物，摄影，人文，自由行，穷游，省钱，周末游", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 95, "category": "旅行计划", "destination": "南宁市,北海市,柳州市", "day": "12天", "time": "3月", "cost": "5000元", "who": "夫妻", "play": "不限", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 96, "category": "旅行计划", "destination": "南宁", "day": "3天", "time": "9月", "cost": "2500元", "who": "和朋友", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 97, "category": "旅行计划", "destination": "杭州市,苏州市,上海市", "day": "8天", "time": "10月", "cost": "2100元", "who": "和父母", "play": "人文，自由行，穷游，省钱", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 98, "category": "旅行计划", "destination": "上海", "day": "2天", "time": "8月", "cost": "500元", "who": "和朋友", "play": "摄影，人文，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 99, "category": "旅行计划", "destination": "上海市,绍兴市", "day": "3天", "time": "3月", "cost": "4000元", "who": "亲子", "play": "自驾，周末游", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 100, "category": "旅行计划", "destination": "上海市,绍兴市", "day": "3天", "time": "3月", "cost": "4000元", "who": "亲子", "play": "摄影，奢侈", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 101, "category": "旅行计划", "destination": "上海", "day": "1天", "time": "7月", "cost": "50元", "who": "和朋友", "play": "自驾，小资，周末游", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 102, "category": "旅行计划", "destination": "上海", "day": "2天", "time": "7月", "cost": "4000元", "who": "和朋友", "play": "美食，摄影，自由行，小资，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 103, "category": "旅行计划", "destination": "上海", "day": "6天", "time": "10月", "cost": "3500元", "who": "和父母", "play": "美食，摄影，自驾，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 104, "category": "旅行计划", "destination": "杭州市,黄山市", "day": "6天", "time": "7月", "cost": "5000元", "who": "和朋友", "play": "美食，购物，摄影，火车，小资，奢侈，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 105, "category": "旅行计划", "destination": "上海", "day": "3天", "time": "6月", "cost": "3000元", "who": "和朋友", "play": "美食，摄影，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 106, "category": "旅行计划", "destination": "上海", "day": "1天", "time": "7月", "cost": "200元", "who": "亲子", "play": "自驾，人文，周末游", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 107, "category": "旅行计划", "destination": "上海", "day": "2天", "time": "6月", "cost": "1000元", "who": "和朋友", "play": "美食，摄影，自由行", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 108, "category": "旅行计划", "destination": "上海", "day": "2天", "time": "8月", "cost": "500元", "who": "和朋友", "play": "人文，小资，周末游", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 109, "category": "旅行计划", "destination": "上海", "day": "3天", "time": "6月", "cost": "4000元", "who": "和朋友", "play": "摄影，自驾，人文，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 110, "category": "旅行计划", "destination": "上海", "day": "2天", "time": "6月", "cost": "1000元", "who": "和朋友", "play": "美食，摄影，自驾，人文，自由行，周末游", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 111, "category": "旅行计划", "destination": "上海", "day": "1天", "time": "8月", "cost": "500元", "who": "和朋友", "play": "摄影，自驾，自由行", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 112, "category": "旅行计划", "destination": "上海", "day": "5天", "time": "4月", "cost": "4000元", "who": "和朋友", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 113, "category": "旅行计划", "destination": "上海", "day": "1天", "time": "12月", "cost": "100元", "who": "夫妻", "play": "摄影，人文，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 114, "category": "旅行计划", "destination": "上海", "day": "2天", "time": "7月", "cost": "6000元", "who": "夫妻", "play": "摄影，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 115, "category": "旅行计划", "destination": "上海", "day": "2天", "time": "8月", "cost": "1000元", "who": "亲子", "play": "人文，周末游", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 116, "category": "旅行计划", "destination": "上海", "day": "2天", "time": "7月", "cost": "不限", "who": "一个人", "play": "摄影，自驾，人文，自由行，小资，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 117, "category": "旅行计划", "destination": "上海", "day": "2天", "time": "7月", "cost": "3000元", "who": "和朋友", "play": "美食，摄影，自由行，小资，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 118, "category": "旅行计划", "destination": "上海", "day": "3天", "time": "6月", "cost": "3000元", "who": "和朋友", "play": "美食，摄影，自由行，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 119, "category": "旅行计划", "destination": "上海", "day": "3天", "time": "1月", "cost": "1600元", "who": "亲子", "play": "美食，摄影，人文，自由行，周末游", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 120, "category": "旅行计划", "destination": "上海", "day": "8天", "time": "5月", "cost": "2500元", "who": "和父母", "play": "美食，购物，摄影，人文，自由行，穷游，省钱，周末游", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 121, "category": "旅行计划", "destination": "杭州市,台州市,上海市", "day": "7天", "time": "2月", "cost": "5000元", "who": "夫妻", "play": "美食，摄影，自驾，自由行，火车，小资，美食林", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 122, "category": "旅行计划", "destination": "上海", "day": "1天", "time": "12月", "cost": "100元", "who": "亲子", "play": "摄影，小资", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 123, "category": "旅行计划", "destination": "上海", "day": "1天", "time": "11月", "cost": "150元", "who": "夫妻", "play": "摄影，自由行，徒步", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 124, "category": "旅行计划", "destination": "成都市,重庆市", "day": "6天", "time": "8月", "cost": "5000元", "who": "和朋友", "play": "美食，摄影，自由行，美食林", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 125, "category": "旅行计划", "destination": "上海", "day": "2天", "time": "8月", "cost": "1000元", "who": "和朋友", "play": "美食，人文，小资，周末游", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 126, "category": "旅行计划", "destination": "上海", "day": "2天", "time": "7月", "cost": "800元", "who": "和朋友", "play": "美食，自由行，小资，周末游，美食林", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 127, "category": "旅行计划", "destination": "上海", "day": "4天", "time": "11月", "cost": "4000元", "who": "一个人", "play": "自驾，人文，自由行，小资", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 128, "category": "旅行计划", "destination": "上海", "day": "1天", "time": "7月", "cost": "30元", "who": "和朋友", "play": "摄影，自驾，人文，周末游", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 129, "category": "旅行计划", "destination": "成都市,拉萨市,林芝市,日喀则市", "day": "22天", "time": "2月", "cost": "13500元", "who": "夫妻", "play": "不限", "pref_consumption": "Economy", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 130, "category": "旅行计划", "destination": "成都", "day": "4天", "time": "8月", "cost": "2500元", "who": "和朋友", "play": "美食，摄影，人文，自由行，穷游，省钱，周末游", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 131, "category": "旅行计划", "destination": "成都", "day": "2天", "time": "11月", "cost": "500元", "who": "亲子", "play": "自驾，自由行，周末游", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 132, "category": "旅行计划", "destination": "上海", "day": "3天", "time": "7月", "cost": "5000元", "who": "亲子", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 133, "category": "旅行计划", "destination": "上海", "day": "1天", "time": "10月", "cost": "800元", "who": "亲子", "play": "自驾，自由行，周末游", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 134, "category": "旅行计划", "destination": "成都", "day": "4天", "time": "12月", "cost": "5000元", "who": "和朋友", "play": "摄影，人文，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 135, "category": "旅行计划", "destination": "成都", "day": "3天", "time": "12月", "cost": "2000元", "who": "和朋友", "play": "美食", "pref_consumption": "Economy", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 136, "category": "旅行计划", "destination": "上海", "day": "1天", "time": "12月", "cost": "200元", "who": "夫妻", "play": "不限", "pref_consumption": "Budget", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 137, "category": "旅行计划", "destination": "上海", "day": "1天", "time": "4月", "cost": "20元", "who": "和朋友", "play": "人文，徒步，穷游", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 138, "category": "旅行计划", "destination": "成都市,甘孜藏族自治州,乐山市", "day": "9天", "time": "3月", "cost": "10000元", "who": "和朋友", "play": "美食，摄影，自驾，人文，自由行，徒步，小资，奢侈，周末游，美食林", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 139, "category": "旅行计划", "destination": "成都市,乐山市,西安市", "day": "9天", "time": "10月", "cost": "5000元", "who": "和父母", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 140, "category": "旅行计划", "destination": "成都", "day": "3天", "time": "12月", "cost": "3000元", "who": "和朋友", "play": "美食，购物，摄影，自驾，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 141, "category": "旅行计划", "destination": "成都", "day": "6天", "time": "12月", "cost": "3000元", "who": "亲子", "play": "美食，摄影，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 142, "category": "旅行计划", "destination": "南宁", "day": "5天", "time": "5月", "cost": "2000元", "who": "家人", "play": "登山，野餐，徒步", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 143, "category": "旅行计划", "destination": "成都", "day": "4天", "time": "6月", "cost": "1200元", "who": "和朋友", "play": "美食，购物，摄影，人文，自由行，周末游，美食林", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 144, "category": "旅行计划", "destination": "成都", "day": "4天", "time": "12月", "cost": "3500元", "who": "和朋友", "play": "美食，人文，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 145, "category": "旅行计划", "destination": "成都", "day": "5天", "time": "12月", "cost": "5000元", "who": "亲子", "play": "美食，摄影", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 146, "category": "旅行计划", "destination": "成都", "day": "5天", "time": "1月", "cost": "2500元", "who": "一个人", "play": "美食，摄影，自驾，自由行，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 147, "category": "旅行计划", "destination": "成都", "day": "2天", "time": "9月", "cost": "1200元", "who": "亲子", "play": "美食，购物，摄影，人文，自由行，周末游", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 148, "category": "旅行计划", "destination": "成都", "day": "5天", "time": "11月", "cost": "3500元", "who": "和朋友", "play": "美食，购物，摄影", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 149, "category": "旅行计划", "destination": "成都", "day": "5天", "time": "11月", "cost": "4000元", "who": "和朋友", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 150, "category": "旅行计划", "destination": "南宁", "day": "5天", "time": "5月", "cost": "2000元", "who": "家人", "play": "登山，野餐，徒步", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 151, "category": "旅行计划", "destination": "成都", "day": "2天", "time": "9月", "cost": "1500元", "who": "和朋友", "play": "美食，摄影，自驾", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 152, "category": "旅行计划", "destination": "成都", "day": "3天", "time": "10月", "cost": "5000元", "who": "和朋友", "play": "美食，摄影，人文，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 153, "category": "旅行计划", "destination": "成都", "day": "3天", "time": "8月", "cost": "2000元", "who": "和朋友", "play": "美食，自驾", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 154, "category": "旅行计划", "destination": "成都", "day": "7天", "time": "11月", "cost": "5000元", "who": "和朋友", "play": "摄影，周末游，美食林", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 155, "category": "旅行计划", "destination": "成都", "day": "3天", "time": "6月", "cost": "1500元", "who": "和朋友", "play": "美食，购物，摄影，穷游，省钱，周末游，美食林", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 156, "category": "旅行计划", "destination": "成都", "day": "3天", "time": "12月", "cost": "3000元", "who": "和朋友", "play": "摄影，自驾，美食林", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 157, "category": "旅行计划", "destination": "成都", "day": "2天", "time": "3月", "cost": "1000元", "who": "和朋友", "play": "摄影，自驾，人文，周末游，美食林", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 158, "category": "旅行计划", "destination": "上海", "day": "5天", "time": "5月", "cost": "2000元", "who": "家人", "play": "登山，野餐，徒步", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 159, "category": "旅行计划", "destination": "成都", "day": "7天", "time": "10月", "cost": "不限", "who": "夫妻", "play": "自由行", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 160, "category": "旅行计划", "destination": "成都", "day": "6天", "time": "2月", "cost": "5000元", "who": "亲子", "play": "摄影，自驾，小资，美食林", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 161, "category": "旅行计划", "destination": "成都", "day": "3天", "time": "12月", "cost": "1000元", "who": "和朋友", "play": "美食，自由行，小资", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 162, "category": "旅行计划", "destination": "成都", "day": "3天", "time": "12月", "cost": "3000元", "who": "亲子", "play": "美食，人文，自由行，小资", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 163, "category": "旅行计划", "destination": "成都", "day": "5天", "time": "1月", "cost": "3000元", "who": "和父母", "play": "美食，摄影，自驾", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 164, "category": "旅行计划", "destination": "成都", "day": "4天", "time": "9月", "cost": "3000元", "who": "和朋友", "play": "美食", "pref_consumption": "Economy", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 165, "category": "旅行计划", "destination": "成都", "day": "2天", "time": "11月", "cost": "2000元", "who": "和朋友", "play": "美食，购物，摄影，自驾，奢侈，周末游，美食林", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 166, "category": "旅行计划", "destination": "成都", "day": "5天", "time": "12月", "cost": "3500元", "who": "亲子", "play": "美食，摄影，自驾", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 167, "category": "旅行计划", "destination": "成都", "day": "8天", "time": "6月", "cost": "3000元", "who": "夫妻", "play": "美食，摄影，人文，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 168, "category": "旅行计划", "destination": "广州", "day": "3天", "time": "12月", "cost": "3000元", "who": "和朋友", "play": "美食，摄影，人文，自由行，徒步，骑行，小资，省钱，周末游，美食林", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 169, "category": "旅行计划", "destination": "成都", "day": "4天", "time": "12月", "cost": "4000元", "who": "一个人", "play": "美食，摄影，人文，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 170, "category": "旅行计划", "destination": "成都", "day": "3天", "time": "12月", "cost": "不限", "who": "夫妻", "play": "美食，摄影，人文，自由行，小资，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 171, "category": "旅行计划", "destination": "成都", "day": "5天", "time": "6月", "cost": "800元", "who": "一个人", "play": "美食，摄影，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 172, "category": "旅行计划", "destination": "成都", "day": "8天", "time": "11月", "cost": "2900元", "who": "夫妻", "play": "不限", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 173, "category": "旅行计划", "destination": "广州", "day": "1天", "time": "12月", "cost": "3000元", "who": "亲子", "play": "摄影，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 174, "category": "旅行计划", "destination": "成都", "day": "4天", "time": "1月", "cost": "2500元", "who": "和朋友", "play": "美食，自由行", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 175, "category": "旅行计划", "destination": "广州市,深圳市,香港特别行政区", "day": "10天", "time": "8月", "cost": "4000元", "who": "和父母", "play": "购物，自由行，火车", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 176, "category": "旅行计划", "destination": "广州", "day": "不限", "time": "不限", "cost": "不限", "who": "不限", "play": "美食", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 177, "category": "旅行计划", "destination": "广州", "day": "3天", "time": "5月", "cost": "2000元", "who": "和朋友", "play": "美食，人文，自由行", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 178, "category": "旅行计划", "destination": "成都", "day": "3天", "time": "12月", "cost": "1500元", "who": "和朋友", "play": "美食，摄影，人文，小资，美食林", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 179, "category": "旅行计划", "destination": "广州", "day": "4天", "time": "8月", "cost": "1500元", "who": "和朋友", "play": "美食，摄影，人文，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 180, "category": "旅行计划", "destination": "成都", "day": "10天", "time": "8月", "cost": "15000元", "who": "夫妻", "play": "美食，摄影，人文，自由行，小资，奢侈，穷游，省钱", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 181, "category": "旅行计划", "destination": "广州", "day": "3天", "time": "8月", "cost": "1233元", "who": "和朋友", "play": "美食，火车", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 182, "category": "旅行计划", "destination": "成都", "day": "5天", "time": "12月", "cost": "3000元", "who": "亲子", "play": "美食，摄影", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 183, "category": "旅行计划", "destination": "广州", "day": "2天", "time": "4月", "cost": "500元", "who": "亲子", "play": "美食，自驾，人文，自由行，周末游", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 184, "category": "旅行计划", "destination": "广州", "day": "4天", "time": "7月", "cost": "不限", "who": "和朋友", "play": "美食，自由行，小资", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 185, "category": "旅行计划", "destination": "广州", "day": "5天", "time": "12月", "cost": "4000元", "who": "夫妻", "play": "摄影，人文，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 186, "category": "旅行计划", "destination": "广州", "day": "2天", "time": "8月", "cost": "1000元", "who": "亲子", "play": "美食，自驾，自由行，小资，周末游", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 187, "category": "旅行计划", "destination": "广州", "day": "4天", "time": "6月", "cost": "1000元", "who": "和朋友", "play": "美食，摄影，人文，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 188, "category": "旅行计划", "destination": "广州", "day": "8天", "time": "12月", "cost": "8000元", "who": "和朋友", "play": "美食，人文，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 189, "category": "旅行计划", "destination": "广州", "day": "4天", "time": "7月", "cost": "3000元", "who": "和朋友", "play": "美食，摄影，自驾，人文", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 190, "category": "旅行计划", "destination": "广州", "day": "1天", "time": "不限", "cost": "不限", "who": "一个人", "play": "摄影，人文，半自由行，小资", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 191, "category": "旅行计划", "destination": "广州", "day": "1天", "time": "12月", "cost": "1000元", "who": "亲子", "play": "摄影，自驾，自由行，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 192, "category": "旅行计划", "destination": "广州", "day": "2天", "time": "4月", "cost": "2000元", "who": "和朋友", "play": "美食，摄影，自驾，徒步，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 193, "category": "旅行计划", "destination": "广州", "day": "2天", "time": "不限", "cost": "不限", "who": "和朋友", "play": "美食，摄影，徒步，周末游，美食林", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 194, "category": "旅行计划", "destination": "杭州市,宁波市", "day": "不限", "time": "不限", "cost": "不限", "who": "不限", "play": "自由行", "pref_consumption": "Budget", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 195, "category": "旅行计划", "destination": "广州", "day": "2天", "time": "4月", "cost": "不限", "who": "亲子", "play": "摄影，自驾，自由行", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 196, "category": "旅行计划", "destination": "广州", "day": "2天", "time": "12月", "cost": "1000元", "who": "和朋友", "play": "小资，周末游", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 197, "category": "旅行计划", "destination": "广州", "day": "2天", "time": "1月", "cost": "2500元", "who": "亲子", "play": "自由行", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 198, "category": "旅行计划", "destination": "广州", "day": "3天", "time": "1月", "cost": "1000元", "who": "和朋友", "play": "美食，自由行，周末游", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 199, "category": "旅行计划", "destination": "广州", "day": "3天", "time": "7月", "cost": "1500元", "who": "和朋友", "play": "美食，摄影，自由行", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 200, "category": "旅行计划", "destination": "广州", "day": "1天", "time": "12月", "cost": "500元", "who": "和朋友", "play": "不限", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 201, "category": "旅行计划", "destination": "广州", "day": "2天", "time": "3月", "cost": "1000元", "who": "亲子", "play": "美食，周末游", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 202, "category": "旅行计划", "destination": "广州", "day": "2天", "time": "4月", "cost": "1000元", "who": "亲子", "play": "美食，摄影，自驾，小资，奢侈，周末游", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 203, "category": "旅行计划", "destination": "广州", "day": "3天", "time": "7月", "cost": "3000元", "who": "和朋友", "play": "自由行", "pref_consumption": "Luxury", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 204, "category": "旅行计划", "destination": "广州", "day": "3天", "time": "12月", "cost": "500元", "who": "一个人", "play": "美食，摄影，人文，自由行，奢侈", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 205, "category": "旅行计划", "destination": "杭州", "day": "4天", "time": "不限", "cost": "不限", "who": "不限", "play": "不限", "pref_consumption": "Economy", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 206, "category": "旅行计划", "destination": "广州", "day": "2天", "time": "1月", "cost": "800元", "who": "亲子", "play": "美食，自由行，周末游", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 207, "category": "旅行计划", "destination": "广州", "day": "2天", "time": "6月", "cost": "500元", "who": "亲子", "play": "美食，自由行，周末游，美食林", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 208, "category": "旅行计划", "destination": "广州", "day": "2天", "time": "12月", "cost": "1000元", "who": "亲子", "play": "美食，自驾，周末游", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 209, "category": "旅行计划", "destination": "广州", "day": "4天", "time": "不限", "cost": "不限", "who": "和朋友", "play": "美食，摄影，人文，自由行，小资", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 210, "category": "旅行计划", "destination": "广州", "day": "2天", "time": "12月", "cost": "1500元", "who": "和朋友", "play": "美食，自由行，小资，周末游", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 211, "category": "旅行计划", "destination": "广州", "day": "2天", "time": "不限", "cost": "1000元", "who": "和朋友", "play": "摄影，自由行", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 212, "category": "旅行计划", "destination": "杭州", "day": "1天", "time": "8月", "cost": "500元", "who": "亲子", "play": "美食，摄影，自驾", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 213, "category": "旅行计划", "destination": "杭州", "day": "2天", "time": "12月", "cost": "300元", "who": "夫妻", "play": "摄影，自驾，人文，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 214, "category": "旅行计划", "destination": "广州", "day": "7天", "time": "10月", "cost": "2500元", "who": "夫妻", "play": "美食，购物，摄影，人文，自由行，徒步，小资，美食林", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 215, "category": "旅行计划", "destination": "杭州", "day": "3天", "time": "1月", "cost": "3000元", "who": "亲子", "play": "美食，摄影，自由行，小资", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 216, "category": "旅行计划", "destination": "广州", "day": "2天", "time": "4月", "cost": "800元", "who": "亲子", "play": "美食，自驾，自由行，周末游", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 217, "category": "旅行计划", "destination": "杭州", "day": "3天", "time": "12月", "cost": "400元", "who": "夫妻", "play": "摄影，自驾，人文，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 218, "category": "旅行计划", "destination": "广州", "day": "1天", "time": "不限", "cost": "不限", "who": "亲子", "play": "摄影，自由行，周末游", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 219, "category": "旅行计划", "destination": "广州", "day": "4天", "time": "7月", "cost": "3000元", "who": "和朋友", "play": "美食，摄影，自由行，周末游", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 220, "category": "旅行计划", "destination": "杭州", "day": "1天", "time": "10月", "cost": "不限", "who": "和朋友", "play": "摄影，人文，自由行，周末游", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 221, "category": "旅行计划", "destination": "广州", "day": "5天", "time": "10月", "cost": "450元", "who": "和父母", "play": "美食，自由行，穷游，省钱，周末游，美食林", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 222, "category": "旅行计划", "destination": "杭州", "day": "3天", "time": "12月", "cost": "300元", "who": "夫妻", "play": "摄影，自驾，人文，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 223, "category": "旅行计划", "destination": "台州", "day": "7天", "time": "2月", "cost": "5000元", "who": "夫妻", "play": "美食，摄影，自驾，自由行，火车，小资，美食林", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 224, "category": "旅行计划", "destination": "杭州", "day": "3天", "time": "12月", "cost": "1500元", "who": "和朋友", "play": "美食，摄影，自驾，人文，自由行，徒步，骑行，周末游", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 225, "category": "旅行计划", "destination": "嘉兴市,温州市,宁波市,舟山市", "day": "16天", "time": "10月", "cost": "不限", "who": "和朋友", "play": "摄影，自驾，人文，自由行", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 226, "category": "旅行计划", "destination": "杭州", "day": "4天", "time": "不限", "cost": "不限", "who": "和朋友", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 227, "category": "旅行计划", "destination": "杭州", "day": "5天", "time": "12月", "cost": "3000元", "who": "和朋友", "play": "美食，摄影，自驾，人文，自由行，火车，徒步，骑行，周末游", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 228, "category": "旅行计划", "destination": "杭州", "day": "8天", "time": "10月", "cost": "2100元", "who": "和父母", "play": "人文，自由行，穷游，省钱", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 229, "category": "旅行计划", "destination": "杭州", "day": "2天", "time": "12月", "cost": "200元", "who": "夫妻", "play": "摄影，自驾，人文，自由行", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 230, "category": "旅行计划", "destination": "杭州", "day": "不限", "time": "不限", "cost": "不限", "who": "不限", "play": "自驾，骑行", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 231, "category": "旅行计划", "destination": "杭州", "day": "3天", "time": "1月", "cost": "2500元", "who": "和朋友", "play": "美食，自由行，小资", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 232, "category": "旅行计划", "destination": "杭州", "day": "2天", "time": "1月", "cost": "1000元", "who": "夫妻", "play": "摄影，自驾，人文，自由行，周末游", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 233, "category": "旅行计划", "destination": "青岛市,济南市", "day": "4天", "time": "7月", "cost": "2200元", "who": "亲子", "play": "美食，摄影，人文，自由行，省钱", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 234, "category": "旅行计划", "destination": "杭州市,丽水市,温州市.台州市", "day": "6天", "time": "11月", "cost": "2500元", "who": "和朋友", "play": "美食，摄影，自驾，自由行，小资", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 235, "category": "旅行计划", "destination": "杭州", "day": "2天", "time": "12月", "cost": "2000元", "who": "和朋友", "play": "自驾，人文，小资，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 236, "category": "旅行计划", "destination": "杭州市,黄山市", "day": "3天", "time": "5月", "cost": "不限", "who": "夫妻", "play": "摄影，自驾", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 237, "category": "旅行计划", "destination": "杭州", "day": "1天", "time": "4月", "cost": "500元", "who": "和朋友", "play": "摄影，自由行，徒步", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 238, "category": "旅行计划", "destination": "杭州", "day": "2天", "time": "不限", "cost": "不限", "who": "不限", "play": "自驾，人文，自由行，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 239, "category": "旅行计划", "destination": "杭州市,丽水市", "day": "不限", "time": "10月", "cost": "不限", "who": "不限", "play": "自由行", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 240, "category": "旅行计划", "destination": "杭州", "day": "2天", "time": "3月", "cost": "500元", "who": "一个人", "play": "美食，摄影", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 241, "category": "旅行计划", "destination": "杭州", "day": "3天", "time": "不限", "cost": "不限", "who": "不限", "play": "美食，摄影，自由行，半自由行，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 242, "category": "旅行计划", "destination": "宁波市,杭州市,嘉兴市", "day": "7天", "time": "12月", "cost": "不限", "who": "夫妻", "play": "自由行", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 243, "category": "旅行计划", "destination": "杭州", "day": "2天", "time": "6月", "cost": "2000元", "who": "和朋友", "play": "美食，摄影，自驾，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 244, "category": "旅行计划", "destination": "杭州", "day": "3天", "time": "4月", "cost": "1500元", "who": "和朋友", "play": "摄影，人文，自由行", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 245, "category": "旅行计划", "destination": "杭州市,黄山市", "day": "6天", "time": "7月", "cost": "5000元", "who": "和朋友", "play": "美食，购物，摄影，火车，小资，奢侈，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 246, "category": "旅行计划", "destination": "杭州", "day": "1天", "time": "7月", "cost": "500元", "who": "情侣", "play": "美食，购物，摄影，人文，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 247, "category": "旅行计划", "destination": "杭州", "day": "2天", "time": "3月", "cost": "1500元", "who": "一个人", "play": "美食，摄影，自驾", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 248, "category": "旅行计划", "destination": "杭州市,台州市", "day": "11天", "time": "1月", "cost": "20000元", "who": "亲子", "play": "美食，摄影，自驾，人文，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 249, "category": "旅行计划", "destination": "杭州", "day": "1天", "time": "8月", "cost": "1888元", "who": "和朋友", "play": "摄影，人文，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 250, "category": "旅行计划", "destination": "杭州", "day": "3天", "time": "5月", "cost": "3000元", "who": "和朋友", "play": "美食，摄影，自驾，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 251, "category": "旅行计划", "destination": "杭州", "day": "3天", "time": "4月", "cost": "2000元", "who": "和朋友", "play": "摄影，自由行，周末游", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 252, "category": "旅行计划", "destination": "杭州市,金华市,台州市,绍兴市", "day": "4天", "time": "10月", "cost": "1200元", "who": "夫妻", "play": "美食，摄影，自驾，奢侈", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 253, "category": "旅行计划", "destination": "西安市,延安市,渭南市", "day": "3天", "time": "5月", "cost": "2560元", "who": "一个人", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 254, "category": "旅行计划", "destination": "杭州", "day": "3天", "time": "6月", "cost": "2500元", "who": "和朋友", "play": "美食，摄影，自驾，人文，自由行，小资，美食林", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 255, "category": "旅行计划", "destination": "杭州", "day": "3天", "time": "10月", "cost": "3000元", "who": "亲子", "play": "美食，摄影", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 256, "category": "旅行计划", "destination": "西安", "day": "4天", "time": "12月", "cost": "5000元", "who": "和朋友", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 257, "category": "旅行计划", "destination": "西安", "day": "4天", "time": "1月", "cost": "4000元", "who": "和朋友", "play": "美食，摄影，人文，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 258, "category": "旅行计划", "destination": "成都市,乐山市,西安市", "day": "9天", "time": "10月", "cost": "5000元", "who": "和父母", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 259, "category": "旅行计划", "destination": "西安", "day": "5天", "time": "1月", "cost": "3000元", "who": "和朋友", "play": "美食，摄影，自由行", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 260, "category": "旅行计划", "destination": "西安", "day": "4天", "time": "1月", "cost": "3000元", "who": "和朋友", "play": "美食，摄影，人文", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 261, "category": "旅行计划", "destination": "西安", "day": "6天", "time": "4月", "cost": "3500元", "who": "亲子", "play": "美食，自由行", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 262, "category": "旅行计划", "destination": "西安", "day": "2天", "time": "6月", "cost": "1000元", "who": "一个人", "play": "自驾，小资，奢侈，周末游", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 263, "category": "旅行计划", "destination": "西安", "day": "3天", "time": "12月", "cost": "3000元", "who": "和朋友", "play": "美食，摄影，自由行，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 264, "category": "旅行计划", "destination": "渭南市", "day": "1天", "time": "1月", "cost": "500元", "who": "一个人", "play": "自由行，徒步，省钱", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 265, "category": "旅行计划", "destination": "广州", "day": "5天", "time": "5月", "cost": "2000元", "who": "和家人", "play": "爬山，徒步，野餐", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 266, "category": "旅行计划", "destination": "西安", "day": "3天", "time": "1月", "cost": "2500元", "who": "和朋友", "play": "美食，摄影，人文，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 267, "category": "旅行计划", "destination": "西安", "day": "5天", "time": "7月", "cost": "5670元", "who": "亲子", "play": "美食，摄影，人文，自由行，小资", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 268, "category": "旅行计划", "destination": "西安", "day": "2天", "time": "不限", "cost": "800元", "who": "一个人", "play": "美食，摄影，人文，自由行，徒步，骑行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 269, "category": "旅行计划", "destination": "西安", "day": "3天", "time": "5月", "cost": "不限", "who": "亲子", "play": "不限", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 270, "category": "旅行计划", "destination": "西安", "day": "3天", "time": "7月", "cost": "3000元", "who": "亲子", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 271, "category": "旅行计划", "destination": "西安市,宁夏回族自治区", "day": "8天", "time": "10月", "cost": "9000元", "who": "亲子", "play": "美食，摄影，人文，自由行，小资", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 272, "category": "旅行计划", "destination": "西安", "day": "4天", "time": "1月", "cost": "2000元", "who": "和朋友", "play": "不限", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 273, "category": "旅行计划", "destination": "西安", "day": "6天", "time": "1月", "cost": "4000元", "who": "情侣", "play": "美食，人文，自由行", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 274, "category": "旅行计划", "destination": "广州", "day": "5天", "time": "5月", "cost": "2000元", "who": "家人", "play": "登山，野餐，徒步", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 275, "category": "旅行计划", "destination": "西安", "day": "2天", "time": "10月", "cost": "2000元", "who": "和朋友", "play": "摄影，人文，跟团，周末游", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 276, "category": "旅行计划", "destination": "西安市,武汉市,岳阳市", "day": "9天", "time": "11月", "cost": "3000元", "who": "一个人", "play": "人文，自由行，火车，穷游，省钱", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 277, "category": "旅行计划", "destination": "晋中市,汉中市,西安市", "day": "6天", "time": "10月", "cost": "2600元", "who": "和朋友", "play": "自由行", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 278, "category": "旅行计划", "destination": "西安", "day": "1天", "time": "4月", "cost": "30元", "who": "和朋友", "play": "美食，摄影，人文，自由行，火车，徒步，穷游，省钱，周末游", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 279, "category": "旅行计划", "destination": "西安", "day": "20天", "time": "8月", "cost": "3850元", "who": "和朋友", "play": "美食，自由行", "pref_consumption": "Budget", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 280, "category": "旅行计划", "destination": "西安", "day": "2天", "time": "10月", "cost": "2000元", "who": "和父母", "play": "摄影，人文", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 281, "category": "旅行计划", "destination": "西安", "day": "4天", "time": "1月", "cost": "2000元", "who": "和朋友", "play": "不限", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 282, "category": "旅行计划", "destination": "西安", "day": "6天", "time": "3月", "cost": "1000元", "who": "情侣", "play": "不限", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 283, "category": "旅行计划", "destination": "西安", "day": "6天", "time": "11月", "cost": "5000元", "who": "和朋友", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 284, "category": "旅行计划", "destination": "西安市,咸阳市", "day": "7天", "time": "7月", "cost": "3000元", "who": "亲子", "play": "美食，人文，自由行，半自由行，小资，穷游，省钱，美食林", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 285, "category": "旅行计划", "destination": "西安", "day": "1天", "time": "5月", "cost": "100元", "who": "亲子", "play": "自由行", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 286, "category": "旅行计划", "destination": "敦煌", "day": "7天", "time": "6月", "cost": "4000元", "who": "和父母", "play": "不限", "pref_consumption": "Luxury", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 287, "category": "旅行计划", "destination": "西安市,宝鸡市,铜川市", "day": "3天", "time": "12月", "cost": "3000元", "who": "和朋友", "play": "自驾，自由行，小资，周末游", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 288, "category": "旅行计划", "destination": "西安", "day": "3天", "time": "12月", "cost": "1000元", "who": "和朋友", "play": "美食，购物，摄影，人文", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 289, "category": "旅行计划", "destination": "西宁", "day": "5天", "time": "5月", "cost": "1500元", "who": "夫妻", "play": "美食，摄影，人文，自由行，火车", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 290, "category": "旅行计划", "destination": "西安", "day": "2天", "time": "10月", "cost": "1000元", "who": "和朋友", "play": "自驾，人文，自由行", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 291, "category": "景点", "destination": "桂林", "location": "城中心/象鼻山/两江四湖", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 292, "category": "景点", "destination": "上海", "location": "浦东金桥地区", "type": "不限", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 293, "category": "景点", "destination": "西安", "location": "小寨/省体育场", "type": "空中体验", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 294, "category": "景点", "destination": "西安", "location": "城东其他区域", "type": "自然风光", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 295, "category": "景点", "destination": "南宁", "location": "不限", "type": "观光游览", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 296, "category": "景点", "destination": "广州", "location": "不限", "type": "展馆展览", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 297, "category": "景点", "destination": "成都", "location": "锦华万达/四川师范大学", "type": "不限", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 298, "category": "景点", "destination": "西安", "location": "北关/龙首原", "type": "观光游览", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 299, "category": "景点", "destination": "北京", "location": "沙河大学城/上庄地区", "type": "观光游览", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 300, "category": "景点", "destination": "杭州", "location": "武林广场附近", "type": "水上运动", "pref_consumption": "Economy", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 301, "category": "景点", "destination": "北京", "location": "西直门/北京展览馆地区", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 302, "category": "景点", "destination": "上海", "location": "不限", "type": "冬季滑雪", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 303, "category": "景点", "destination": "广州", "location": "增城万达广场/东汇城", "type": "自然风光", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 304, "category": "景点", "destination": "北京", "location": "不限", "type": "温泉泡汤", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 305, "category": "景点", "destination": "成都", "location": "青城山前山景区及周边", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 306, "category": "景点", "destination": "北京", "location": "永定门/南站/大红门/南苑地区", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 307, "category": "景点", "destination": "桂林", "location": "高新万达广场/高新区商圈", "type": "名胜古迹", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 308, "category": "景点", "destination": "西安", "location": "临潼兵马俑旅游区", "type": "亲子同乐", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 309, "category": "景点", "destination": "上海", "location": "顾村公园地区", "type": "名胜古迹", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 310, "category": "景点", "destination": "北京", "location": "北京西站/丽泽商务区", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 311, "category": "景点", "destination": "广州", "location": "广州东站/五山", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 312, "category": "景点", "destination": "杭州", "location": "千岛湖中心湖区", "type": "展馆展览", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 313, "category": "景点", "destination": "广州", "location": "白云同和/龙洞地区", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 314, "category": "景点", "destination": "北京", "location": "中关村/五道口", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 315, "category": "景点", "destination": "杭州", "location": "临平新城", "type": "名胜古迹", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 316, "category": "景点", "destination": "西安", "location": "南门地区", "type": "动植物园", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 317, "category": "景点", "destination": "西安", "location": "大明宫遗址公园", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 318, "category": "景点", "destination": "杭州", "location": "千岛湖镇", "type": "夜游观景", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 319, "category": "景点", "destination": "成都", "location": "天府新区/西博城地区", "type": "不限", "pref_consumption": "Economy", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 320, "category": "景点", "destination": "西安", "location": "Gpark老城根/太奥广场", "type": "水上运动", "pref_consumption": "Budget", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 321, "category": "景点", "destination": "广州", "location": "中新广州知识城", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 322, "category": "景点", "destination": "南宁", "location": "五象新区总部基地/体育中心", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 323, "category": "景点", "destination": "北京", "location": "怀柔风景区", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 324, "category": "景点", "destination": "上海", "location": "浦东机场核心区", "type": "不限", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 325, "category": "景点", "destination": "南宁", "location": "南宁东站/琅东车站", "type": "休闲娱乐", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 326, "category": "景点", "destination": "西安", "location": "不限", "type": "观光游览", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 327, "category": "景点", "destination": "广州", "location": "白云国际机场附近", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 328, "category": "景点", "destination": "成都", "location": "新津地区/花舞人间景区", "type": "不限", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 329, "category": "景点", "destination": "桂林", "location": "不限", "type": "观光游览", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 330, "category": "景点", "destination": "广州", "location": "大沙地商圈", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 331, "category": "景点", "destination": "上海", "location": "不限", "type": "自然风光", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 332, "category": "景点", "destination": "上海", "location": "莘庄工业区", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 333, "category": "景点", "destination": "上海", "location": "静安寺/南京西路", "type": "自然风光", "pref_consumption": "Budget", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 334, "category": "景点", "destination": "南宁", "location": "不限", "type": "不限", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 335, "category": "景点", "destination": "杭州", "location": "塘栖古镇/超山风景区", "type": "名胜古迹", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 336, "category": "景点", "destination": "西安", "location": "航天城商圈", "type": "冬季滑雪", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 337, "category": "景点", "destination": "北京", "location": "三里屯/工体/东直门地区", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 338, "category": "景点", "destination": "西安", "location": "西安火车站地区", "type": "温泉泡汤", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 339, "category": "景点", "destination": "杭州", "location": "滨江地区", "type": "主题乐园", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 340, "category": "景点", "destination": "广州", "location": "从化区中心", "type": "主题乐园", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 341, "category": "景点", "destination": "北京", "location": "门头沟/潭柘寺/妙峰山风景区", "type": "水上运动", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 342, "category": "景点", "destination": "杭州", "location": "芹川古民居", "type": "水上运动", "pref_consumption": "Luxury", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 343, "category": "景点", "destination": "北京", "location": "西单/金融街地区", "type": "空中体验", "pref_consumption": "Luxury", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 344, "category": "景点", "destination": "广州", "location": "不限", "type": "亲子同乐", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 345, "category": "景点", "destination": "上海", "location": "吴淞口国际邮轮港", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 346, "category": "景点", "destination": "广州", "location": "不限", "type": "休闲娱乐", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 347, "category": "景点", "destination": "西安", "location": "大唐西市/城西", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 348, "category": "景点", "destination": "西安", "location": "Gpark老城根/太奥广场", "type": "不限", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 349, "category": "景点", "destination": "桂林", "location": "会展中心/七星公园景区", "type": "名胜古迹", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 350, "category": "景点", "destination": "西安", "location": "西门地区", "type": "主题乐园", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 351, "category": "景点", "destination": "桂林", "location": "不限", "type": "自然风光", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 352, "category": "景点", "destination": "成都", "location": "海滨城/双流体育中心", "type": "休闲娱乐", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 353, "category": "景点", "destination": "杭州", "location": "大慈岩/新叶古村", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 354, "category": "景点", "destination": "上海", "location": "北外滩地区", "type": "自然风光", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 355, "category": "景点", "destination": "上海", "location": "上海火车站地区", "type": "户外活动", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 356, "category": "景点", "destination": "杭州", "location": "汽车北站/国际会展中心区域", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 357, "category": "景点", "destination": "西安", "location": "南门地区", "type": "亲子同乐", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 358, "category": "景点", "destination": "广州", "location": "南沙万达广场/天后宫商圈", "type": "自然风光", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 359, "category": "景点", "destination": "西安", "location": "西门地区", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 360, "category": "景点", "destination": "广州", "location": "番禺长隆/广州南站附近", "type": "温泉泡汤", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 361, "category": "景点", "destination": "上海", "location": "不限", "type": "水上运动", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 362, "category": "景点", "destination": "北京", "location": "中关村/五道口", "type": "自然风光", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 363, "category": "景点", "destination": "桂林", "location": "不限", "type": "展馆展览", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 364, "category": "景点", "destination": "杭州", "location": "临平新城", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 365, "category": "景点", "destination": "上海", "location": "嘉定新城", "type": "冬季滑雪", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 366, "category": "景点", "destination": "成都", "location": "九眼桥/四川大学附近地区", "type": "不限", "pref_consumption": "Economy", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 367, "category": "景点", "destination": "成都", "location": "建设路/东郊记忆公园", "type": "动植物园", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 368, "category": "景点", "destination": "成都", "location": "金牛万达/成都动物园", "type": "空中体验", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 369, "category": "景点", "destination": "广州", "location": "白云黄石/同德围地区", "type": "空中体验", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 370, "category": "景点", "destination": "广州", "location": "不限", "type": "温泉泡汤", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 371, "category": "景点", "destination": "杭州", "location": "不限", "type": "亲子同乐", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 372, "category": "景点", "destination": "西安", "location": "秦岭环山路/野生动物园", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 373, "category": "景点", "destination": "成都", "location": "双流国际机场/空港花田", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 374, "category": "景点", "destination": "南宁", "location": "武鸣商业区", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 375, "category": "景点", "destination": "杭州", "location": "宋城/转塘/之江休闲度假区", "type": "自然风光", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 376, "category": "景点", "destination": "成都", "location": "蔚然花海/洛带古镇", "type": "户外活动", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 377, "category": "景点", "destination": "西安", "location": "大雁塔/曲江新区", "type": "自然风光", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 378, "category": "景点", "destination": "上海", "location": "迪士尼度假区", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 379, "category": "景点", "destination": "上海", "location": "奉贤开发区", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 380, "category": "景点", "destination": "上海", "location": "崇明岛/长兴岛/横沙岛", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 381, "category": "景点", "destination": "广州", "location": "番禺市桥/亚运城", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 382, "category": "景点", "destination": "南宁", "location": "江南万达", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 383, "category": "景点", "destination": "广州", "location": "南沙万达广场/天后宫商圈", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 384, "category": "景点", "destination": "广州", "location": "江南西/中大南校区", "type": "户外活动", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 385, "category": "景点", "destination": "北京", "location": "望京/酒仙桥/798地区", "type": "名胜古迹", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 386, "category": "景点", "destination": "杭州", "location": "滨江地区", "type": "冬季滑雪", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 387, "category": "景点", "destination": "西安", "location": "西安火车站地区", "type": "户外活动", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 388, "category": "景点", "destination": "杭州", "location": "大明山/十门峡度假区", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 389, "category": "景点", "destination": "上海", "location": "北外滩地区", "type": "动植物园", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 390, "category": "景点", "destination": "南宁", "location": "五象新区总部基地/体育中心", "type": "动植物园", "pref_consumption": "Economy", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 391, "category": "景点", "destination": "广州", "location": "白云同和/龙洞地区", "type": "主题乐园", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 392, "category": "景点", "destination": "西安", "location": "高铁南站", "type": "不限", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 393, "category": "景点", "destination": "杭州", "location": "良渚文化村周边", "type": "展馆展览", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 394, "category": "景点", "destination": "西安", "location": "南门地区", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 395, "category": "景点", "destination": "上海", "location": "四川北路商业区", "type": "水上运动", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 396, "category": "景点", "destination": "成都", "location": "金牛万达/成都动物园", "type": "自然风光", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 397, "category": "景点", "destination": "上海", "location": "浦江镇地区", "type": "名胜古迹", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 398, "category": "景点", "destination": "杭州", "location": "大奇山度假区", "type": "动植物园", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 399, "category": "景点", "destination": "杭州", "location": "火车城站杭州站/四季青", "type": "温泉泡汤", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 400, "category": "景点", "destination": "北京", "location": "首都机场/新国展地区", "type": "温泉泡汤", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 401, "category": "景点", "destination": "北京", "location": "首都机场/新国展地区", "type": "不限", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 402, "category": "景点", "destination": "桂林", "location": "遇龙河国家级旅游度假区", "type": "水上运动", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 403, "category": "景点", "destination": "杭州", "location": "黄龙体育中心/浙江大学玉泉/西溪校区", "type": "水上运动", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 404, "category": "景点", "destination": "广州", "location": "天河体育中心/太古汇", "type": "不限", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 405, "category": "景点", "destination": "成都", "location": "不限", "type": "亲子同乐", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 406, "category": "景点", "destination": "广州", "location": "广州大学城附近", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 407, "category": "景点", "destination": "上海", "location": "人民广场地区", "type": "动植物园", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 408, "category": "景点", "destination": "成都", "location": "锦里/武侯祠附近地区", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 409, "category": "景点", "destination": "上海", "location": "青浦朱家角/东方绿舟", "type": "亲子同乐", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 410, "category": "景点", "destination": "北京", "location": "延庆休闲度假区", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 411, "category": "景点", "destination": "杭州", "location": "不限", "type": "休闲娱乐", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 412, "category": "景点", "destination": "成都", "location": "不限", "type": "休闲娱乐", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 413, "category": "景点", "destination": "杭州", "location": "奥体博览城/钱江世纪城", "type": "不限", "pref_consumption": "Economy", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 414, "category": "景点", "destination": "杭州", "location": "太湖源度假区", "type": "亲子同乐", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 415, "category": "景点", "destination": "成都", "location": "不限", "type": "展馆展览", "pref_consumption": "Economy", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 416, "category": "景点", "destination": "上海", "location": "前滩", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 417, "category": "景点", "destination": "桂林", "location": "不限", "type": "主题乐园", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 418, "category": "景点", "destination": "南宁", "location": "不限", "type": "名胜古迹", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 419, "category": "景点", "destination": "北京", "location": "鸟巢/奥体中心地区", "type": "冬季滑雪", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 420, "category": "景点", "destination": "杭州", "location": "文渊狮城/龙川湾景区", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 421, "category": "景点", "destination": "上海", "location": "莘庄工业区", "type": "亲子同乐", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 422, "category": "景点", "destination": "西安", "location": "市图书馆/凤城二路", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 423, "category": "景点", "destination": "西安", "location": "唐都医院/城东客运站", "type": "名胜古迹", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 424, "category": "景点", "destination": "西安", "location": "不限", "type": "温泉泡汤", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 425, "category": "景点", "destination": "上海", "location": "滴水湖临港地区", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 426, "category": "景点", "destination": "桂林", "location": "不限", "type": "名胜古迹", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 427, "category": "景点", "destination": "北京", "location": "顺义温泉休闲区", "type": "户外活动", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 428, "category": "景点", "destination": "上海", "location": "青浦朱家角/东方绿舟", "type": "不限", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 429, "category": "景点", "destination": "上海", "location": "不限", "type": "展馆展览", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 430, "category": "景点", "destination": "上海", "location": "静安寺/南京西路", "type": "观光游览", "pref_consumption": "Budget", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 431, "category": "景点", "destination": "北京", "location": "燕莎/朝阳公园商业区", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 432, "category": "景点", "destination": "北京", "location": "公主坟/五棵松/石景山游乐园地区", "type": "亲子同乐", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 433, "category": "景点", "destination": "杭州", "location": "滨江地区", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 434, "category": "景点", "destination": "成都", "location": "都江堰景区及周边", "type": "不限", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 435, "category": "景点", "destination": "上海", "location": "虹桥枢纽周边区", "type": "自然风光", "pref_consumption": "Economy", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 436, "category": "景点", "destination": "上海", "location": "浦东张江地区", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 437, "category": "景点", "destination": "北京", "location": "不限", "type": "不限", "pref_consumption": "Economy", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 438, "category": "景点", "destination": "西安", "location": "唐都医院/城东客运站", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 439, "category": "景点", "destination": "南宁", "location": "广西大学/民族大学/动物园", "type": "自然风光", "pref_consumption": "Economy", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 440, "category": "景点", "destination": "广州", "location": "淘金/环市东/广州动物园", "type": "不限", "pref_consumption": "Economy", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 441, "category": "景点", "destination": "上海", "location": "长风公园地区", "type": "冬季滑雪", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 442, "category": "景点", "destination": "杭州", "location": "运河商务区/新天地", "type": "不限", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 443, "category": "景点", "destination": "杭州", "location": "不限", "type": "户外活动", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 444, "category": "景点", "destination": "广州", "location": "从化区中心", "type": "不限", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 445, "category": "景点", "destination": "成都", "location": "龙泉驿地区/大运会体育中心", "type": "亲子同乐", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 446, "category": "景点", "destination": "杭州", "location": "黄龙体育中心/浙江大学玉泉/西溪校区", "type": "动植物园", "pref_consumption": "Luxury", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 447, "category": "景点", "destination": "上海", "location": "虹桥地区", "type": "亲子同乐", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 448, "category": "景点", "destination": "成都", "location": "凤凰山体育公园/大丰", "type": "动植物园", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 449, "category": "景点", "destination": "杭州", "location": "天子地风景区", "type": "不限", "pref_consumption": "Economy", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 450, "category": "景点", "destination": "上海", "location": "七宝古镇", "type": "不限", "pref_consumption": "Economy", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 451, "category": "景点", "destination": "南宁", "location": "南宁东站/琅东车站", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 452, "category": "景点", "destination": "杭州", "location": "瑶琳仙境/OMG心跳乐园", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 453, "category": "景点", "destination": "杭州", "location": "滨江地区", "type": "户外活动", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 454, "category": "景点", "destination": "成都", "location": "海滨城/双流体育中心", "type": "冬季滑雪", "pref_consumption": "Budget", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 455, "category": "景点", "destination": "北京", "location": "房山风景区", "type": "水上运动", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 456, "category": "景点", "destination": "西安", "location": "长安大学城", "type": "不限", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 457, "category": "景点", "destination": "西安", "location": "汉长安城遗址周边", "type": "名胜古迹", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 458, "category": "景点", "destination": "广州", "location": "广州体育馆/白云山", "type": "户外活动", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 459, "category": "景点", "destination": "西安", "location": "土门地区", "type": "不限", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 460, "category": "景点", "destination": "西安", "location": "诗经里/西安欢乐谷", "type": "动植物园", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 461, "category": "景点", "destination": "北京", "location": "鸟巢/奥体中心地区", "type": "动植物园", "pref_consumption": "Budget", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 462, "category": "景点", "destination": "广州", "location": "广佛智城", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 463, "category": "景点", "destination": "成都", "location": "华侨城欢乐谷/西南交大", "type": "不限", "pref_consumption": "Economy", "pref_interest": "其它", "pref_pace": "Relaxed"}
+{"id": 464, "category": "景点", "destination": "广州", "location": "广州体育馆/白云山", "type": "夜游观景", "pref_consumption": "Economy", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 465, "category": "景点", "destination": "广州", "location": "白云同和/龙洞地区", "type": "观光游览", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 466, "category": "景点", "destination": "成都", "location": "杜甫草堂/省人民医院", "type": "动植物园", "pref_consumption": "Economy", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 467, "category": "景点", "destination": "杭州", "location": "千岛湖镇", "type": "动植物园", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 468, "category": "景点", "destination": "西安", "location": "小寨/省体育场", "type": "温泉泡汤", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 469, "category": "景点", "destination": "上海", "location": "衡山路地区", "type": "名胜古迹", "pref_consumption": "Luxury", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 470, "category": "景点", "destination": "成都", "location": "凤凰山体育公园/大丰", "type": "休闲娱乐", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 471, "category": "景点", "destination": "南宁", "location": "不限", "type": "展馆展览", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 472, "category": "景点", "destination": "西安", "location": "航天城商圈", "type": "观光游览", "pref_consumption": "Luxury", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 473, "category": "景点", "destination": "上海", "location": "青浦朱家角/东方绿舟", "type": "观光游览", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Fast"}
+{"id": 474, "category": "景点", "destination": "上海", "location": "七宝古镇", "type": "展馆展览", "pref_consumption": "Economy", "pref_interest": "其它", "pref_pace": "Fast"}
+{"id": 475, "category": "景点", "destination": "西安", "location": "西京医院/康复路", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Shopping", "pref_pace": "Relaxed"}
+{"id": 476, "category": "景点", "destination": "西安", "location": "不限", "type": "亲子同乐", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 477, "category": "景点", "destination": "桂林", "location": "不限", "type": "温泉泡汤", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 478, "category": "景点", "destination": "上海", "location": "长寿路商业区", "type": "不限", "pref_consumption": "Luxury", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 479, "category": "景点", "destination": "桂林", "location": "遇龙河国家级旅游度假区", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 480, "category": "景点", "destination": "上海", "location": "青浦朱家角/东方绿舟", "type": "冬季滑雪", "pref_consumption": "Economy", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 481, "category": "景点", "destination": "上海", "location": "陆家嘴", "type": "冬季滑雪", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 482, "category": "景点", "destination": "广州", "location": "广州大学城附近", "type": "温泉泡汤", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 483, "category": "景点", "destination": "杭州", "location": "文渊狮城/龙川湾景区", "type": "户外活动", "pref_consumption": "Budget", "pref_interest": "Culture", "pref_pace": "Relaxed"}
+{"id": 484, "category": "景点", "destination": "北京", "location": "中关村/五道口", "type": "观光游览", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Relaxed"}
+{"id": 485, "category": "景点", "destination": "杭州", "location": "临安城区/青山湖度假区", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Shopping", "pref_pace": "Fast"}
+{"id": 486, "category": "景点", "destination": "杭州", "location": "文教区/浙大紫金港校区", "type": "不限", "pref_consumption": "Economy", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 487, "category": "景点", "destination": "北京", "location": "不限", "type": "主题乐园", "pref_consumption": "Budget", "pref_interest": "Entertainment", "pref_pace": "Fast"}
+{"id": 488, "category": "景点", "destination": "西安", "location": "西安火车站地区", "type": "空中体验", "pref_consumption": "Luxury", "pref_interest": "Nature", "pref_pace": "Relaxed"}
+{"id": 489, "category": "景点", "destination": "杭州", "location": "西湖风景区/灵隐度假区", "type": "温泉泡汤", "pref_consumption": "Budget", "pref_interest": "Nature", "pref_pace": "Fast"}
+{"id": 490, "category": "景点", "destination": "西安", "location": "不限", "type": "展馆展览", "pref_consumption": "Economy", "pref_interest": "Entertainment", "pref_pace": "Fast"}

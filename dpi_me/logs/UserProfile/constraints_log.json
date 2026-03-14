@@ -1,0 +1,35 @@
+[
+  {
+    "turn": 1,
+    "user_text": "我想从重庆去北京玩3天。",
+    "constraints": [
+      "1. Start City == \"重庆\"",
+      "2. Target City == \"北京\"",
+      "3. Day Count == 3",
+      "4. All InterCity Transport Type == \"train\""
+    ]
+  },
+  {
+    "turn": 2,
+    "user_text": "慢慢的吧。",
+    "constraints": [
+      "1. All Activities' activity_time() <= 90",
+      "2. All Activities count >= 5"
+    ]
+  },
+  {
+    "turn": 3,
+    "user_text": "我想去故宫和颐和园。",
+    "constraints": [
+      "1. Exist Attraction which Position == \"故宫\" and Type == \"历史文化\"",
+      "2. Exist Attraction which Position == \"颐和园\" and Type == \"历史文化\""
+    ]
+  },
+  {
+    "turn": 4,
+    "user_text": "我总预算3000元。",
+    "constraints": [
+      "1. Cost <= 3000"
+    ]
+  }
+]

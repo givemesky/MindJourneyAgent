@@ -1,0 +1,33 @@
+### 1. 模型与路径配置
+model_name_or_path: /public/home/azsy/TrainLora/TrainLora/models/Qwen2.5-7B-Instruct
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_target: all  # 针对所有线性层进行微调，能获得最好的逻辑学习能力
+
+### 2. 数据集配置
+dataset: mindjourney_task   # 注意：这个名字必须和 dataset_info.json 里的 Key 一致
+template: qwen              # Qwen2.5 系列必须使用 qwen 模板
+cutoff_len: 2048            # 训练数据的最大长度，如果显存大可以设为 4096
+max_samples: 1000           # 最大样本数
+overwrite_cache: true
+preprocessing_num_workers: 16
+
+### 3. 训练超参数
+output_dir: saves/qwen2.5_7b/lora/mindjourney_v1  # 微调后的权重保存位置
+logging_steps: 5            # 每 5 步记录一次日志
+save_steps: 100             # 每 100 步保存一次权重
+plot_loss: true             # 训练结束后生成 Loss 曲线图
+learning_rate: 1.0e-4       # 学习率，LoRA 常用 1e-4
+num_train_epochs: 3.0       # 训练 3 轮
+per_device_train_batch_size: 2 # 单个显卡的批次大小，如果显存够（>24G）可以设为 4
+gradient_accumulation_steps: 8 # 梯度累加，实际 batch_size = 显卡数 * 2 * 8 = 16
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true                  # 如果是 A100/H100/3090/4090 显卡，建议把这行换成 bf16: true
+
+### 4. 评估配置 (可选)
+val_size: 0.1               # 抽出 10% 的数据作为验证集
+per_device_eval_batch_size: 1
+eval_strategy: steps
+eval_steps: 100

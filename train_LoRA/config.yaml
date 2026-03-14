@@ -1,0 +1,21 @@
+task:
+  "旅行计划":
+    task_name: "旅行计划/攻略制定"
+    # 1. 增加偏好字段
+    columns: ['destination','pref_consumption', 'pref_interest', 'pref_pace']
+    # 2. 增加对应的中文描述，助手会看到这些描述并据此提问
+    columns_description: ['目的地','消费档次偏好','兴趣领域偏好','行程节奏偏好']
+    # 3. 调低偏好字段初始出现的概率（最后三个0.1），强迫模型去“挖”
+    keys_prob: [0.9,0.1, 0.1, 0.1]
+    mean: -1 
+    std: 2 
+    max_turns: 9 # 增加轮数，确保能问完
+
+  "景点":
+    task_name: "景点推荐"
+    columns: ['destination','pref_consumption', 'pref_interest', 'pref_pace']
+    columns_description: ['目的地','消费水平偏好','景观兴趣偏好','游玩节奏偏好']
+    keys_prob: [0.7, 0.1, 0.1, 0.1]
+    mean: -1
+    std: 2
+    max_turns: 6

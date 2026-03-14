@@ -1,0 +1,10 @@
+### 模型与路径配置
+model_name_or_path: /public/home/azsy/TrainLora/TrainLora/models/Qwen2.5-7B-Instruct
+adapter_name_or_path: saves/qwen2.5_7b/lora/mindjourney_v1
+template: qwen
+finetuning_type: lora
+
+### 推理参数配置
+max_new_tokens: 512
+temperature: 0.7
+top_p: 0.9

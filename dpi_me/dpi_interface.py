@@ -26,25 +26,9 @@ except ImportError as e:
     raise
 
 class DPIAlgorithmInterface:
-    # def __init__(self, log_dir="/public/home/azsy/SynPT-main/dpi_me/logs/UserProfile"):
-    #     """
-    #     初始化 DPI 算法插件
-    #     :param log_dir: 实验日志保存路径
-    #     """
-    #     print("🛠️  [DPI Interface] 正在初始化 DPI-ME 算法引擎...")
-        
-    #     # 1. 初始化系统中枢 (内部已配置为引用全局共享模型)
-    #     # 注意：这里传入 model_name="shared" 是为了告诉管理器不要自己加载模型
-    #     self.manager = DPISystemManager(model_name="shared")
-        
-    #     # 2. 初始化评估器
-    #     self.evaluator = PreferenceEvaluator(log_dir=log_dir)
-    #     self.log_dir = log_dir 
-    #     print("✅ [DPI Interface] 算法引擎初始化完成。")
-
     def __init__(self, 
-                 user_profile_dir="/public/home/azsy/SynPT-main/dpi_me/logs/UserProfile",
-                 convergence_dir="/public/home/azsy/SynPT-main/dpi_me/logs/Convergence"): # 新增路径参数
+                 user_profile_dir="dpi_me/logs/UserProfile",
+                 convergence_dir="dpi_me/logs/Convergence"): # 新增路径参数
         """
         初始化 DPI 算法插件
         """
@@ -95,22 +79,6 @@ class DPIAlgorithmInterface:
         
         return persona_summary, metrics
 
-    # def get_final_report(self):
-    #     """保存并获取最终实验数据报表"""
-    #     # 1. 保存 CSV
-    #     self.evaluator.save_to_csv("persona_convergence.csv")
-        
-    #     # 2. 保存画像 JSON (纯数学分布)
-    #     json_path = os.path.join(self.log_dir, "persona_evolution.json")
-    #     self.manager.persona.save_logs(path=json_path)
-        
-    #     # 3. 保存独立约束 JSON (纯语义约束)
-    #     constraints_path = os.path.join(self.log_dir, "constraints_log.json")
-    #     self.manager.save_constraints(path=constraints_path)
-        
-    #     # 这里建议直接 return 而不是调用 manager 的 generate_final_report
-    #     # 因为 manager 里的路径是硬编码的，可能会产生重复或路径不一的文件
-    #     return self.manager.persona.get_top_persona()
 
     def get_final_report(self):
         """保存并获取最终实验数据报表"""

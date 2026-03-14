@@ -19,7 +19,7 @@ if current_dir not in sys.path:
     sys.path.insert(0, current_dir)
 
 from integrated_bridge import DPI_SynPT_Bridge
-from rag_system.rag_interface import run_rag_recommendation
+from RAG.rag_system.rag_interface import run_rag_recommendation
 
 def print_dashboard(turn, result):
     """打印算法监控面板"""
@@ -109,7 +109,7 @@ def main():
 
             # 2. 【改进】立刻打印当前轮次的监控面板和助手回复
             print_dashboard(turn, result)
-            print(f"助手: {result['response']}")
+            # print(f"助手: {result['response']}")
 
             # 3. 检测收敛性，如果动作是 TERMINATE，则进入最终推荐流程
             if result['decision']['action'] == 'TERMINATE':
@@ -120,18 +120,19 @@ def main():
                 # 保存实验日志
                 bridge.finalize()
                 
-                # 4. 执行 RAG 推荐（内部已包含 Hard/Soft 信息打印）
+                # 3. 执行 RAG 推荐
                 start_time = time.time()
                 recommendation_report = run_rag_recommendation()
                 print(recommendation_report)
                 end_time = time.time()
                 
                 print(f"✅ 任务完成！推荐生成耗时: {end_time - start_time:.2f}s")
-                
-                # 推荐完后直接结束或询问是否继续
                 print("\n(对话已锁定，如需开始新的一轮规划请重启程序)")
-                break
+                break  # 【关键】直接跳出循环，不再执行下面的 print(助手: ...)
 
+            # 4. 如果没有收敛，才正常输出助手对话回复
+            print(f"助手: {result['response']}")
+            
             turn += 1
 
     except KeyboardInterrupt:
