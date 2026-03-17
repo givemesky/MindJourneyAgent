@@ -1,35 +1,39 @@
 [
   {
     "turn": 1,
-    "user_text": "我想从重庆去北京玩3天。",
+    "user_text": "我想和我父母从重庆到南京玩5天。",
     "constraints": [
       "1. Start City == \"重庆\"",
-      "2. Target City == \"北京\"",
-      "3. Day Count == 3",
-      "4. All InterCity Transport Type == \"train\""
+      "2. Target City == \"南京\"",
+      "3. Day Count == 5",
+      "4. People Count == 3",
+      "5. All InterCity Transport Type == \"train\"",
+      "6. Exist Attraction which Type == \"其它\""
     ]
   },
   {
     "turn": 2,
-    "user_text": "慢慢的吧。",
+    "user_text": "慢慢悠悠的吧，不用特别紧凑。",
     "constraints": [
-      "1. All Activities' activity_time() <= 90",
-      "2. All Activities count >= 5"
+      "1. All Activities' activity_time() <= 120",
+      "2. All Day Count >= 2",
+      "3. All Activities count <= 6"
     ]
   },
   {
     "turn": 3,
-    "user_text": "我想去故宫和颐和园。",
+    "user_text": "想逛玄武湖和鸡鸣寺，想吃鸭血粉丝汤。",
     "constraints": [
-      "1. Exist Attraction which Position == \"故宫\" and Type == \"历史文化\"",
-      "2. Exist Attraction which Position == \"颐和园\" and Type == \"历史文化\""
+      "1. Exist Attraction which Position == \"玄武湖\" and Type == \"公园\"",
+      "2. Exist Attraction which Position == \"鸡鸣寺\" and Type == \"人文景观\"",
+      "3. Exist Restaurant which Cuisine == \"江苏菜\" and Type == \"鸭血粉丝汤\""
     ]
   },
   {
     "turn": 4,
-    "user_text": "我总预算3000元。",
+    "user_text": "总预算6000左右。",
     "constraints": [
-      "1. Cost <= 3000"
+      "1. Cost <= 6000"
     ]
   }
 ]

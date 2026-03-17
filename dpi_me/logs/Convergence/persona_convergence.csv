@@ -1,5 +1,5 @@
 turn,Consumption_entropy,Consumption_certainty,Consumption_confidence,Consumption_top,Interest_entropy,Interest_certainty,Interest_confidence,Interest_top,Pace_entropy,Pace_certainty,Pace_confidence,Pace_top
 1,1.585,0.0,0.3333,Budget,2.3219,0.0,0.2,Culture,1.0,0.0,0.5,Fast
 2,1.585,0.0,0.3333,Budget,2.3219,0.0,0.2,Culture,0.4578,0.5422,0.9035,Relaxed
-3,1.585,0.0,0.3333,Budget,1.3155,0.4334,0.7488,Culture,0.4578,0.5422,0.9035,Relaxed
-4,1.4225,0.1025,0.5652,Economy,1.3155,0.4334,0.7488,Culture,0.4578,0.5422,0.9035,Relaxed
+3,1.585,0.0,0.3333,Budget,1.6311,0.2975,0.4405,Nature,0.4578,0.5422,0.9035,Relaxed
+4,1.4225,0.1025,0.5652,Luxury,1.6311,0.2975,0.4405,Nature,0.4578,0.5422,0.9035,Relaxed
