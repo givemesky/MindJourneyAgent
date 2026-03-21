@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindJourney DPI 算法调试面板</title>
+    <!-- 使用 Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .chat-container { height: calc(100vh - 200px); }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 10px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeIn 0.3s ease-out; }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-900">
+
+    <div class="container mx-auto py-6 px-4 h-screen flex flex-col">
+        <!-- 头部 -->
+        <header class="flex justify-between items-center mb-6 bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+            <div class="flex items-center space-x-3">
+                <span class="text-3xl">🧩</span>
+                <div>
+                    <h1 class="text-xl font-bold text-slate-800">MindJourney DPI-SynPT</h1>
+                    <p class="text-xs text-slate-500">动态偏好推理引擎 · 算法调试工具 v1.0</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="text-right">
+                    <div id="sessionDisplay" class="text-xs font-mono text-slate-400">Session: --</div>
+                    <div id="turnDisplay" class="text-sm font-bold text-blue-600">Round: 0</div>
+                </div>
+                <button onclick="window.location.reload()" class="p-2 hover:bg-slate-100 rounded-full transition" title="重置对话">
+                    🔄
+                </button>
+            </div>
+        </header>
+
+        <main class="grid grid-cols-12 gap-6 flex-1 overflow-hidden">
+            <!-- 左侧：对话区域 -->
+            <div class="col-span-12 lg:col-span-7 flex flex-col bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div id="chatBox" class="chat-container custom-scrollbar overflow-y-auto p-6 space-y-4 bg-slate-50/50">
+                    <div class="text-center text-slate-400 text-sm my-10 italic">
+                        👋 您好！我是您的 AI 旅游规划助手。<br>请告诉我您的旅行目的地、预算或任何偏好，我将开始推测您的需求。
+                    </div>
+                </div>
+
+                <!-- 输入框 -->
+                <div class="p-4 bg-white border-t border-slate-100">
+                    <div class="relative flex items-center">
+                        <input id="userInput" type="text" 
+                               onkeypress="if(event.keyCode==13) sendChat()"
+                               placeholder="在此输入您的旅游需求... (例如: 我想去苏州玩3天)" 
+                               class="w-full pl-4 pr-24 py-3 bg-slate-100 border-none rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+                        <button onclick="sendChat()" id="sendBtn"
+                                class="absolute right-2 bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-medium transition-colors shadow-lg shadow-blue-200">
+                            发送
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧：画像监控面板 -->
+            <div class="col-span-12 lg:col-span-5 flex flex-col space-y-6 overflow-y-auto custom-scrollbar">
+                
+                <!-- DPI 核心面板 -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                    <h2 class="text-lg font-bold mb-6 flex items-center">
+                        <span class="mr-2">📊</span> 用户偏好实时画像 (DPI)
+                    </h2>
+                    
+                    <div id="personaPanel" class="space-y-8">
+                        <!-- 骨架屏或默认状态 -->
+                        <div class="text-center py-10 text-slate-400 italic">等待对话以开始推断...</div>
+                    </div>
+
+                    <div id="statusBadge" class="mt-8 flex items-center justify-center p-3 rounded-xl bg-slate-100 text-slate-500 font-bold transition-all border border-dashed border-slate-300">
+                        <span class="mr-2">⏳</span> 状态：等待输入
+                    </div>
+                </div>
+
+                <!-- RAG 推荐结果 (仅在收敛后显示) -->
+                <div id="recommendationPanel" class="hidden fade-in bg-white p-6 rounded-2xl shadow-sm border-2 border-green-100">
+                    <h2 class="text-lg font-bold mb-4 text-green-700 flex items-center">
+                        <span class="mr-2">🎯</span> RAG 知识图谱推荐建议
+                    </h2>
+                    <div id="recList" class="space-y-4">
+                        <!-- 动态生成推荐卡片 -->
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // 生成随机 Session ID
+        const sessionId = "UID-" + Math.random().toString(36).substring(2, 9).toUpperCase();
+        document.getElementById('sessionDisplay').innerText = `Session: ${sessionId}`;
+
+        async function sendChat() {
+            const input = document.getElementById('userInput');
+            const chatBox = document.getElementById('chatBox');
+            const sendBtn = document.getElementById('sendBtn');
+            const text = input.value.trim();
+
+            if (!text) return;
+
+            // UI 状态重置
+            input.value = '';
+            input.disabled = true;
+            sendBtn.innerText = '思考中...';
+            sendBtn.disabled = true;
+
+            // 1. 显示用户气泡
+            appendBubble('user', text);
+
+            try {
+                const response = await fetch('/v1/plan', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ session_id: sessionId, user_input: text })
+                });
+
+                if (!response.ok) throw new Error('网络请求失败');
+                
+                const data = await response.json();
+
+                // 2. 显示助手气泡
+                appendBubble('assistant', data.reply);
+                
+                // 3. 更新轮次和面板
+                document.getElementById('turnDisplay').innerText = `Round: ${data.turn}`;
+                updatePersonaUI(data.persona);
+                updateStatus(data.status);
+
+                // 4. 如果收敛，显示推荐
+                if (data.status === 'TERMINATE' && data.recommendations) {
+                    showRecommendations(data.recommendations);
+                }
+
+            } catch (error) {
+                console.error(error);
+                appendBubble('system', '❌ 错误: 无法连接到算力集群后端。');
+            } finally {
+                input.disabled = false;
+                sendBtn.innerText = '发送';
+                sendBtn.disabled = false;
+                input.focus();
+            }
+        }
+
+        function appendBubble(role, text) {
+            const chatBox = document.getElementById('chatBox');
+            const div = document.createElement('div');
+            div.className = `flex ${role === 'user' ? 'justify-end' : 'justify-start'} fade-in`;
+            
+            const innerHtml = role === 'user' 
+                ? `<div class="max-w-[80%] bg-blue-600 text-white p-3 rounded-2xl rounded-tr-none shadow-sm">${text}</div>`
+                : role === 'system'
+                ? `<div class="max-w-[90%] bg-red-50 text-red-600 border border-red-100 p-3 rounded-xl text-sm italic">${text}</div>`
+                : `<div class="max-w-[85%] bg-white border border-slate-200 p-4 rounded-2xl rounded-tl-none shadow-sm text-slate-800">${text}</div>`;
+            
+            div.innerHTML = innerHtml;
+            chatBox.appendChild(div);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function updatePersonaUI(persona) {
+            const panel = document.getElementById('personaPanel');
+            panel.innerHTML = '';
+
+            for (let dim in persona) {
+                const info = persona[dim];
+                const confPercent = (info.confidence * 100).toFixed(1);
+                const isStable = info.is_stable;
+                
+                const colorClass = isStable ? 'bg-green-500' : 'bg-blue-500';
+                const textColor = isStable ? 'text-green-600' : 'text-blue-600';
+                const statusIcon = isStable ? '✅' : '🔍';
+
+                const html = `
+                    <div class="fade-in">
+                        <div class="flex justify-between items-end mb-2">
+                            <div>
+                                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">${dim}</span>
+                                <div class="text-lg font-bold ${textColor}">${statusIcon} ${info.label}</div>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-sm font-mono font-bold">${confPercent}%</span>
+                                <div class="text-[10px] text-slate-400">${isStable ? '已锁定 (Stable)' : '探索中 (Exploring)'}</div>
+                            </div>
+                        </div>
+                        <div class="w-full bg-slate-100 rounded-full h-2.5 overflow-hidden">
+                            <div class="${colorClass} h-full transition-all duration-1000 ease-out" style="width: ${confPercent}%"></div>
+                        </div>
+                    </div>
+                `;
+                panel.innerHTML += html;
+            }
+        }
+
+        function updateStatus(status) {
+            const badge = document.getElementById('statusBadge');
+            if (status === 'TERMINATE') {
+                badge.className = "mt-8 flex items-center justify-center p-4 rounded-xl bg-green-500 text-white font-bold shadow-lg shadow-green-200 transition-all scale-105";
+                badge.innerHTML = '🎯 偏好已完全收敛，方案生成中...';
+            } else {
+                badge.className = "mt-8 flex items-center justify-center p-3 rounded-xl bg-blue-50 text-blue-500 font-bold border border-blue-100";
+                badge.innerHTML = '<span class="animate-pulse mr-2">🧠</span> 正在分析您的偏好信息...';
+            }
+        }
+
+        function showRecommendations(recs) {
+            const panel = document.getElementById('recommendationPanel');
+            const list = document.getElementById('recList');
+            panel.classList.remove('hidden');
+            list.innerHTML = '';
+
+            // 如果推荐是字符串（大报告格式），则直接显示
+            if (typeof recs === 'string') {
+                list.innerHTML = `<div class="text-sm text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-xl border border-slate-100 whitespace-pre-wrap">${recs}</div>`;
+            } else if (Array.isArray(recs)) {
+                // 如果是数组对象格式
+                recs.forEach(item => {
+                    const card = `
+                        <div class="p-4 border border-slate-100 bg-slate-50 rounded-xl hover:shadow-md transition">
+                            <div class="flex justify-between items-start">
+                                <h3 class="font-bold text-slate-800">${item.name}</h3>
+                                <span class="text-xs bg-white px-2 py-1 rounded border border-slate-200 text-slate-500">${item.type}</span>
+                            </div>
+                            <p class="text-xs text-slate-500 mt-2">${item.description || ''}</p>
+                        </div>
+                    `;
+                    list.innerHTML += card;
+                });
+            }
+        }
+    </script>
+</body>
+</html>
