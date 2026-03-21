@@ -132,13 +132,14 @@ Combine constraints is also allowed. For example, "The cost of xxx activity  sho
 ### MANDATORY RULES FOR ATTRACTIONS (景点强制规则) ###
 1. If the user specifies a particular attraction or a clear type of interest:
    - Output: "Exist Attraction which Position == 'NAME' and Type == 'CATEGORY'"
-2. If the user mentions "attractions" or "spots" generally WITHOUT specifying names or types:
+2. Only extract attraction categories that the user EXPLICITLY mentions. 
+3. If the user mentions "attractions" or "spots" generally WITHOUT specifying names or types:
    - Output: "Exist Attraction which Type == '其它'" 
-3. The 'Type' MUST be selected from this specific list: 
+4. The 'Type' MUST be selected from this specific list: 
    ['游乐园/体育娱乐', '历史古迹', '博物馆/纪念馆', '文化旅游区', '公园', '人文景观', '商业街区', '红色景点', '美术馆/艺术馆', '图书馆', '大学校园', '自然风光','其它'].
-4. If the user mentions "attractions" but doesn't specify a type, you MUST use '其它' as the Type instead of listing all categories.
-5. DO NOT output multiple categories in a list like ["Type A", "Type B"] unless the user explicitly requested multiple types. 
-6. DO NOT dump the entire candidate list. If you are uncertain, use '其它'.
+5. DO NOT dump the entire candidate list. If you are uncertain, use '其它'.
+6. If the user mentions "attractions" but doesn't specify a type, you MUST use '其它' as the Type instead of listing all categories.
+7. DO NOT output multiple categories in a list like ["Type A", "Type B"] unless the user explicitly requested multiple types. 
 ####################################################
 
 we offer some functions below, which can help you extract the nature language logic constraints in the user's request.
@@ -173,9 +174,6 @@ Nature Language Logic Constraints:
 9. Cars == (People Count + 3) // 4 = 1
 10. Exist "都江堰" in Attraction Position and Type == "自然风光"
 11. Exist Attraction which Type == "自然风光"
-12. All InterCity Transport Type == "airplane"
-13. All Innercity Transport set <= {"taxi", "metro", "walk"}
-14. Exist Accommodation which Type == "泳池"
 <end>
 
 Query 2: 我想多去几个景点看看，行程排满一点，行程不要太赶。

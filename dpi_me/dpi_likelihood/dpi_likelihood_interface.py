@@ -64,7 +64,7 @@ class LikelihoodExtractor:
             ct.agent.nesy_agent = nesy_agent
             ct.data.load_datasets = i_data
             
-            print("✅ [DPI 接口] 虚拟路径 chinatravel 映射成功")
+            # print("✅ [DPI 接口] 虚拟路径 chinatravel 映射成功")
         except Exception as e:
             print(f"⚠️ [DPI 接口] 模块映射警告: {e}")
 

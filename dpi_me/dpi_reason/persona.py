@@ -77,15 +77,41 @@ class UserPersona:
         }
         self.metrics_history.append({"turn": turn_id, "metrics": metrics})
 
+    # def get_top_persona(self):
+    #     """获取当前最可能的画像标签总结 (用于控制台打印)"""
+    #     summary = {}
+    #     for dim, prob in self.beliefs.items():
+    #         idx = np.argmax(prob)
+    #         summary[dim] = {
+    #             "label": self.schema[dim][idx],
+    #             "confidence": round(float(prob[idx]), 3),
+    #             "is_stable": self.get_entropy(dim) < 0.5 # 熵阈值判定是否收敛
+    #         }
+    #     return summary
+
     def get_top_persona(self):
         """获取当前最可能的画像标签总结 (用于控制台打印)"""
         summary = {}
+        
+        # 定义与 strategy.py 完全一致的收敛阈值 (基于置信度/最大概率)
+        convergence_thresholds = {
+            "Consumption": 0.40,
+            "Interest": 0.30,
+            "Pace": 0.62
+        }
+
         for dim, prob in self.beliefs.items():
             idx = np.argmax(prob)
+            conf = float(prob[idx])
+            
+            # 获取该维度对应的阈值，如果没有定义则默认为 0.6
+            threshold = convergence_thresholds.get(dim, 0.6)
+            
             summary[dim] = {
                 "label": self.schema[dim][idx],
-                "confidence": round(float(prob[idx]), 3),
-                "is_stable": self.get_entropy(dim) < 0.5 # 熵阈值判定是否收敛
+                "confidence": round(conf, 3),
+                # 【修改点】改用置信度与策略层对齐，不再使用单一的熵值 0.5
+                "is_stable": conf >= threshold 
             }
         return summary
 
