@@ -98,9 +98,9 @@ dpi_me算法生成三个偏好Consumption (Budget/Luxury)、Interest (Nature/Cul
 
 
 
+## 运行日志记录
 
-
-
+```text
 (base) azsy@5a71b42f9f9f:~/MindJourney_LoRA/MindJourneyAgent$ conda activate TravelAPI_change
 (TravelAPI_change) azsy@5a71b42f9f9f:~/MindJourney_LoRA/MindJourneyAgent$ export CUDA_VISIBLE_DEVICES=0
 (TravelAPI_change) azsy@5a71b42f9f9f:~/MindJourney_LoRA/MindJourneyAgent$ python test_chat_rag.py
@@ -842,3 +842,4 @@ Pace         | Fast         | 90.30%     | 0.4578       | 🎯 已收敛
 ✅ 任务完成！推荐生成耗时: 2.24s
 
 (对话已锁定，如需开始新的一轮规划请重启程序)
+```
