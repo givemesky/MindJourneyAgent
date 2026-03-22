@@ -1,38 +1,48 @@
 [
   {
     "turn": 1,
-    "user_text": "我想从武汉到成都玩6天。",
+    "user_text": "我想从重庆去苏州玩3天，就我自己一个人。",
     "constraints": [
-      "1. Start City == \"武汉\"",
-      "2. Target City == \"成都\"",
-      "3. Day Count == 6",
-      "4. People Count == 1"
+      "1. Start City == \"重庆\"",
+      "2. Target City == \"苏州\"",
+      "3. People Count == 1",
+      "4. Day Count == 3"
     ]
   },
   {
     "turn": 2,
-    "user_text": "可以特种兵一点。",
+    "user_text": "紧凑一点。",
     "constraints": [
-      "1. Day Count >= 2",
-      "2. All Activities count >= 5",
-      "3. All Activities' activity_time() <= 120"
+      "1. Day Count <= 1",
+      "2. All Activities count <= 5"
     ]
   },
   {
     "turn": 3,
-    "user_text": "我想去看大熊猫、杜甫草堂、武侯祠，逛一下太古里。",
+    "user_text": "想看自然风光。",
     "constraints": [
-      "1. Exist Attraction which Position == \"大熊猫基地\" and Type == \"人文景观\"",
-      "2. Exist Attraction which Position == \"杜甫草堂\" and Type == \"人文景观\"",
-      "3. Exist Attraction which Position == \"武侯祠\" and Type == \"人文景观\"",
-      "4. Exist Attraction which Position == \"太古里\" and Type == \"商业街区\""
+      "1. Exist Attraction which Type == \"自然风光\""
     ]
   },
   {
     "turn": 4,
-    "user_text": "总预算6000左右。",
+    "user_text": "想吃螃蟹。",
     "constraints": [
-      "1. Cost <= 6000"
+      "1. Restaurant Type == \"海鲜\""
+    ]
+  },
+  {
+    "turn": 5,
+    "user_text": "是。",
+    "constraints": [
+      "请提供具体的旅行需求和偏好，例如出发城市、目的地城市、同行人数、游玩天数等信息，以及您对交通方式、景点、住宿和其他方面的具体要求。这样我可以更好地为您提取逻辑约束并制定合适的旅行计划。"
+    ]
+  },
+  {
+    "turn": 6,
+    "user_text": "奢侈一点也可以。",
+    "constraints": [
+      "1. Cost of specific activity >= people_count(plan) * 1.5"
     ]
   }
 ]

@@ -232,6 +232,8 @@ class TravelPlanner:
         - 下午：[景点名] (票价: [price]元/人)。[介绍]。
         - 晚餐：[餐厅名] (人均: [price]元)。招牌：[recommend]。
         - 住宿：[酒店名] (房价: [price]元/间)。
+        
+        【该方案总预算预估：XXXX 元】
 
         [数据源-方案1]: {json.dumps(plan_1, ensure_ascii=False)}
         [数据源-方案2]: {json.dumps(plan_2, ensure_ascii=False)}

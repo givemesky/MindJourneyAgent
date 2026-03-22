@@ -13,22 +13,21 @@
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .selected-card { border-color: #2563eb !important; background-color: #eff6ff !important; }
         
-        /* 新增：方案卡片容器样式 */
         .plan-card {
-            border-left: 4px solid #eab308;
+            border-left: 5px solid #fbbf24;
             background: #ffffff;
             transition: all 0.3s ease;
         }
         .plan-card:hover {
-            transform: translateX(5px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body class="bg-slate-50 font-sans text-slate-900">
 
     <div class="container mx-auto py-6 px-4 h-screen flex flex-col">
-        <!-- 头部 (保持不变) -->
+        <!-- 头部 -->
         <header class="flex justify-between items-center mb-6 bg-white p-4 rounded-xl shadow-sm border border-slate-200">
             <div class="flex items-center space-x-3">
                 <span class="text-3xl">🧩</span>
@@ -42,41 +41,41 @@
                     <div id="sessionDisplay" class="text-xs font-mono text-slate-400">Session: --</div>
                     <div id="turnDisplay" class="text-sm font-bold text-blue-600">Round: 0</div>
                 </div>
-                <button onclick="window.location.reload()" class="p-2 hover:bg-slate-100 rounded-full transition">🔄</button>
+                <button onclick="window.location.reload()" class="p-2 hover:bg-slate-100 rounded-full transition" title="开启新对话">🔄</button>
             </div>
         </header>
 
         <main class="grid grid-cols-12 gap-6 flex-1 overflow-hidden">
             <!-- 左侧：对话区域 -->
             <div id="leftPanel" class="col-span-12 lg:col-span-7 flex flex-col bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
-                <div id="chatBox" class="chat-container custom-scrollbar overflow-y-auto p-6 space-y-4 bg-slate-50/50">
-                    <div class="text-center text-slate-400 text-sm my-10 italic">👋 开始对话以识别画像...</div>
+                <div id="chatBox" class="chat-container custom-scrollbar overflow-y-auto p-6 space-y-6 bg-slate-50/50">
+                    <div class="text-center text-slate-400 text-sm my-10 italic">👋 您好，请告诉您的旅游计划，我将为您精准规划。</div>
                 </div>
                 <div class="p-4 bg-white border-t border-slate-100">
                     <div class="relative flex items-center">
-                        <input id="userInput" type="text" onkeypress="if(event.keyCode==13) sendChat()" placeholder="输入旅游需求..." class="w-full pl-4 pr-24 py-3 bg-slate-100 border-none rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
-                        <button onclick="sendChat()" id="sendBtn" class="absolute right-2 bg-blue-600 text-white px-5 py-2 rounded-lg font-medium shadow-blue-200 shadow-lg">发送</button>
+                        <input id="userInput" type="text" onkeypress="if(event.keyCode==13) sendChat()" placeholder="输入您的需求..." class="w-full pl-4 pr-24 py-3 bg-slate-100 border-none rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+                        <button onclick="sendChat()" id="sendBtn" class="absolute right-2 bg-blue-600 text-white px-5 py-2 rounded-lg font-medium shadow-blue-200 shadow-lg transition-colors hover:bg-blue-700">发送</button>
                     </div>
                 </div>
             </div>
 
-            <!-- 右侧：监控与勾选区域 -->
+            <!-- 右侧：监控区域 -->
             <div class="col-span-12 lg:col-span-5 flex flex-col space-y-6 overflow-y-auto custom-scrollbar">
                 
                 <!-- 仪表盘 -->
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
                     <h2 class="text-lg font-bold mb-4 flex items-center"><span class="mr-2">📊</span> 实时画像 (DPI)</h2>
-                    <div id="personaPanel" class="space-y-6"><div class="text-center py-10 text-slate-400">等待数据...</div></div>
+                    <div id="personaPanel" class="space-y-6"><div class="text-center py-10 text-slate-400">正在等待对话输入...</div></div>
                     <div id="statusBadge" class="mt-6 p-3 text-center rounded-xl bg-slate-100 text-slate-500 font-bold border border-dashed border-slate-300">⏳ 等待输入</div>
                 </div>
 
-                <!-- 推荐勾选区 (阶段 C) -->
+                <!-- 推荐勾选区 -->
                 <div id="selectionPanel" class="hidden bg-white p-6 rounded-2xl shadow-sm border-2 border-blue-100 fade-in">
-                    <h2 class="text-lg font-bold mb-2 text-blue-700">🎯 精选推荐 (请点击勾选)</h2>
-                    <p class="text-xs text-slate-500 mb-4">请从中选择您感兴趣的地点，我们将为您生成行程。</p>
+                    <h2 class="text-lg font-bold mb-2 text-blue-700">🎯 精选推荐 (点击勾选)</h2>
+                    <p class="text-xs text-slate-500 mb-4">请挑选您中意的景点和餐厅，我们将为您进行智能排期。</p>
                     <div id="recList" class="space-y-3 mb-6"></div>
-                    <button onclick="generateFinalPlan()" id="planBtn" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-bold shadow-lg shadow-green-200 transition-all">
-                        🚀 生成最终行程规划
+                    <button onclick="generateFinalPlan()" id="planBtn" class="w-full bg-green-600 hover:bg-green-700 text-white py-4 rounded-xl font-bold shadow-lg shadow-green-200 transition-all transform hover:scale-[1.02]">
+                        🚀 生成深度定制方案
                     </button>
                 </div>
             </div>
@@ -115,7 +114,7 @@
                     showSelectionUI(data.recommendations);
                 }
             } catch (error) {
-                appendBubble('system', '❌ 错误: 无法连接服务器');
+                appendBubble('system', '❌ 错误: 无法连接算力集群后端');
             }
         }
 
@@ -128,7 +127,7 @@
                 panel.innerHTML += `
                     <div class="fade-in">
                         <div class="flex justify-between mb-1">
-                            <span class="text-xs font-bold text-slate-400">${dim}</span>
+                            <span class="text-xs font-bold text-slate-400 uppercase">${dim}</span>
                             <span class="text-sm font-bold ${info.is_stable ? 'text-green-600' : 'text-blue-600'}">${info.is_stable ? '✅' : '🔍'} ${info.label}</span>
                         </div>
                         <div class="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
@@ -142,9 +141,9 @@
             const badge = document.getElementById('statusBadge');
             if (status === 'TERMINATE') {
                 badge.className = "mt-6 p-4 rounded-xl bg-green-500 text-white font-bold shadow-lg";
-                badge.innerHTML = '🎯 偏好已收敛，请在下方选择地点';
+                badge.innerHTML = '🎯 偏好已收敛，请在右侧选择地点';
             } else {
-                badge.innerHTML = '🧠 正在分析您的偏好...';
+                badge.innerHTML = '🧠 正在分析您的偏好信息...';
             }
         }
 
@@ -157,17 +156,17 @@
             recs.forEach(item => {
                 const isRestaurant = item.recommend_food !== null;
                 const card = document.createElement('div');
-                card.className = "p-4 border border-slate-200 bg-white rounded-xl cursor-pointer hover:border-blue-400 transition";
+                card.className = "p-4 border border-slate-200 bg-white rounded-xl cursor-pointer hover:border-blue-400 transition shadow-sm";
                 card.innerHTML = `
                     <div class="flex justify-between items-start">
                         <div>
                             <h3 class="font-bold text-slate-800">${item.name}</h3>
-                            <p class="text-[10px] text-blue-500 font-bold uppercase">${item.type}</p>
+                            <p class="text-[10px] text-blue-500 font-bold uppercase tracking-wider">${item.type}</p>
                         </div>
                         <span class="text-xs font-bold text-slate-400">￥${item.price}</span>
                     </div>
                     <p class="text-xs text-slate-500 mt-2">${item.description || ''}</p>
-                    ${isRestaurant ? `<p class="text-[10px] text-orange-500 mt-1">🍴 招牌: ${item.recommend_food}</p>` : ''}
+                    ${isRestaurant ? `<p class="text-[10px] text-orange-500 mt-1 font-bold">🍴 招牌菜: ${item.recommend_food}</p>` : ''}
                 `;
                 
                 card.onclick = () => {
@@ -185,7 +184,6 @@
             panel.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // --- 核心修改：生成规划并以卡片形式插入对话框 ---
         async function generateFinalPlan() {
             const btn = document.getElementById('planBtn');
             const chatBox = document.getElementById('chatBox');
@@ -196,11 +194,10 @@
             }
 
             btn.disabled = true;
-            btn.innerText = "🚀 规划计算中...";
-            appendBubble('system', '正在为您生成定制行程，请稍候...');
+            btn.innerText = "🚀 规划大脑正在计算排期...";
+            appendBubble('system', '正在为您生成深度定制行程，请稍候约 30-60 秒...');
 
             try {
-                // 1. 发送选择
                 await fetch('/v1/select', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -211,7 +208,6 @@
                     })
                 });
 
-                // 2. 获取最终规划报告
                 const response = await fetch('/v1/generate_plan', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -219,49 +215,53 @@
                 });
                 const data = await response.json();
 
-                // 3. 解析长文本为多个方案卡片
-                // 假设 Planner 返回的文本中，每个方案以 "#### [方案名称]" 开头
+                // 解析长文本并切分方案
                 const fullText = data.rendered_report;
                 const planSections = fullText.split(/####/).filter(t => t.trim().length > 10);
 
-                appendBubble('assistant', '为您生成了以下三套精选方案：');
+                appendBubble('assistant', '您的私人定制方案已生成！✨ 以下是为您推荐的三套排期：');
 
                 planSections.forEach((section, index) => {
                     const lines = section.trim().split('\n');
-                    const title = lines[0].replace(/\[|\]/g, '').trim();
+                    // 1. 标题去重逻辑：去掉重复的“方案一”等字样
+                    let title = lines[0].replace(/\[|\]/g, '').replace(/方案[一二三123][:：]?\s*/g, '').trim();
                     const content = lines.slice(1).join('\n').trim();
                     
                     appendPlanCardBubble(title, content, index + 1);
                 });
 
-                btn.innerText = "✅ 规划已送达";
+                btn.innerText = "✅ 行程已发送";
                 document.getElementById('selectionPanel').classList.add('hidden');
 
             } catch (error) {
-                appendBubble('system', '❌ 规划生成失败，请重试');
+                appendBubble('system', '❌ 规划生成失败，可能因为模型响应超时。');
             } finally {
                 btn.disabled = false;
             }
         }
 
-        // 新增：在对话框中插入方案卡片
         function appendPlanCardBubble(title, content, index) {
             const chatBox = document.getElementById('chatBox');
             const div = document.createElement('div');
-            div.className = `flex justify-start fade-in mb-6`;
+            div.className = `flex justify-start fade-in mb-8`;
             
+            // 2. 天数美化逻辑：将 **第n天：** 替换为带样式的标签，去掉 **
+            let formattedContent = content
+                .replace(/\*\*第(\d+)天：\s*\*\*/g, '<b class="text-blue-900 text-sm block mt-5 mb-2 border-b border-blue-100 pb-1">第$1天：</b>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong class="text-slate-900">$1</strong>'); // 处理其他粗体
+
             div.innerHTML = `
-                <div class="max-w-[90%] w-full bg-white border-2 border-slate-100 p-0 rounded-2xl shadow-md overflow-hidden plan-card">
-                    <div class="bg-slate-900 text-yellow-400 px-4 py-2 flex justify-between items-center">
-                        <span class="font-bold text-sm">方案 ${index}: ${title}</span>
-                        <span class="text-[10px] bg-yellow-400 text-slate-900 px-2 py-0.5 rounded-full font-bold">RECOM</span>
+                <div class="max-w-[95%] w-full bg-white border-2 border-slate-100 p-0 rounded-2xl shadow-lg overflow-hidden plan-card">
+                    <div class="bg-slate-900 text-amber-400 px-5 py-3 flex justify-between items-center">
+                        <span class="font-bold text-sm tracking-wide">方案 ${index}: ${title}</span>
+                        <span class="text-[10px] bg-amber-400 text-slate-900 px-2 py-0.5 rounded-full font-bold">RECOM</span>
                     </div>
-                    <div class="p-4 text-xs text-slate-700 leading-relaxed whitespace-pre-wrap font-mono bg-slate-50">
-                        ${content}
+                    <div class="p-6 text-xs text-slate-700 leading-relaxed bg-slate-50 font-sans whitespace-pre-wrap">
+                        ${formattedContent}
                     </div>
-                    <div class="border-t border-slate-100 p-2 text-center bg-white">
-                        <button onclick="confirmThisPlan('${title}')" class="text-blue-600 text-[10px] font-bold hover:underline">
-                            选择此方案并保存到手机
+                    <div class="border-t border-slate-100 p-3 text-center bg-white">
+                        <button onclick="confirmPlan('${title}')" class="text-blue-600 text-[11px] font-bold hover:underline tracking-tight">
+                            确认选择并同步至 MindJourney App
                         </button>
                     </div>
                 </div>
@@ -270,15 +270,21 @@
             chatBox.scrollTop = chatBox.scrollHeight;
         }
 
-        function confirmThisPlan(title) {
-            alert(`已确认选择：${title}。祝您旅途愉快！`);
+        function confirmPlan(t) {
+            alert(`方案 [${t}] 已保存！系统将自动导出为您的行程单。祝您旅途愉快！`);
         }
 
         function appendBubble(role, text) {
             const chatBox = document.getElementById('chatBox');
             const div = document.createElement('div');
             div.className = `flex ${role === 'user' ? 'justify-end' : 'justify-start'} fade-in`;
-            div.innerHTML = `<div class="max-w-[85%] ${role === 'user' ? 'bg-blue-600 text-white rounded-tr-none' : role === 'system' ? 'bg-amber-50 text-amber-700 text-xs italic' : 'bg-white border border-slate-200 rounded-tl-none'} p-3 rounded-2xl shadow-sm">${text}</div>`;
+            
+            let bgClass = "";
+            if (role === 'user') bgClass = "bg-blue-600 text-white rounded-tr-none";
+            else if (role === 'system') bgClass = "bg-amber-50 text-amber-700 text-[11px] italic border border-amber-100";
+            else bgClass = "bg-white border border-slate-200 text-slate-800 rounded-tl-none";
+
+            div.innerHTML = `<div class="max-w-[85%] ${bgClass} p-3 rounded-2xl shadow-sm">${text}</div>`;
             chatBox.appendChild(div);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
