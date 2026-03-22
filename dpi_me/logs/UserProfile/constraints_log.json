@@ -6,43 +6,48 @@
       "1. Start City == \"重庆\"",
       "2. Target City == \"苏州\"",
       "3. People Count == 1",
-      "4. Day Count == 3"
+      "4. Day Count == 3",
+      "5. Tickets == People Count == 1"
     ]
   },
   {
     "turn": 2,
-    "user_text": "紧凑一点。",
+    "user_text": "可以特种兵一点。",
     "constraints": [
-      "1. Day Count <= 1",
-      "2. All Activities count <= 5"
+      "1. Day Count <= 3",
+      "2. All Activities count >= 5"
     ]
   },
   {
     "turn": 3,
-    "user_text": "想看自然风光。",
+    "user_text": "想去逛风景园林，尝一下螃蟹。",
     "constraints": [
-      "1. Exist Attraction which Type == \"自然风光\""
+      "1. Exist Attraction which Type == \"自然风光\"",
+      "2. Cuisine == \"螃蟹\""
     ]
   },
   {
     "turn": 4,
-    "user_text": "想吃螃蟹。",
+    "user_text": "特色餐馆吧。",
     "constraints": [
-      "1. Restaurant Type == \"海鲜\""
+      "1. Exist Restaurant which Type == \"其它\""
     ]
   },
   {
     "turn": 5,
-    "user_text": "是。",
+    "user_text": "一点。",
     "constraints": [
-      "请提供具体的旅行需求和偏好，例如出发城市、目的地城市、同行人数、游玩天数等信息，以及您对交通方式、景点、住宿和其他方面的具体要求。这样我可以更好地为您提取逻辑约束并制定合适的旅行计划。"
+      "1. Start City == \"一点\"",
+      "2. Target City == \"一点\"",
+      "3. People Count == 1",
+      "4. Day Count == 1"
     ]
   },
   {
     "turn": 6,
-    "user_text": "奢侈一点也可以。",
+    "user_text": "奢侈。",
     "constraints": [
-      "1. Cost of specific activity >= people_count(plan) * 1.5"
+      "1. Budget >= 10000  # Assuming \"奢侈\" means the budget is at least 10000, as a rough estimate for luxury travel."
     ]
   }
 ]

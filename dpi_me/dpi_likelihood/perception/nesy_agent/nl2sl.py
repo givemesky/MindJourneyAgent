@@ -38,88 +38,25 @@ Return: int
 (3) target_city(plan)
 Docs: Get the target city of the plan.
 Return: str
-(4) allactivities(plan)
-Docs: Get all the activities in the plan.
-Return: list of activities
-(5) allactivities_count(plan)
-Docs: Get the number of activities in the plan.
-Return: int
-(6) dayactivities(plan, day)
-Docs: Get all the activities in the specific day [1, 2, 3, ...].
-Return: list of activities
-(7) activity_cost(activity)
-Docs: Get the cost of specific activity without transport cost.
-Return: float
-(8) activity_position(activity)
+(4) activity_position(activity)
 Docs: Get the position name of specific activity.
 Return: str
-(9) activity_price(activity)
+(5) activity_cost(activity)
+Docs: Get the cost of specific activity without transport cost.
+Return: float
+(6) activity_price(activity)
 Docs: Get the price of specific activity. The price is price per person.
 Return: float
-(10) activity_type(activity)
-Docs: Get the type of specific activity. ['breakfast', 'lunch', 'dinner', 'attraction', 'accommodation', 'train', 'airplane']
-Return: str
-(11) activity_tickets(activity)
-Docs: Get the number of tickets needed for specific activity. ['attraction', 'train', 'airplane']
-Return: int
-(12) activity_transports(activity)
-Docs: Get the transport information of specific activity.
-Return: list of dict
-(13) activity_start_time(activity)
-Docs: Get the start time of specific activity.
-Return: str
-(14) activity_end_time(activity)
-Docs: Get the end time of specific activity.
-Return: str
-(15) activity_time(activity)
-Docs: Get the duration of specific activity.
-Return: int (minutes)
-(16) innercity_transport_cost(transports)
-Docs: Get the total cost of innercity transport.
-Return: float
-(17) poi_recommend_time(city, poi):
-Docs: Get the recommend time of specific poi in the city. Only support attractions now.
-Return: int (minutes)
-(18) poi_distance(city, poi1, poi2):
-Docs: Get the distance between two pois in the city.
-Return: float (km)
-(19) innercity_transport_price(transports)
-Docs: Get the price of innercity transport. The price is price per person.
-Return: float
-(20) innercity_transport_distance(transports)
-Docs: Get the distance of innercity transport.
-Return: float (km)
-(21) metro_tickets(transports)
-Docs: Get the number of metro tickets if the type of transport is metro.
-Return: int
-(22) taxi_cars(transports)
-Docs: Get the number of taxi cars if the type of transport is taxi. The number of taxi cars is `(people_count(plan) + 3) // 4`.
-Return: int
-(23) room_count(activity)
-Docs: Get the number of rooms of accommodation activity.
-Return: int
-(24) room_type(activity)
-Docs: Get the type of room of accommodation activity.
-1 for single room, 2 for double room. Must be 1 or 2. Never use "大床房" or "双床房" or other words but 1 or 2.
-Return: int
-(25) restaurant_type(activity, target_city)
-Docs: Get the type of restaurant's cuisine in the target city. The return value must be in ['云南菜', '西藏菜', '东北菜', '烧烤', '亚洲菜', '粤菜', '西北菜', '闽菜', '客家菜', '快餐简餐', '川菜', '台湾菜', '其他', '清真菜', '小吃', '西餐', '素食', '日本料理', '江浙菜', '湖北菜', '东南亚菜', '湘菜', '北京菜', '韩国料理', '海鲜', '中东料理', '融合菜', '茶馆/茶室', '酒吧/酒馆', '创意菜', '自助餐', '咖啡店', '本帮菜', '徽菜', '拉美料理', '鲁菜', '新疆菜', '农家菜', '海南菜', '火锅', '面包甜点', '其他中餐'].
-Return: str
-(26) attraction_type(activity, target_city)
+(7) attraction_type(activity, target_city)
 Docs: Get the type of attraction in the target city. The return value must be in ['博物馆/纪念馆', '美术馆/艺术馆', '红色景点', '自然风光', '人文景观', '大学校园', '历史古迹', '游乐园/体育娱乐', '图书馆', '园林', '其它', '文化旅游区', '公园', '商业街区'].
 Return: str
-(27) accommodation_type(activity, target_city)
+(8) restaurant_type(activity, target_city)
+Docs: Get the type of restaurant's cuisine in the target city. The return value must be in ['云南菜', '西藏菜', '东北菜', '烧烤', '亚洲菜', '粤菜', '西北菜', '闽菜', '客家菜', '快餐简餐', '川菜', '台湾菜', '其他', '清真菜', '小吃', '西餐', '素食', '日本料理', '江浙菜', '湖北菜', '东南亚菜', '湘菜', '北京菜', '韩国料理', '海鲜', '中东料理', '融合菜', '茶馆/茶室', '酒吧/酒馆', '创意菜', '自助餐', '咖啡店', '本帮菜', '徽菜', '拉美料理', '鲁菜', '新疆菜', '农家菜', '海南菜', '火锅', '面包甜点', '其他中餐'].
+Return: str
+(9) accommodation_type(activity, target_city)
 Docs: Get the feature of accommodation in the target city to judge whether it's feature meets the user's requirement. The return value must be in ['儿童俱乐部', '空气净化器', '山景房', '私汤房', '四合院', '温泉', '湖畔美居', '电竞酒店', '温泉泡汤', '行政酒廊', '充电桩', '设计师酒店', '民宿', '湖景房', '动人夜景', '行李寄存', '中式庭院', '桌球室', '私人泳池', '钓鱼', '迷人海景', '园林建筑', '老洋房', '儿童泳池', '历史名宅', '棋牌室', '智能客控', '情侣房', '小而美', '特色 住宿', '茶室', '亲子主题房', '多功能厅', '洗衣房', '客栈', '自营亲子房', '停车场', 'Boss推荐', '江河景房', '日光浴场', '自营影音房', '厨房', '空调', '网红泳池', '别墅', '免费停车', '洗衣服务', '窗外好景', '酒店公寓', '会议厅', '家庭房', '24小时前台', '商务中心', '提前入园', '农家乐', '智能马桶', '美食酒店', 'SPA', '拍照出片', '海景房', '泳池', '影音房', '管家服务', '穿梭机场班车', '桑拿', '机器人服务', '儿童乐园', '健身室', '洗衣机', '自营舒睡房', '宠物友好', '电竞房', '位置超好', '套房'].
 Return: str
-(28) innercity_transport_type(transports)
-Docs: Get the type of innercity transport. The return value must be in ['metro', 'taxi', 'walk'].
-Return: str
-(29) innercity_transport_start_time(transports)
-Docs: Get the start time of innercity transport.
-Return: str
-(30) innercity_transport_end_time(transports)
-Docs: Get the end time of innercity transport.
-Return: str
+
 """
 
 nl_trans_prompt = (
@@ -135,11 +72,14 @@ Combine constraints is also allowed. For example, "The cost of xxx activity  sho
 2. Only extract attraction categories that the user EXPLICITLY mentions. 
 3. If the user mentions "attractions" or "spots" generally WITHOUT specifying names or types:
    - Output: "Exist Attraction which Type == '其它'" 
-4. The 'Type' MUST be selected from this specific list: 
+4. If the user specifies a particular dish, food, or cuisine:
+    - Output: "Cuisine == 'DISH_NAME' and Restaurant_type == 'CATEGORY'"
+    (Note: The 'CATEGORY' must be selected from the standard restaurant_type list.)
+5. The 'Type' MUST be selected from this specific list: 
    ['游乐园/体育娱乐', '历史古迹', '博物馆/纪念馆', '文化旅游区', '公园', '人文景观', '商业街区', '红色景点', '美术馆/艺术馆', '图书馆', '大学校园', '自然风光','其它'].
-5. DO NOT dump the entire candidate list. If you are uncertain, use '其它'.
-6. If the user mentions "attractions" but doesn't specify a type, you MUST use '其它' as the Type instead of listing all categories.
-7. DO NOT output multiple categories in a list like ["Type A", "Type B"] unless the user explicitly requested multiple types. 
+6. DO NOT dump the entire candidate list. If you are uncertain, use '其它'.
+7. If the user mentions "attractions" but doesn't specify a type, you MUST use '其它' as the Type instead of listing all categories.
+8. DO NOT output multiple categories in a list like ["Type A", "Type B"] unless the user explicitly requested multiple types. 
 ####################################################
 
 we offer some functions below, which can help you extract the nature language logic constraints in the user's request.
@@ -168,12 +108,8 @@ Nature Language Logic Constraints:
 3. People Count == 3
 4. Day Count == 3
 5. All Accommodation Position == "成都明悦大酒店"
-6. Number of beds per room/Room Type == 2
-7. Tickets == People Count = 3
-8. Metro Tickets == People Count = 3
-9. Cars == (People Count + 3) // 4 = 1
-10. Exist "都江堰" in Attraction Position and Type == "自然风光"
-11. Exist Attraction which Type == "自然风光"
+6. Tickets == People Count = 3
+7. Exist Attraction which Position == "都江堰" and Type == "自然风光"
 <end>
 
 Query 2: 我想多去几个景点看看，行程排满一点，行程不要太赶。
@@ -181,7 +117,18 @@ Nature Language Logic Constraints:
 <constraint>
 1. Exist Attraction which Type == "其它"
 2. All Activities count >= 5
-3. All Activities' activity_time() <= 90
+<end>
+
+Query 3:我想和父母从重庆去苏州玩3天，预算共6000。想看拙政园，尝尝松鼠桂鱼。
+Nature Language Logic Constraints:
+<constraint>
+1. Start City == "重庆"
+2. Target City == "苏州"
+3. People Count == 3
+4. Day Count == 3
+5. Cost <= 6000
+6. Exist Attraction which Position == "拙政园"
+7. Cuisine == "松鼠桂鱼" and Restaurant_type == "江浙菜"
 <end>
 
 DO NOT MAKE ANY ASSUMPTIONS. Follow the user's request strictly!!!

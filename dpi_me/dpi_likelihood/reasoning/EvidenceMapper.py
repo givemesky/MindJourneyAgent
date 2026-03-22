@@ -195,23 +195,49 @@ class EvidenceMapper:
             
         return None
 
-
-
     def _handle_consumption_flexible(self, key, op, val_str):
         key = key.lower()
         val_str = val_str.strip().lower()
-        # 1. 直接标签匹配（解决 LLM 吐出英文符号的问题）
+
+        # --- 1. 基础标签识别（识别出“普通”、“实惠”或“豪华”代表的原始档位） ---
+        base_label = None
+        
+        # 先看是否直接匹配标签名 (Budget/Economy/Luxury)
         for label in self.schema["Consumption"]:
             if val_str == label.lower():
-                return "Consumption", label, 0.95
+                base_label = label
+                break
 
-        if not re.search(r'\d+', val_str):
+        # 如果没匹配到，看是否命中关键词词典
+        if not base_label and not re.search(r'\d+', val_str):
             for label, kws in self.keyword_map["Consumption"].items():
-                if any(kw in val_str for kw in kws): return "Consumption", label, 0.95
-            return None
+                if any(kw in val_str for kw in kws):
+                    base_label = label
+                    break
+
+        # --- 2. 【核心修复】逻辑运算符转换逻辑 ---
+        # 如果识别到了基础标签，我们需要根据 > 或 < 进行升降档位转换
+        if base_label:
+            final_label = base_label
+            if op == ">":
+                if base_label == "Budget": final_label = "Economy"
+                elif base_label == "Economy": final_label = "Luxury"
+                # 如果是 > Luxury，依然保持 Luxury
+            elif op == "<":
+                if base_label == "Luxury": final_label = "Economy"
+                elif base_label == "Economy": final_label = "Budget"
+                # 如果是 < Budget，依然保持 Budget
+            
+            print(f"DEBUG: [逻辑转换] 原始词:{val_str}({base_label}) | 操作符:{op} | 最终映射:{final_label}")
+            return "Consumption", final_label, 0.95
+
+        # --- 3. 数字处理逻辑（保持原有逻辑，但做了微调） ---
         try:
-            val = float(re.findall(r'\d+\.?\d*', val_str)[0])
+            nums = re.findall(r'\d+\.?\d*', val_str)
+            if not nums: return None
+            val = float(nums[0])
         except: return None
+
         is_total = any(x in key for x in ["budget", "total", "总"]) or val > 1000
         if is_total:
             if val <= 1500: return "Consumption", "Budget", 0.95
@@ -221,6 +247,31 @@ class EvidenceMapper:
             if val <= 200: return "Consumption", "Budget", 0.95
             if val <= 600: return "Consumption", "Economy", 0.90
             return "Consumption", "Luxury", 0.95
+
+    # def _handle_consumption_flexible(self, key, op, val_str):
+    #     key = key.lower()
+    #     val_str = val_str.strip().lower()
+    #     # 1. 直接标签匹配（解决 LLM 吐出英文符号的问题）
+    #     for label in self.schema["Consumption"]:
+    #         if val_str == label.lower():
+    #             return "Consumption", label, 0.95
+
+    #     if not re.search(r'\d+', val_str):
+    #         for label, kws in self.keyword_map["Consumption"].items():
+    #             if any(kw in val_str for kw in kws): return "Consumption", label, 0.95
+    #         return None
+    #     try:
+    #         val = float(re.findall(r'\d+\.?\d*', val_str)[0])
+    #     except: return None
+    #     is_total = any(x in key for x in ["budget", "total", "总"]) or val > 1000
+    #     if is_total:
+    #         if val <= 1500: return "Consumption", "Budget", 0.95
+    #         if val <= 4500: return "Consumption", "Economy", 0.90
+    #         return "Consumption", "Luxury", 0.95
+    #     else:
+    #         if val <= 200: return "Consumption", "Budget", 0.95
+    #         if val <= 600: return "Consumption", "Economy", 0.90
+    #         return "Consumption", "Luxury", 0.95
 
     # def get_likelihood_D(self, constraints, raw_text=""):
     #     D = {dim: [0.5] * len(labels) for dim, labels in self.schema.items()}
