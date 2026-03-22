@@ -1,7 +1,7 @@
 # 业务协调器：核心逻辑封装，负责串联 DPI -> RAG -> Planner
 
 # -*- coding: utf-8 -*-
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 from integrated_bridge import DPI_SynPT_Bridge
 from RAG.rag_system.rag_interface import run_rag_recommendation
 from api_service.manager.session_manager import session_manager, SessionData
@@ -12,17 +12,48 @@ class MJCoordinator:
         self.bridge = bridge
 
     async def handle_chat_turn(self, session_id: str, user_input: str) -> Dict[str, Any]:
-        """
-        处理一轮对话的核心流程：DPI 推理 -> 状态更新 -> (可选) RAG 检索
-        """
-        # 1. 获取当前会话状态
+        # 1. 获取 Session
         session: SessionData = session_manager.get_session(session_id)
-        
-        # 2. 调用 DPI-SynPT 引擎进行推理和回复生成
-        # result 包含: response, persona, decision, metrics, duration
+        recommendations = None 
+
+        # 2. 调用推理引擎
+        # 此时最新的画像和约束已经存在于 self.bridge 的内存中了
         result = self.bridge.chat_step(user_input, session.turn)
-        
-        # 3. 提取并格式化画像数据 (DimensionDetail)
+
+        # 3. 提取状态和原始回复
+        action = result['decision']['action']
+        assistant_reply = result['response'] 
+
+        # ---------------------------------------------------------
+        # 【核心修改点】：处理收敛状态
+        # ---------------------------------------------------------
+        if action == "TERMINATE":
+            print(f"🎯 [Coordinator] 会话 {session_id} 已收敛。准备生成方案...")
+
+            # 【第一步：先落盘！】
+            # 必须在 RAG 运行前调用 finalize，将内存中最新的画像轨迹和约束写入磁盘文件
+            if hasattr(self.bridge, 'finalize'):
+                print("💾 [Log] 正在将最新推断结果写入磁盘以供 RAG 引擎读取...")
+                self.bridge.finalize()
+
+            # 【第二步：替换引导语】
+            assistant_reply = (
+                "好的，我已经完全掌握了您的旅行偏好！✨\n\n"
+                "根据您的需求，我从知识图谱中为您挑选了一些最匹配的景点和餐厅。"
+                "请在下方**点击勾选**您心仪的选项，选好后告诉我，我将为您生成精准的深度行程规划。"
+            )
+
+            # 【第三步：执行 RAG 检索】
+            # 此时 run_rag_recommendation 去读文件，拿到的就是刚存进去的热乎数据
+            print("🚀 [RAG] 正在检索匹配的景点与餐厅...")
+            raw_rag_list = run_rag_recommendation() 
+            recommendations = self._parse_rag_results(raw_rag_list)
+            
+            # 将候选结果同步到 Session
+            session_manager.update_session(session_id, rag_candidates=raw_rag_list)
+        # ---------------------------------------------------------
+
+        # 4. 格式化画像 (保持不变)
         formatted_persona = {}
         for dim, info in result['persona'].items():
             formatted_persona[dim] = DimensionDetail(
@@ -30,52 +61,39 @@ class MJCoordinator:
                 confidence=info['confidence'],
                 is_stable=info['is_stable']
             )
-        
-        # 4. 更新 Session 中的画像状态
+
+        # 5. 更新 Session 轮次
         session_manager.update_session(
             session_id, 
             current_persona=result['persona'],
             turn=session.turn + 1
         )
 
-        # 5. 检查是否收敛 (TERMINATE)
-        recommendations = None
-        action = result['decision']['action']
-        
-        if action == "TERMINATE":
-            # 触发 RAG 检索
-            # 注意：这里假设 run_rag_recommendation 返回的是结构化数据或可解析的列表
-            # 为了演示，我们模拟将其转化为 List[RecommendationItem]
-            raw_rag_data = run_rag_recommendation() 
-            recommendations = self._parse_rag_results(raw_rag_data)
-            
-            # 将候选结果存入 Session，供阶段 C 使用
-            session_manager.update_session(session_id, rag_candidates=recommendations)
-
-        # 6. 返回给 Route 层的数据
         return {
             "status": action,
-            "reply": result['response'],
-            "turn": session.turn, # 返回当前的轮次
+            "reply": assistant_reply,
+            "turn": session.turn,
             "persona": formatted_persona,
             "recommendations": recommendations
         }
-
-    def _parse_rag_results(self, raw_data: Any) -> List[RecommendationItem]:
-        """
-        [逻辑占位] 将 RAG 的原始输出转化为 Android 需要的 RecommendationItem 列表
-        实际开发中，你需要根据 run_rag_recommendation() 的返回格式进行解析
-        """
-        # 这里仅为示例：假设 RAG 返回了一个列表或我们需要构造它
-        # 如果 RAG 目前只返回大文本，建议修改 RAG 接口返回结构化 List
+        
+    def _parse_rag_results(self, raw_data: List[Dict[str, Any]]) -> List[RecommendationItem]:
+        """将 RAG 返回的字典列表转换为 Pydantic 对象列表"""
         items = []
-        # 示例模拟数据
-        if isinstance(raw_data, str):
-            # 如果是字符串，暂时封装进一个 Item，或者在这里做正则解析
-            items.append(RecommendationItem(
-                name="推荐方案已生成",
-                type="Report",
-                price=0.0,
-                description=raw_data
-            ))
+        if not raw_data:
+            return items
+            
+        for data in raw_data:
+            try:
+                item = RecommendationItem(
+                    name=data.get("name", "未知地点"),
+                    type=data.get("type", "其他"),
+                    price=data.get("price", 0.0),
+                    description=data.get("description", ""),
+                    recommend_food=data.get("recommend_food")
+                )
+                items.append(item)
+            except Exception as e:
+                print(f"⚠️ 解析 RAG 数据项失败: {e}")
+                
         return items
