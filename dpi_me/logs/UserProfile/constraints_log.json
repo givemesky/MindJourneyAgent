@@ -1,11 +1,11 @@
 [
   {
     "turn": 1,
-    "user_text": "我想从深圳去北京玩5天。",
+    "user_text": "我想从武汉到成都玩6天。",
     "constraints": [
-      "1. Start City == \"深圳\"",
-      "2. Target City == \"北京\"",
-      "3. Day Count == 5",
+      "1. Start City == \"武汉\"",
+      "2. Target City == \"成都\"",
+      "3. Day Count == 6",
       "4. People Count == 1"
     ]
   },
@@ -13,32 +13,26 @@
     "turn": 2,
     "user_text": "可以特种兵一点。",
     "constraints": [
-      "1. Day Count >= 3",
+      "1. Day Count >= 2",
       "2. All Activities count >= 5",
       "3. All Activities' activity_time() <= 120"
     ]
   },
   {
     "turn": 3,
-    "user_text": "想去看故宫等文化历史建筑。",
+    "user_text": "我想去看大熊猫、杜甫草堂、武侯祠，逛一下太古里。",
     "constraints": [
-      "1. Exist Attraction which Position == \"故宫\" and Type == \"历史古迹\""
+      "1. Exist Attraction which Position == \"大熊猫基地\" and Type == \"人文景观\"",
+      "2. Exist Attraction which Position == \"杜甫草堂\" and Type == \"人文景观\"",
+      "3. Exist Attraction which Position == \"武侯祠\" and Type == \"人文景观\"",
+      "4. Exist Attraction which Position == \"太古里\" and Type == \"商业街区\""
     ]
   },
   {
     "turn": 4,
-    "user_text": "天安门广场、颐和园也挺想去的。可以安排奢华一点。",
+    "user_text": "总预算6000左右。",
     "constraints": [
-      "1. Exist Attraction which Position == \"天安门广场\" and Type == \"历史文化\"",
-      "2. Exist Attraction which Position == \"颐和园\" and Type == \"公园\"",
-      "3. Exist Accommodation which Accommodation Type == \"奢华\""
-    ]
-  },
-  {
-    "turn": 5,
-    "user_text": "预算10000元以内。",
-    "constraints": [
-      "1. Cost <= 10000"
+      "1. Cost <= 6000"
     ]
   }
 ]

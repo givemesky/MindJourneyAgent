@@ -45,7 +45,10 @@ class ChatResponse(BaseModel):
 # --- 阶段 D: 最终行程响应 ---
 class PlanResponse(BaseModel):
     status: str = "SUCCESS"
-    total_price: float
+    total_price: float = 0.0
     rendered_report: str = Field(..., description="Qwen 渲染的最终 Markdown 文本报告")
-    # 可选：结构化行程数据，供高级 UI 使用
-    itinerary_data: Optional[List[Dict[str, Any]]] = None
+    
+    # 【核心修改】：将这两个字段设为 Optional，并给予默认值 None
+    # 这样即使后端没传这两个字段，校验也能通过
+    strategy_name: Optional[str] = None 
+    itinerary: Optional[List[Any]] = None

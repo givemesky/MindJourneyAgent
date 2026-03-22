@@ -40,7 +40,15 @@ class ItineraryDay(BaseModel):
     accommodation: Optional[Dict[str, Any]]
 
 class PlanResponse(BaseModel):
-    strategy_name: str = Field(..., description="规划策略名称")
-    total_price: float = Field(..., description="预估总价")
-    itinerary: List[ItineraryDay] = Field(..., description="每日行程详情")
+    # 增加 status 字段（因为你路由里返回了这个）
+    status: str = Field("SUCCESS", description="状态")
+    
+    total_price: float = Field(0.0, description="预估总价")
+    
     rendered_report: str = Field(..., description="Qwen 渲染的最终 Markdown 文本报告")
+
+    # 【关键修改】：改为 Optional 并设置默认值为 None
+    strategy_name: Optional[str] = Field(None, description="规划策略名称")
+    
+    # 【关键修改】：改为 Optional 并设置默认值为 None
+    itinerary: Optional[List[ItineraryDay]] = Field(None, description="每日行程详情")

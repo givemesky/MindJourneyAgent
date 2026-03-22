@@ -12,6 +12,17 @@
         .fade-in { animation: fadeIn 0.3s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         .selected-card { border-color: #2563eb !important; background-color: #eff6ff !important; }
+        
+        /* 新增：方案卡片容器样式 */
+        .plan-card {
+            border-left: 4px solid #eab308;
+            background: #ffffff;
+            transition: all 0.3s ease;
+        }
+        .plan-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body class="bg-slate-50 font-sans text-slate-900">
@@ -67,12 +78,6 @@
                     <button onclick="generateFinalPlan()" id="planBtn" class="w-full bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-bold shadow-lg shadow-green-200 transition-all">
                         🚀 生成最终行程规划
                     </button>
-                </div>
-
-                <!-- 最终报告区 (阶段 D) -->
-                <div id="reportPanel" class="hidden bg-slate-900 text-slate-100 p-6 rounded-2xl shadow-2xl fade-in overflow-y-auto max-h-[600px]">
-                    <h2 class="text-xl font-bold mb-4 text-yellow-400">📅 最终行程方案</h2>
-                    <div id="reportContent" class="text-sm leading-relaxed whitespace-pre-wrap font-mono"></div>
                 </div>
             </div>
         </main>
@@ -143,7 +148,6 @@
             }
         }
 
-        // --- 阶段 C: 展示勾选界面 ---
         function showSelectionUI(recs) {
             const panel = document.getElementById('selectionPanel');
             const list = document.getElementById('recList');
@@ -178,15 +182,13 @@
                 };
                 list.appendChild(card);
             });
-            // 自动滚动到勾选区
             panel.scrollIntoView({ behavior: 'smooth' });
         }
 
-        // --- 阶段 D: 请求生成最终方案 ---
+        // --- 核心修改：生成规划并以卡片形式插入对话框 ---
         async function generateFinalPlan() {
             const btn = document.getElementById('planBtn');
-            const reportPanel = document.getElementById('reportPanel');
-            const reportContent = document.getElementById('reportContent');
+            const chatBox = document.getElementById('chatBox');
             
             if (selectedAttractions.size === 0 && selectedRestaurants.size === 0) {
                 alert("请至少勾选一个感兴趣的地点！");
@@ -194,10 +196,11 @@
             }
 
             btn.disabled = true;
-            btn.innerText = "🚀 规划大脑全速计算中...";
+            btn.innerText = "🚀 规划计算中...";
+            appendBubble('system', '正在为您生成定制行程，请稍候...');
 
             try {
-                // 1. 发送选择 (阶段 C)
+                // 1. 发送选择
                 await fetch('/v1/select', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -208,7 +211,7 @@
                     })
                 });
 
-                // 2. 发送生成规划请求 (阶段 D)
+                // 2. 获取最终规划报告
                 const response = await fetch('/v1/generate_plan', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -216,23 +219,66 @@
                 });
                 const data = await response.json();
 
-                // 3. 展示结果
-                reportPanel.classList.remove('hidden');
-                reportContent.innerText = data.rendered_report;
-                reportPanel.scrollIntoView({ behavior: 'smooth' });
-                btn.innerText = "✅ 规划完成";
+                // 3. 解析长文本为多个方案卡片
+                // 假设 Planner 返回的文本中，每个方案以 "#### [方案名称]" 开头
+                const fullText = data.rendered_report;
+                const planSections = fullText.split(/####/).filter(t => t.trim().length > 10);
+
+                appendBubble('assistant', '为您生成了以下三套精选方案：');
+
+                planSections.forEach((section, index) => {
+                    const lines = section.trim().split('\n');
+                    const title = lines[0].replace(/\[|\]/g, '').trim();
+                    const content = lines.slice(1).join('\n').trim();
+                    
+                    appendPlanCardBubble(title, content, index + 1);
+                });
+
+                btn.innerText = "✅ 规划已送达";
+                document.getElementById('selectionPanel').classList.add('hidden');
+
             } catch (error) {
-                alert("规划生成失败，请检查控制台。");
+                appendBubble('system', '❌ 规划生成失败，请重试');
             } finally {
                 btn.disabled = false;
             }
+        }
+
+        // 新增：在对话框中插入方案卡片
+        function appendPlanCardBubble(title, content, index) {
+            const chatBox = document.getElementById('chatBox');
+            const div = document.createElement('div');
+            div.className = `flex justify-start fade-in mb-6`;
+            
+            div.innerHTML = `
+                <div class="max-w-[90%] w-full bg-white border-2 border-slate-100 p-0 rounded-2xl shadow-md overflow-hidden plan-card">
+                    <div class="bg-slate-900 text-yellow-400 px-4 py-2 flex justify-between items-center">
+                        <span class="font-bold text-sm">方案 ${index}: ${title}</span>
+                        <span class="text-[10px] bg-yellow-400 text-slate-900 px-2 py-0.5 rounded-full font-bold">RECOM</span>
+                    </div>
+                    <div class="p-4 text-xs text-slate-700 leading-relaxed whitespace-pre-wrap font-mono bg-slate-50">
+                        ${content}
+                    </div>
+                    <div class="border-t border-slate-100 p-2 text-center bg-white">
+                        <button onclick="confirmThisPlan('${title}')" class="text-blue-600 text-[10px] font-bold hover:underline">
+                            选择此方案并保存到手机
+                        </button>
+                    </div>
+                </div>
+            `;
+            chatBox.appendChild(div);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function confirmThisPlan(title) {
+            alert(`已确认选择：${title}。祝您旅途愉快！`);
         }
 
         function appendBubble(role, text) {
             const chatBox = document.getElementById('chatBox');
             const div = document.createElement('div');
             div.className = `flex ${role === 'user' ? 'justify-end' : 'justify-start'} fade-in`;
-            div.innerHTML = `<div class="max-w-[85%] ${role === 'user' ? 'bg-blue-600 text-white rounded-tr-none' : 'bg-white border border-slate-200 rounded-tl-none'} p-3 rounded-2xl shadow-sm">${text}</div>`;
+            div.innerHTML = `<div class="max-w-[85%] ${role === 'user' ? 'bg-blue-600 text-white rounded-tr-none' : role === 'system' ? 'bg-amber-50 text-amber-700 text-xs italic' : 'bg-white border border-slate-200 rounded-tl-none'} p-3 rounded-2xl shadow-sm">${text}</div>`;
             chatBox.appendChild(div);
             chatBox.scrollTop = chatBox.scrollHeight;
         }

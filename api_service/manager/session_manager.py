@@ -5,6 +5,7 @@ from typing import Dict, Any, Optional, List
 import threading
 from pydantic import BaseModel, Field
 
+'''
 # --- 定义 Session 内部存储的数据结构 ---
 class SessionData(BaseModel):
     session_id: str
@@ -20,6 +21,20 @@ class SessionData(BaseModel):
     # 阶段 C 写入，阶段 D 读取
     user_selections: List[str] = Field(default_factory=list)
     # 聊天历史
+    chat_history: List[Dict[str, str]] = Field(default_factory=list)
+'''
+
+class SessionData(BaseModel):
+    session_id: str
+    turn: int = 1
+    current_persona: Dict[str, Any] = Field(default_factory=dict)
+    constraints: List[str] = Field(default_factory=list)
+    rag_candidates: Optional[List[Dict[str, Any]]] = None
+    
+    # --- 修改这里：明确区分景点和餐厅的勾选 ---
+    user_selections_attractions: List[str] = Field(default_factory=list)
+    user_selections_restaurants: List[str] = Field(default_factory=list)
+    
     chat_history: List[Dict[str, str]] = Field(default_factory=list)
 
 class SessionManager:

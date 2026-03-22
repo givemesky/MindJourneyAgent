@@ -8,6 +8,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 
+
 # --- 1. 路径环境配置 ---
 # 获取当前文件的绝对路径 (api_service/main.py)
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -20,7 +21,7 @@ if root_dir not in sys.path:
 
 # --- 2. 导入内部组件 ---
 # 注意：这些导入必须在路径配置之后
-from api_service.routes import chat
+from api_service.routes import chat, selection, planner 
 from api_service.dependencies import preload_models
 from api_service.utils.logger import logger  # 假设你已在 utils 中简单定义了 logger
 
@@ -44,7 +45,9 @@ app.add_middleware(
 # --- 5. 挂载路由模块 ---
 # 将 chat.py 中的路由挂载到 /v1 前缀下
 # 最终访问路径为: http://IP:8000/v1/plan
-app.include_router(chat.router, prefix="/v1", tags=["Conversation & DPI"])
+app.include_router(chat.router, prefix="/v1", tags=["Conversation"])
+app.include_router(selection.router, prefix="/v1", tags=["Selection"])
+app.include_router(planner.router, prefix="/v1", tags=["Planning"])
 
 # --- 6. 定义服务生命周期事件 ---
 @app.on_event("startup")
