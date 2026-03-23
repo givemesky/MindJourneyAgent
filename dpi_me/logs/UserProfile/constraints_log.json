@@ -6,48 +6,30 @@
       "1. Start City == \"重庆\"",
       "2. Target City == \"苏州\"",
       "3. People Count == 1",
-      "4. Day Count == 3",
-      "5. Tickets == People Count == 1"
+      "4. Day Count == 3"
     ]
   },
   {
     "turn": 2,
-    "user_text": "可以特种兵一点。",
+    "user_text": "慢慢悠悠的吧，不用特别紧凑。",
     "constraints": [
-      "1. Day Count <= 3",
-      "2. All Activities count >= 5"
+      "1. All Activities count <= Day Count * 3",
+      "2. All Activities count >= Day Count * 2"
     ]
   },
   {
     "turn": 3,
     "user_text": "想去逛风景园林，尝一下螃蟹。",
     "constraints": [
-      "1. Exist Attraction which Type == \"自然风光\"",
+      "1. Exist Attraction which Type == \"园林\"",
       "2. Cuisine == \"螃蟹\""
     ]
   },
   {
     "turn": 4,
-    "user_text": "特色餐馆吧。",
+    "user_text": "我总预算2500元左右.",
     "constraints": [
-      "1. Exist Restaurant which Type == \"其它\""
-    ]
-  },
-  {
-    "turn": 5,
-    "user_text": "一点。",
-    "constraints": [
-      "1. Start City == \"一点\"",
-      "2. Target City == \"一点\"",
-      "3. People Count == 1",
-      "4. Day Count == 1"
-    ]
-  },
-  {
-    "turn": 6,
-    "user_text": "奢侈。",
-    "constraints": [
-      "1. Budget >= 10000  # Assuming \"奢侈\" means the budget is at least 10000, as a rough estimate for luxury travel."
+      "1. Cost <= 2500"
     ]
   }
 ]
