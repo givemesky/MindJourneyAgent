@@ -17,7 +17,7 @@ RESULTS_BASE_DIR = "/public/home/azsy/MindJourney_LoRA/MindJourneyAgent/evaluati
 MAX_TURNS = 8
 
 # API 配置 (建议替换为你的实际配置)
-API_KEY = "AIzaSyCfU8v-9LTXMT0-xWtGf503GaudDh55FDs"
+API_KEY = "AIzaSyBC6h3wPvaBzBiug-kHN_abu2yhOlCISeU"
 BASE_URL = "https://generativelanguage.googleapis.com/v1beta/openai/"
 
 def is_mining_complete(assistant_output):

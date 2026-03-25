@@ -52,9 +52,58 @@ MindJourneyAgent/
     ├── synthesis_data_to_train_data.py # 格式转换脚本
     └── case_studies/             # 系统表现案例研究
 
+
+
+MindJourneyAgent/
+├── 🚀 main.py                     # 程序总入口：启动 FastAPI 后端服务
+├── 🧠 model_provider.py           # 基础设施：大模型单例加载器 (Qwen2.5 + LoRA)
+├── 🌉 integrated_bridge.py        # 中枢桥接：连接对话流与 DPI 偏好推理算法
+├── ⚙️ config.yaml                 # 全局配置：包含模型路径、系统提示词等
+│
+├── 🌐 api_service/                # 【模块一：后端 API 与 Web 服务】
+│   ├── main.py                    # API 入口配置 (路由挂载、跨域配置)
+│   ├── dependencies.py            # 依赖注入：确保模型单例全局唯一
+│   ├── test_ui.html               # 调试利器：可视化 DPI 算法监控面板
+│   ├── manager/                   # 状态管理
+│   │   ├── session_manager.py     # 会话管理：在内存中维护用户画像与勾选状态
+│   │   └── mj_coordinator.py      # 业务协调：串联对话、RAG 检索与 Planner 规划
+│   ├── routes/                    # 接口分发
+│   │   ├── chat.py                # 阶段 A/B：处理对话与偏好推断 (/v1/plan)
+│   │   ├── selection.py           # 阶段 C：接收用户勾选的景点/餐厅 (/v1/select)
+│   │   └── planner.py             # 阶段 D：触发最终路径生成 (/v1/generate_plan)
+│   ├── schemas/                   # 数据协议：定义前后端传输的 JSON 格式 (Pydantic)
+│   └── utils/                     # 工具类：日志记录 (logger.py) 与异常处理
+│
+├── 📊 dpi_me/                     # 【模块二：DPI-ME 偏好推理核心算法】
+│   ├── dpi_interface.py           # 算法接口层：封装感知与推理，计算熵值指标
+│   ├── dpi_likelihood/            # 感知层：计算用户输入与偏好的似然概率
+│   │   └── perception/nesy_agent/ # NL2SL：将自然语言转为符号逻辑约束
+│   ├── dpi_reason/                # 推理层：信念更新与决策策略
+│   │   ├── engine.py              # 递归贝叶斯更新引擎
+│   │   ├── evaluator.py           # 系统熵值(Entropy)与确定度评估
+│   │   └── strategy.py            # 决策逻辑：决定继续询问 (ASK) 还是结束 (TERMINATE)
+│   └── logs/                      # 实验日志：存储画像演化轨迹与识别到的约束
+│
+├── 🔍 RAG/                        # 【模块三：知识图谱检索与智能规划】
+│   ├── kg_travel/                 # 核心数据库：10个城市的 .gml 统一知识图谱
+│   └── rag_system/                # 检索引擎
+│       ├── retriever.py           # KG 检索器：负责景点、餐厅、住宿的属性匹配
+│       ├── planner.py             # 规划大脑：执行地理聚类、排期与 Qwen 报表渲染
+│       └── rag_interface.py       # RAG 接口：将检索结果转为结构化卡片数据
+│
+├── 🤖 model/                      # 【模块四：预训练模型权重】
+│   └── Qwen2.5-7B-Instruct/       # 基座模型：阿里千问 7B 指令微调版
+│
+├── 🎗️ lora/                       # 【模块五：微调适配器】
+│   └── mindjourney_v1/            # 针对旅游意图挖掘微调的 LoRA 权重
+│
+└── 🛠️ train_LoRA/                 # 【模块六：训练与数据生成】
+    ├── LLaMA-Factory/             # 微调框架：集成训练环境
+    ├── data/                      # 训练语料：生成的模拟对话数据集
+    ├── preference_data_generate.py# 数据引擎：模拟不同偏好用户的交互逻辑
+    └── synthesis_data_to_train_data.py # 格式转换：处理为标准 SFT 格式
+
 ```
-
-
 
 
 ## 2. 核心模块详解

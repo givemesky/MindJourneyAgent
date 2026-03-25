@@ -15,4 +15,6 @@ RAG/kg_travel/restaurants
 RAG/kg_travel/attracions_restaurants_kg/output_attracions_restaurants_kg
 RAG/kg_travel/attractions_kg/output_attractions_kgs
 RAG/kg_travel/city_kg/output_city_kg
-
+evaluation/LoRA_eval/data/raw_data/*.json
+evaluation/LoRA_eval/data/processed_data/*.json
+evaluation/LoRA_eval/results
