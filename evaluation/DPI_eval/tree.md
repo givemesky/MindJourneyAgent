@@ -117,3 +117,85 @@ for case in test_cases:
 *   **隐性转化**：看系统能不能把“休闲为主”准确地转化为 `Pace: Relaxed`，而不是因为杭州旅游景点多就误判为 `Fast`。
 
 **你需要我帮你写一个能自动运行这种“模拟对话”并输出准确率报告的脚本吗？**
+
+
+通过你目前收集到的这五类日志（画像演化 JSON、收敛指标 CSV、约束日志 JSON、对话原文 JSON 和 评估总结 TXT），你可以进行深度的数据挖掘，支撑起一篇高质量论文或实验报告的**结果分析（Results）**部分。
+
+以下是你可以获得的实验数据以及建议绘制的图表：
+
+---
+
+### 1. 核心性能指标（System Performance）
+这部分数据主要来自 `eval_summary.txt` 和多个 UID 文件夹的汇总。
+
+*   **实验数据：**
+    *   **平均收敛轮次 (Average Turns to Convergence, TTC)**：系统平均聊几句能看透用户？
+    *   **维度准确率 (Dimensional Accuracy)**：Consumption、Interest、Pace 各个维度的推断准确率。
+    *   **总体 F1-Score**：综合评估推断的精确度。
+*   **建议图表：**
+    *   **柱状图 (Bar Chart)**：展示三个维度各自的准确率。
+    *   **饼图 (Pie Chart)**：展示“完全匹配”、“部分匹配（2/3个维度）”和“不匹配”的比例。
+    *   **直方图 (Histogram)**：X轴为轮次（1, 2, 3...），Y轴为 Case 数量。展示收敛轮次的分布情况（例如：大部分 Case 是否集中在 3-4 轮收敛）。
+
+---
+
+### 2. 信息论指标分析（Information Theoretic Analysis）
+这部分数据来自 `persona_convergence.csv`。这是证明 **DPI-ME（动态偏好推理）** 算法有效性的核心证据。
+
+*   **实验数据：**
+    *   **熵减速度 (Entropy Decay Rate)**：每一轮对话平均消减了多少不确定性。
+    *   **置信度增益 (Confidence Gain)**：每一轮提问后，系统确定性的提升幅度。
+*   **建议图表：**
+    *   **熵减轨迹图 (Entropy Trajectory Line Chart)**：
+        *   X轴为对话轮次，Y轴为熵值（Entropy）。
+        *   画出三条线（三个维度）或一条总和线。
+        *   **亮点**：你应该能看到曲线在某轮（系统精准提问后）有剧烈的下降，这证明了“主动提问”的威力。
+    *   **确定度增长曲线 (Certainty Growth Curve)**：
+        *   展示 Certainty 指标随轮次平滑上升的过程。
+
+---
+
+### 3. 推理稳健性分析（Inference Robustness）
+这部分数据来自 `persona_evolution.json`。
+
+*   **实验数据：**
+    *   **标签震荡率 (Label Flipping Rate)**：推断标签在对话过程中发生改变的次数。
+    *   **收敛稳定性**：达到收敛后，标签是否还发生过抖动？
+*   **建议图表：**
+    *   **置信度堆叠面积图 (Stacked Area Chart)**：展示某一 Case 中，不同标签（如 Budget/Economy/Luxury）的概率分布随轮次的变化。
+    *   **混淆矩阵 (Confusion Matrix)**：
+        *   横轴为系统预测标签，纵轴为人工标注的 Ground Truth。
+        *   分析系统最容易把哪个标签看走眼（比如：是否容易把 Standard 误判为 Luxury）。
+
+---
+
+### 4. 语义感知能力分析（Semantic Perception）
+这部分数据来自 `constraints_log.json` 和 `chat_history.json`。
+
+*   **实验数据：**
+    *   **有效约束提取数**：平均每轮对话能挖掘出多少个符号约束（`Target City`, `Budget` 等）。
+    *   **NL2SL 成功率**：用户说的话里包含的信息点 vs 系统提取出来的符号点。
+*   **建议图表：**
+    *   **约束累积曲线 (Cumulative Constraints Curve)**：随着轮次增加，系统掌握的硬约束数量。
+    *   **对话长度与准确率的相关性散点图**：看是不是聊得越久提取越准。
+
+---
+
+### 5. 综合案例研究（Case Study）
+利用 `chat_history.json` 选出两个典型的案例。
+
+*   **图表形式：**
+    *   **对话时序可视化图**：左侧放对话原文气泡，右侧对应画出该轮次后的画像雷达图或置信度条。
+    *   **成功 vs 失败对比分析**：对比一个 3 轮完美收敛的案例和一个 8 轮未收敛的案例，分析失败原因（如用户表达模糊、LLM API 拦截等）。
+
+---
+
+### 💡 给你的后续操作建议（自动化制图）：
+
+既然你已经有了日志，你可以写一个 **`visualizer.py`** 脚本来全自动产出这些图。步骤如下：
+1.  **遍历 `logs/` 目录**下所有的 UID 文件夹。
+2.  **提取 CSV 数据**：用 `pandas` 读取 `persona_convergence.csv`，计算所有 Case 在第 1, 2, 3... 轮的**平均熵值**。
+3.  **提取 TXT 数据**：统计总的准确率百分比。
+4.  **绘图**：用 `matplotlib` 或 `seaborn` 绘制上述图表并保存为 PDF 或 PNG。
+
+**你需要我帮你写一段基础的“汇总统计并画出平均熵减曲线”的 Python 脚本框架吗？**
