@@ -38,7 +38,7 @@ class MindJourneyAssistant:
             "收集并识别用户的 4 个核心维度信息，并将其映射到以下标准标签中：\n\n"
             "### 1. 标准标签定义 (PREFERENCE_SCHEMA):\n"
             "- **目的地 (Destination)**: 用户想去的具体城市（如：北京）。\n"
-            "- **消费偏好 (Consumption)**: [Budget (普通), Economy (经济型/穷游), Luxury (豪华型/高端)]\n"
+            "- **消费偏好 (Consumption)**: [Budget (节省型), Economy (经济型), Luxury (豪华型/高端)]\n"
             "- **兴趣特征 (Interest)**: [Culture (历史文化), Nature (自然风光), Entertainment (现代娱乐/酒店), Shopping (购物中心)]\n"
             "- **行程节奏 (Pace)**: [Fast (特种兵/紧凑), Relaxed (慢节奏/休闲)]\n\n"
             "### 2. 输出要求:\n"
@@ -46,7 +46,7 @@ class MindJourneyAssistant:
             "<think>分析当前已掌握信息，判定还缺失哪些维度，决定下一步追问策略</think>\n"
             "<answer>对用户的自然语言回复或追问</answer>\n"
             "<summary>{\"Destination\": \"标签或null\", \"Consumption\": \"标签或null\", \"Interest\": \"标签或null\", \"Pace\": \"标签或null\"}</summary>\n\n"
-            "请注意：在未确定某个维度前，该字段必须填 null。一旦识别，请填写上述方括号内的标准英文标签。"
+            "请注意：在未确定某一个维度前，该字段必须填 null。一旦识别，请填写上述方括号内的标准英文标签，并在后面的<summary>保持记录。"
         )
 
         # 5. 定义 Few-shot 示例 (仅用于 Group B)
@@ -80,7 +80,7 @@ class MindJourneyAssistant:
                 input_ids=input_ids,
                 max_new_tokens=512,
                 temperature=0.3,
-                top_p=0.8,
+                top_p=0.7,
                 do_sample=True,
                 pad_token_id=self.tokenizer.eos_token_id
             )
