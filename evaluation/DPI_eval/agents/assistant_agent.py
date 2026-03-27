@@ -36,7 +36,7 @@ class AssistantAgent:
         # --- 核心修复点：先定义 decision 变量 ---
         decision = result.get('decision', {}) 
         
-        self._print_mini_dashboard(turn, result)
+        # self._print_mini_dashboard(turn, result)
         
         return {
             "reply": result['response'],
