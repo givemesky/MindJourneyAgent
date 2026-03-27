@@ -201,8 +201,12 @@ for case in test_cases:
 **你需要我帮你写一段基础的“汇总统计并画出平均熵减曲线”的 Python 脚本框架吗？**
 
 
-🏆 实验汇总 ==============================
-📊 已测数量: 50
-🎯 平均准确率: 78.67%
-⏱️  平均收敛轮次: 4.24
+==================================================
+📈 Advanced Performance Report
+--------------------------------------------------
+Test Cases Processed            : 50
+Overall Accuracy (Persona)      : 86.01%
+Constraint Satisfaction (CSR)   : 100.00%
+Avg Turns to Convergence (TTC)  : 4.18 turns
+Convergence Efficiency (Acc/TTC): 0.2058
 ==================================================
