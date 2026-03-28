@@ -200,7 +200,20 @@ for case in test_cases:
 
 **你需要我帮你写一段基础的“汇总统计并画出平均熵减曲线”的 Python 脚本框架吗？**
 
-
+Overall Accuracy (总体准确率):
+含义：系统最终推断的画像标签（Consumption, Interest, Pace）与预设标签完全一致的概率。
+价值：衡量 DPI 推理层和贝叶斯更新的最终效果。
+Constraint Satisfaction Rate (CSR, 约束满足率):
+含义：用户提到的硬性指标（目的地、游玩几天、几个人）是否被系统成功提取。
+价值：衡量感知层（NL2SL）的性能。如果 CSR 很高但 Accuracy 较低，说明系统虽然能听清“事实”，但理解不了“偏好”。
+Convergence Efficiency (收敛效率):
+含义：定义为 Accuracy / TTC。
+价值：如果两套算法准确率一样，但 A 算法用了 3 轮，B 算法用了 6 轮，显然 A 的效率更高。这个指标能体现你“主动提问”策略的优越性。
+Confidence Heatmap (置信度热力图):
+看点：
+颜色由浅变深：代表随着 Turn 增加，模型对正确答案的把握越来越大。
+横向条纹分析：如果有某几行颜色一直很浅，代表那几个 Case 是“硬骨头”，系统一直识别不准。
+纵向对比：可以看到在第几轮颜色发生了“质变”。通常第 1-2 轮较浅，第 3 轮开始大幅变深，这证明了第 2 轮系统提问的有效性。
 ==================================================
 📈 Advanced Performance Report
 --------------------------------------------------
@@ -210,3 +223,17 @@ Constraint Satisfaction (CSR)   : 100.00%
 Avg Turns to Convergence (TTC)  : 4.18 turns
 Convergence Efficiency (Acc/TTC): 0.2058
 ==================================================
+==================================================
+📊 Qwen Baseline (Vanilla LLM) Performance Report
+--------------------------------------------------
+Test Cases Processed            : 50
+Overall Accuracy (Persona)      : 59.34%
+Constraint Satisfaction (CSR)   : 34.67%
+Avg Turns to Convergence (TTC)  : 4.42 turns
+Convergence Efficiency (Acc/TTC): 0.1342
+==================================================
+
+对照组 C：Vanilla LLM (纯大模型组)
+做法：直接使用 Qwen2.5-7B 配合一个简单的 Prompt（“你是一个导游，请通过对话了解用户需求并规划”），不使用你的贝叶斯状态更新，也不计算熵，由大模型自己决定什么时候结束对话。
+对比点：推理准确率 (Accuracy)。
+预期结论：纯大模型容易产生“幻觉”或者在没搞清楚需求时就盲目输出规划。你的系统因为有数学指标（置信度阈值）把关，准确率和稳定性更高。
