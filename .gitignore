@@ -18,3 +18,8 @@ RAG/kg_travel/city_kg/output_city_kg
 evaluation/LoRA_eval/data/raw_data/*.json
 evaluation/LoRA_eval/data/processed_data/*.json
 evaluation/LoRA_eval/results
+evaluation/DPI_eval/logs
+evaluation/DPI_eval/data/dpi_me_test_cases.json
+evaluation/DPI_eval/logs_Qwen
+evaluation/RAG_eval/logs
+evaluation/RAG_eval/data/benchmark_test_set.json
